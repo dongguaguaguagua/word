@@ -8,7 +8,7 @@
 import Foundation
 
 struct singleWord:Hashable,Codable,Identifiable{
-    var id: Int
+    var id = UUID()
     var name: String
     var definition: String
     var date: String

@@ -10,6 +10,7 @@ import Foundation
 
 struct WordList: View {
     @EnvironmentObject var ModelData:ModelDataClass
+
     ///中英文切换变量
     @State var showEnglishOnly:Bool=false
     @State var showChineseOnly:Bool=false
@@ -20,6 +21,7 @@ struct WordList: View {
         case byDateUp, byDateDown, byNameUp, byNameDown, random
         var id: Self { self }
     }
+    
     
     var body: some View {
         NavigationView{
@@ -34,16 +36,22 @@ struct WordList: View {
                 .pickerStyle(.segmented)
                 List() {
                     ForEach(sortWords(by: sortMode)){
-                        i in
+                        word in
                         NavigationLink(){
-                            ListDetail(word: i)
+                            ListDetail(word: word)
                         }
                     label: {
-                        ListRow(isShowEnglish: $showEnglishOnly,isShowChinese:$showChineseOnly,word: i)
+                        ListRow(isShowEnglish: $showEnglishOnly,isShowChinese:$showChineseOnly,word: word)
+                            .swipeActions(edge: .trailing) {
+                                Button(role: .destructive) {
+                                    ModelData.word.removeAll(where: {word.id==$0.id})
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
+                            }
                         }
                     }
                 }
-//                    .onDelete(perform: deleteRow)
                 .navigationTitle("生词本")
                 HStack {
                     ///添加单词界面
@@ -63,9 +71,10 @@ struct WordList: View {
         }
     }
     ///滑动删除方法
-//    func deleteRow(at offsets: IndexSet) {
-//        ModelData.word.remove(atOffsets: offsets)
-//    }
+    func deleteRow(at offsets: IndexSet) {
+        ModelData.word.remove(atOffsets: offsets)
+        print("删除行序号：\(offsets)")
+    }
     ///判断显示方案和按钮文字
     func switchShowMode(){
         switch showLanguage{

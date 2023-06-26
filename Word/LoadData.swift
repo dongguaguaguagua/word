@@ -21,12 +21,14 @@ func load<T: Decodable>() ->T{
     }
     let fileHandle = FileHandle(forWritingAtPath: file)!
     let fileLength = fileHandle.seekToEndOfFile()
+    
     if(fileLength <= 1){
+        
         fileHandle.seekToEndOfFile()
         fileHandle.write("""
             [
             {
-                \"id\": 1,
+                \"id\": \"\(UUID())\",
                 \"name\": \"massacre\",
                 \"definition\":\"n. 大屠杀，惨败 vt. 大屠杀，彻底击败，把…搞砸\",
                 \"date\":\"2002-07-03 05:52:44\"
@@ -68,7 +70,7 @@ func writeData(newWord : singleWord){
         fileHandle.write("""
             [
             {
-                \"id\": \(newWord.id),
+                \"id\": \"\(UUID())\",
                 \"name\": \"\(newWord.name)\",
                 \"definition\":\"\(newWord.definition)\",
                 \"date\":\"\(newWord.date)\"
@@ -78,7 +80,7 @@ func writeData(newWord : singleWord){
         try? fileHandle.seek(toOffset: fileLength-1)
         fileHandle.write("""
         {
-            \"id\": \(newWord.id),
+            \"id\": \"\(UUID())\",
             \"name\": \"\(newWord.name)\",
             \"definition\":\"\(newWord.definition)\",
             \"date\":\"\(newWord.date)\"
