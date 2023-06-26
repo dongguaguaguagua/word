@@ -1,2 +1,5 @@
 # word
-a new word book focus on simple
+
+![img](./img/wordImg.png)
+
+a new word book focus on elegance and simplicity
