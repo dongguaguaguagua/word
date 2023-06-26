@@ -52,7 +52,7 @@ struct NewWordForm: View {
                         ModelData.word.append(newWord)
                         self.showNewWordForm.toggle()
                         ///将单词写入本地文件
-                        writeData(newWord: newWord)
+                        saveData(data: ModelData.word)
                     }
                 }
                 ToolbarItem(placement: .navigation){

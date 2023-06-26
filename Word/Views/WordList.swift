@@ -45,6 +45,7 @@ struct WordList: View {
                             .swipeActions(edge: .trailing) {
                                 Button(role: .destructive) {
                                     ModelData.word.removeAll(where: {word.id==$0.id})
+                                    saveData(data: ModelData.word)
                                 } label: {
                                     Label("Delete", systemImage: "trash")
                                 }
@@ -70,11 +71,7 @@ struct WordList: View {
             .background(.ultraThinMaterial)
         }
     }
-    ///滑动删除方法
-    func deleteRow(at offsets: IndexSet) {
-        ModelData.word.remove(atOffsets: offsets)
-        print("删除行序号：\(offsets)")
-    }
+
     ///判断显示方案和按钮文字
     func switchShowMode(){
         switch showLanguage{

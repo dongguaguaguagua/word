@@ -23,7 +23,6 @@ func load<T: Decodable>() ->T{
     let fileLength = fileHandle.seekToEndOfFile()
     
     if(fileLength <= 1){
-        
         fileHandle.seekToEndOfFile()
         fileHandle.write("""
             [
@@ -56,36 +55,20 @@ func load<T: Decodable>() ->T{
     }
 }
 
-func writeData(newWord : singleWord){
+func saveData(data:[singleWord]){
+    let encoder = JSONEncoder()
+
+    /// 将 `singleWord` 数组编码为 `JSON` 数据
+    guard let jsonData = try? encoder.encode(data) else {
+        fatalError("Could not encode data to json")
+    }
+
     let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "data.json"
-    if !FileManager.default.fileExists(atPath: path) {
-        FileManager.default.createFile(atPath: path, contents: nil, attributes: nil)
+    
+    let fileUrl=URL(fileURLWithPath: path)
+    do {
+        try jsonData.write(to: fileUrl)
+    } catch {
+        fatalError("Error occurs when writing to json file")
     }
-    let fileHandle = FileHandle(forWritingAtPath: path)!
-    let fileLength = fileHandle.seekToEndOfFile()
-    print(fileLength)
-    ///防止文件为空
-    if(fileLength <= 1){
-        fileHandle.seekToEndOfFile()
-        fileHandle.write("""
-            [
-            {
-                \"id\": \"\(UUID())\",
-                \"name\": \"\(newWord.name)\",
-                \"definition\":\"\(newWord.definition)\",
-                \"date\":\"\(newWord.date)\"
-            },]
-            """.data(using: .utf8)!)
-    }else{
-        try? fileHandle.seek(toOffset: fileLength-1)
-        fileHandle.write("""
-        {
-            \"id\": \"\(UUID())\",
-            \"name\": \"\(newWord.name)\",
-            \"definition\":\"\(newWord.definition)\",
-            \"date\":\"\(newWord.date)\"
-        },]
-        """.data(using: .utf8)!)
-    }
-    try? fileHandle.close()
 }
