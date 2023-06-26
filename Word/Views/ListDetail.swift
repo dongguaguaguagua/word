@@ -24,6 +24,10 @@ struct ListDetail: View {
             ToolbarItem(placement: .primaryAction) {
                 EditWord(wordId: word.id,wordName: word.name, wordDef: word.definition)
             }
+            ToolbarItem(placement: .principal) {
+                Text("\(word.name)")
+                    .bold()
+            }
         }
     }
 }

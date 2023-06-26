@@ -15,32 +15,28 @@ struct WordList: View {
     @State var showEnglishOnly:Bool=false
     @State var showChineseOnly:Bool=false
     @State var showLanguage:String="隐藏中文"
+    
     ///`SortMode`包含四个case
-    @State var sortMode:SortMode = .byNameDown
+    @State var sortMode:SortMode = .byDateDown
+    
+    ///过滤用标签
+    @State var filterTag:String = "全部"
+    
     enum SortMode: String, CaseIterable, Identifiable {
         case byDateUp, byDateDown, byNameUp, byNameDown, random
         var id: Self { self }
     }
     
-    
     var body: some View {
         NavigationView{
             VStack {
-                Picker("sort", selection: $sortMode) {
-                    Text("从旧到新").tag(SortMode.byDateUp)
-                    Text("从新到旧").tag(SortMode.byDateDown)
-                    Text("从A到Z").tag(SortMode.byNameUp)
-                    Text("从Z到A").tag(SortMode.byNameDown)
-                    Text("随机打乱").tag(SortMode.random)
-                }
-                .pickerStyle(.segmented)
                 List() {
-                    ForEach(sortWords(by: sortMode)){
+                    ForEach(sortWords(sortMode: sortMode, data: filteredWords(data: ModelData.word, tag: filterTag))){
                         word in
                         NavigationLink(){
                             ListDetail(word: word)
                         }
-                    label: {
+                        label: {
                         ListRow(isShowEnglish: $showEnglishOnly,isShowChinese:$showChineseOnly,word: word)
                             .swipeActions(edge: .trailing) {
                                 Button(role: .destructive) {
@@ -55,10 +51,9 @@ struct WordList: View {
                 }
                 .navigationTitle("生词本")
                 HStack {
-                    ///添加单词界面
-                    AddWord()
                     Text("共计 \(ModelData.word.count) ")
                         .bold()
+                    AddWord()
                     ///切换中英文显示模式
                     Text("\(showLanguage)")
                         .padding()
@@ -69,6 +64,27 @@ struct WordList: View {
                 Divider()
             }
             .background(.ultraThinMaterial)
+            .toolbar(){
+                ToolbarItem(placement: .primaryAction) {
+                    Picker("sort", selection: $sortMode) {
+                        Text("从旧到新").tag(SortMode.byDateUp)
+                        Text("从新到旧").tag(SortMode.byDateDown)
+                        Text("从A到Z").tag(SortMode.byNameUp)
+                        Text("从Z到A").tag(SortMode.byNameDown)
+                        Text("随机打乱").tag(SortMode.random)
+                    }
+                }
+                ToolbarItem(placement: .navigation) {
+                    ///to do:分组过滤器
+                    Picker("filter", selection: $filterTag) {
+                        Text("全部").tag("全部")
+                        ForEach(getTags(data: ModelData.word),id: \.self){
+                            tag in
+                            Text(tag)
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -98,26 +114,34 @@ struct WordList: View {
         }
     }
     ///接收`sortMode`作为参数,返回的是排序好的`ModelData`
-    func sortWords(by sortMode: SortMode) -> [singleWord] {
+    func sortWords(sortMode: SortMode,data: [singleWord]) -> [singleWord] {
         switch sortMode {
         case .byDateUp:
-            return ModelData.word.sorted { $0.date < $1.date }
+            return data.sorted { $0.date < $1.date }
         case .byDateDown:
-            return ModelData.word.sorted { $0.date > $1.date }
+            return data.sorted { $0.date > $1.date }
         case .byNameUp:
-            return ModelData.word.sorted { $0.name < $1.name }
+            return data.sorted { $0.name < $1.name }
         case .byNameDown:
-            return ModelData.word.sorted { $0.name > $1.name }
+            return data.sorted { $0.name > $1.name }
         case .random:
-            var shuffled = ModelData.word
-            for i in 0..<ModelData.word.count {
-                let index = Int.random(in: i..<ModelData.word.count)
-                if index != i {
-                    shuffled.swapAt(i, index)
-                }
-            }
-            return shuffled
+            return data.shuffled()
+            
+            ///it can be done like this:
+            ///```
+            ///var shuffled = data
+            ///for i in 0..<data.count {
+            ///    let index = Int.random(in: i..<data.count)
+            ///    if index != i {
+            ///        shuffled.swapAt(i, index)
+            ///    }
+            ///}
+            ///return shuffled
+            ///```
         }
+    }
+    func filteredWords(data:[singleWord],tag:String)->[singleWord]{
+        return tag=="全部" ? data : data.filter({$0.tag==tag})
     }
 }
 
