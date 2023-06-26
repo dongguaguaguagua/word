@@ -14,7 +14,7 @@ struct ListRow: View {
     ///实现在每个row上点按可以单独开启
     @State var isShowEnglishSingle:Bool=false
     @State var isShowChineseSingle:Bool=false
-    @State var showText:String="口"
+
     var word:singleWord
     var body: some View {
         VStack(alignment: .leading){

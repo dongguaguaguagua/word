@@ -20,6 +20,10 @@ struct ListDetail: View {
                 .frame(minHeight: 10,maxHeight: 20)
             Text(word.definition)
                 .font(.title2)
+        }.toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                EditWord(wordId: word.id,wordName: word.name, wordDef: word.definition)
+            }
         }
     }
 }

@@ -23,6 +23,7 @@
 		9C9213E72A47160C00DAA757 /* LoadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9213E62A47160C00DAA757 /* LoadData.swift */; };
 		9C9213E92A47188900DAA757 /* Manage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9213E82A47188900DAA757 /* Manage.swift */; };
 		9C9213F12A472BF900DAA757 /* AddWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9213F02A472BF900DAA757 /* AddWord.swift */; };
+		9CED471E2A49597800285043 /* EditWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CED471D2A49597800285043 /* EditWord.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		9C9213E62A47160C00DAA757 /* LoadData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadData.swift; sourceTree = "<group>"; };
 		9C9213E82A47188900DAA757 /* Manage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manage.swift; sourceTree = "<group>"; };
 		9C9213F02A472BF900DAA757 /* AddWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWord.swift; sourceTree = "<group>"; };
+		9CED471D2A49597800285043 /* EditWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWord.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				9C9213EF2A472BBB00DAA757 /* Views */,
 				9C9213E82A47188900DAA757 /* Manage.swift */,
 				9C9213F02A472BF900DAA757 /* AddWord.swift */,
+				9CED471D2A49597800285043 /* EditWord.swift */,
 				9C31AE7D2A48011A000B3827 /* Time.swift */,
 				9C9213E42A4715FD00DAA757 /* WordStructure.swift */,
 				9C9213E62A47160C00DAA757 /* LoadData.swift */,
@@ -302,6 +305,7 @@
 				9C9213B22A47153100DAA757 /* WordApp.swift in Sources */,
 				9C9213E12A4715D700DAA757 /* ListDetail.swift in Sources */,
 				9C9213F12A472BF900DAA757 /* AddWord.swift in Sources */,
+				9CED471E2A49597800285043 /* EditWord.swift in Sources */,
 				9C9213DC2A4715A200DAA757 /* WordList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
