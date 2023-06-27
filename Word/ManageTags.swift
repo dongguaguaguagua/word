@@ -13,27 +13,25 @@ struct Manage: View {
     @State var tagName:String=""
     
     var body: some View {
-        ZStack{
-            NavigationView{
-                List{
-                    ForEach(getTags(data: ModelData.word),id: \.self){tag in
-                        NavigationLink(){
-                            EachTagList(tag: tag)
+        NavigationView{
+            List{
+                ForEach(getTags(data: ModelData.word),id: \.self){tag in
+                    NavigationLink(){
+                        EachTagList(tag: tag)
+                    }label: {
+                        Text(tag)
+                        Text("\(getFilteredWordsCount(data:ModelData.word,tag:tag))")
+                            .bold()
+                            .foregroundColor(.pink)
+                    }
+                    .swipeActions(edge: .trailing) {
+                        deleteButton(tag: tag)
+                        Button(){
+                            renameTagMessage(tagName: tag)
                         }label: {
-                            Text(tag)
-                            Text("\(getFilteredWordsCount(data:ModelData.word,tag:tag))")
-                                .bold()
-                                .foregroundColor(.pink)
+                            Label("Rename",systemImage: "character.cursor.ibeam")
                         }
-                        .swipeActions(edge: .trailing) {
-                            deleteButton(tag: tag)
-                            Button(){
-                                renameTagMessage(tagName: tag)
-                            }label: {
-                                Label("Rename",systemImage: "character.cursor.ibeam")
-                            }
-                            .tint(.blue)
-                        }
+                        .tint(.blue)
                     }
                 }
                 .navigationTitle("标签")

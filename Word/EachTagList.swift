@@ -59,13 +59,8 @@ struct EachTagList: View {
             }
             Divider()
         }
+        .navigationBarTitle("\(tag)",displayMode: .inline)
         .background(.ultraThinMaterial)
-        .toolbar(){
-            ToolbarItem(placement: .principal){
-                Text(tag)
-                    .bold()
-            }
-        }
     }
 
     ///判断显示方案和按钮文字
