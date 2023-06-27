@@ -1,5 +1,5 @@
 //
-//  eachTagList.swift
+//  EachTagList.swift
 //  Word
 //
 //  Created by 胡宗禹 on 6/26/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct eachTagList: View {
+struct EachTagList: View {
     @EnvironmentObject var ModelData:ModelDataClass
     
     var tag:String
@@ -18,10 +18,6 @@ struct eachTagList: View {
     @State var showLanguage:String="隐藏中文"
     ///`SortMode`包含四个case
     @State var sortMode:SortMode = .byNameDown
-    enum SortMode: String, CaseIterable, Identifiable {
-        case byDateUp, byDateDown, byNameUp, byNameDown, random
-        var id: Self { self }
-    }
 
     var body: some View {
         VStack {
@@ -52,7 +48,7 @@ struct eachTagList: View {
                     Text("从Z到A").tag(SortMode.byNameDown)
                     Text("随机打乱").tag(SortMode.random)
                 }
-                Text("共计 \(filteredWords(data: ModelData.word, tag: tag).count) ")
+                Text("共计 \(getFilteredWordsCount(data:ModelData.word,tag:tag)) ")
                     .bold()
                 ///切换中英文显示模式
                 Text("\(showLanguage)")
@@ -97,37 +93,10 @@ struct eachTagList: View {
             break
         }
     }
-    ///接收`sortMode`作为参数,返回的是排序好的`ModelData`
-    func sortWords(sortMode: SortMode,data: [singleWord]) -> [singleWord] {
-        switch sortMode {
-        case .byDateUp:
-            return data.sorted { $0.date < $1.date }
-        case .byDateDown:
-            return data.sorted { $0.date > $1.date }
-        case .byNameUp:
-            return data.sorted { $0.name < $1.name }
-        case .byNameDown:
-            return data.sorted { $0.name > $1.name }
-        case .random:
-            return data.shuffled()
-            
-            ///it can be done like this:
-            ///```
-            ///var shuffled = data
-            ///for i in 0..<data.count {
-            ///    let index = Int.random(in: i..<data.count)
-            ///    if index != i {
-            ///        shuffled.swapAt(i, index)
-            ///    }
-            ///}
-            ///return shuffled
-            ///```
-        }
-    }
 }
 
-//struct eachTagList_Previews: PreviewProvider {
+//struct EachTagList_Previews: PreviewProvider {
 //    static var previews: some View {
-//        eachTagList("无标签")
+//        EachTagList("无标签")
 //    }
 //}

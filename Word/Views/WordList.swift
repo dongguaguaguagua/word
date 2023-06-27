@@ -22,11 +22,6 @@ struct WordList: View {
     ///过滤用标签
     @State var filterTag:String = "全部"
     
-    enum SortMode: String, CaseIterable, Identifiable {
-        case byDateUp, byDateDown, byNameUp, byNameDown, random
-        var id: Self { self }
-    }
-    
     var body: some View {
         NavigationView{
             VStack {
@@ -51,7 +46,7 @@ struct WordList: View {
                 }
                 .navigationTitle("生词本")
                 HStack {
-                    Text("共计 \(filteredWords(data: ModelData.word, tag: filterTag).count) ")
+                    Text("共计 \(getFilteredWordsCount(data:ModelData.word,tag:filterTag)) ")
                         .bold()
                     AddWord()
                     ///切换中英文显示模式
@@ -112,33 +107,6 @@ struct WordList: View {
             showEnglishOnly=false
             showLanguage="隐藏中文"
             break
-        }
-    }
-    ///接收`sortMode`作为参数,返回的是排序好的`ModelData`
-    func sortWords(sortMode: SortMode,data: [singleWord]) -> [singleWord] {
-        switch sortMode {
-        case .byDateUp:
-            return data.sorted { $0.date < $1.date }
-        case .byDateDown:
-            return data.sorted { $0.date > $1.date }
-        case .byNameUp:
-            return data.sorted { $0.name < $1.name }
-        case .byNameDown:
-            return data.sorted { $0.name > $1.name }
-        case .random:
-            return data.shuffled()
-            
-            ///it can be done like this:
-            ///```
-            ///var shuffled = data
-            ///for i in 0..<data.count {
-            ///    let index = Int.random(in: i..<data.count)
-            ///    if index != i {
-            ///        shuffled.swapAt(i, index)
-            ///    }
-            ///}
-            ///return shuffled
-            ///```
         }
     }
 }

@@ -19,3 +19,5 @@ func getTags(data:[singleWord])->[String]
     }
     return tags
 }
+
+
