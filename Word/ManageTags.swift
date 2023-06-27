@@ -9,7 +9,6 @@ import SwiftUI
 
 struct Manage: View {
     @EnvironmentObject var ModelData:ModelDataClass
-    @State var isShowDeleteWarn:Bool=false
     
     var body: some View {
         NavigationView{
@@ -23,11 +22,8 @@ struct Manage: View {
                             .bold()
                             .foregroundColor(.pink)
                     }
-                    .alert("无法删除", isPresented: $isShowDeleteWarn){
-                        ///todo:删的时候有点bug
-                    }
                     .swipeActions(edge: .trailing) {
-                        deleteButton(isShowDeleteWarn: $isShowDeleteWarn,tag: tag)
+                        deleteButton(tag: tag)
                     }
                 }
             }
@@ -38,14 +34,13 @@ struct Manage: View {
 
 struct deleteButton:View{
     @EnvironmentObject var ModelData:ModelDataClass
-    ///用于防止删除“无标签”
-    @Binding var isShowDeleteWarn:Bool
+    
     var tag:String
     var body: some View{
         ///删除标签
         Button(role: .destructive) {
             if(tag=="无标签"){
-                isShowDeleteWarn=true
+                deleteNoTagsAlert()
             }else{
                 for i in 0..<ModelData.word.count{
                     ModelData.word[i].tag.removeAll(where: {$0==tag})
@@ -55,6 +50,11 @@ struct deleteButton:View{
         } label: {
             Label("Delete", systemImage: "trash")
         }
+    }
+    func deleteNoTagsAlert() {
+        let alert = UIAlertController(title: "不能删除无标签哦", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+        UIApplication.shared.windows.first?.rootViewController?.present(alert, animated: true)
     }
 }
 
