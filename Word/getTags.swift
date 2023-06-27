@@ -11,8 +11,10 @@ func getTags(data:[singleWord])->[String]
 {
     var tags:[String]=["无标签"]
     for word in data{
-        if(!tags.contains(word.tag) && !(word.tag=="")){
-            tags.append(word.tag)
+        for tag in word.tag{
+            if(!tags.contains(tag) && !(tag=="")){
+                tags.append(tag)
+            }
         }
     }
     return tags

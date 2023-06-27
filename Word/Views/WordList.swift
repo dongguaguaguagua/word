@@ -51,7 +51,7 @@ struct WordList: View {
                 }
                 .navigationTitle("生词本")
                 HStack {
-                    Text("共计 \(ModelData.word.count) ")
+                    Text("共计 \(filteredWords(data: ModelData.word, tag: filterTag).count) ")
                         .bold()
                     AddWord()
                     ///切换中英文显示模式
@@ -65,6 +65,7 @@ struct WordList: View {
             }
             .background(.ultraThinMaterial)
             .toolbar(){
+                ///排序菜单
                 ToolbarItem(placement: .primaryAction) {
                     Picker("sort", selection: $sortMode) {
                         Text("从旧到新").tag(SortMode.byDateUp)
@@ -74,8 +75,8 @@ struct WordList: View {
                         Text("随机打乱").tag(SortMode.random)
                     }
                 }
+                ///标签过滤器
                 ToolbarItem(placement: .navigation) {
-                    ///to do:分组过滤器
                     Picker("filter", selection: $filterTag) {
                         Text("全部").tag("全部")
                         ForEach(getTags(data: ModelData.word),id: \.self){
@@ -139,9 +140,6 @@ struct WordList: View {
             ///return shuffled
             ///```
         }
-    }
-    func filteredWords(data:[singleWord],tag:String)->[singleWord]{
-        return tag=="全部" ? data : data.filter({$0.tag==tag})
     }
 }
 

@@ -22,13 +22,11 @@ struct eachTagList: View {
         case byDateUp, byDateDown, byNameUp, byNameDown, random
         var id: Self { self }
     }
-    var fileredWords:[singleWord] {
-        ModelData.word.filter({$0.tag==tag})
-    }
+
     var body: some View {
         VStack {
             List() {
-                ForEach(sortWords(sortMode: sortMode, data: fileredWords)){
+                ForEach(sortWords(sortMode: sortMode, data: filteredWords(data: ModelData.word, tag: tag))){
                     word in
                     NavigationLink(){
                         ListDetail(word: word)
@@ -54,7 +52,7 @@ struct eachTagList: View {
                     Text("从Z到A").tag(SortMode.byNameDown)
                     Text("随机打乱").tag(SortMode.random)
                 }
-                Text("共计 \(fileredWords.count) ")
+                Text("共计 \(filteredWords(data: ModelData.word, tag: tag).count) ")
                     .bold()
                 ///切换中英文显示模式
                 Text("\(showLanguage)")

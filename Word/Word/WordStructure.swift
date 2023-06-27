@@ -17,5 +17,5 @@ struct singleWord:Hashable,Codable,Identifiable{
 //        var name: String
 //        var color: UIColor
 //    }
-    var tag: String
+    var tag: [String]
 }

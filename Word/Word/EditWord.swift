@@ -55,7 +55,7 @@ struct EditWordForm: View {
                     Button("完成"){
                         ModelData.word.removeAll(where: {wordId==$0.id})
                         let time = getCurrentTime(timeFormat: .YYYYMMDDHHMMSS)
-                        let newWord = singleWord(id: wordId, name: "\(wordName)", definition: "\(wordDef)",date: time,tag: "")
+                        let newWord = singleWord(id: wordId, name: "\(wordName)", definition: "\(wordDef)",date: time,tag: [""])
                         ModelData.word.append(newWord)
                         self.showEditWordForm.toggle()
                         ///将单词写入本地文件
