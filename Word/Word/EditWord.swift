@@ -46,6 +46,7 @@ struct EditWordForm: View {
                 Divider()
                 TextField("单词/词组", text: $wordName)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .disableAutocorrection(true)
                     .padding()
                 Divider()
                 TextEditor(text: $wordDef)

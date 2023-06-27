@@ -39,6 +39,7 @@ struct NewWordForm: View {
                     .font(.title2)
                 Divider()
                 TextField("单词/词组", text: $wordName)
+                    .disableAutocorrection(true)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                 Divider()
