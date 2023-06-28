@@ -20,13 +20,22 @@ struct ListDetail: View {
                 .frame(minHeight: 10,maxHeight: 20)
             Text(word.definition)
                 .font(.title2)
+            .navigationBarTitle(word.name, displayMode: .inline)
         }.toolbar {
             ToolbarItem(placement: .primaryAction) {
                 EditWord(wordId: word.id,wordName: word.name, wordDef: word.definition)
             }
-            ToolbarItem(placement: .principal) {
-                Text("\(word.name)")
-                    .bold()
+            ToolbarItem(placement: .primaryAction) {
+                ///`selectedTags`参数写的那么复杂是为了防止以下情况：
+                ///manage模式下，在某个标签中将单词的这个标签删除了,
+                ///返回以后单词还存在于原有标签中，
+                ///将导致再次进入`NavigationLink`时会带有原来的标签
+                NavigationLink{
+                    SelectTags(word: word,selectedTags: ModelData.word.filter({$0.id==word.id})[0].tag)
+                }
+                label: {
+                    Label("Select", systemImage: "tag.circle")
+                }
             }
         }
     }

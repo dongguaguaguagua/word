@@ -12,14 +12,8 @@ struct singleWord:Hashable,Codable,Identifiable{
     var name: String
     var definition: String
     var date: String
+    var isShow: Bool = true
     var tag: [String]
 }
-
-//struct singleTag:Hashable,Codable,Identifiable{
-//    var id = UUID()
-//    var name: String
-//    var color: String
-//}
-//
-/////十六进制颜色扩展
-/////链接：https://juejin.cn/post/6948250295549820942
+///十六进制颜色扩展
+///链接：https://juejin.cn/post/6948250295549820942

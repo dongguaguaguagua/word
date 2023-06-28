@@ -25,17 +25,19 @@ struct NoTagList: View {
         List() {
             ForEach(sortWords(sortMode: sortMode, data: noTagWord)){
                 word in
-                NavigationLink(){
-                    ListDetail(word: word)
-                }
+                if(word.isShow){
+                    NavigationLink(){
+                        ListDetail(word: word)
+                    }
                 label: {
-                ListRow(isShowEnglish: $showEnglishOnly,isShowChinese:$showChineseOnly,word: word)
-                    .swipeActions(edge: .trailing) {
-                        Button(role: .destructive) {
-                            ModelData.word.removeAll(where: {word.id==$0.id})
-                            saveData(data: ModelData.word)
-                        } label: {
-                            Label("Delete", systemImage: "trash")
+                    ListRow(isShowEnglish: $showEnglishOnly,isShowChinese:$showChineseOnly,word: word)
+                        .swipeActions(edge: .trailing) {
+                            Button(role: .destructive) {
+                                ModelData.word.removeAll(where: {word.id==$0.id})
+                                saveData(data: ModelData.word)
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
                         }
                     }
                 }

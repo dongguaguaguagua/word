@@ -49,5 +49,8 @@ func filteredWords(data:[singleWord],tag:String)->[singleWord]{
 }
 
 func getFilteredWordsCount(data:[singleWord],tag:String)->Int{
-    return filteredWords(data: data, tag: tag).count
+    var excludeNonShownWords:[singleWord]{
+        filteredWords(data: data, tag: tag).filter({$0.isShow})
+    }
+    return excludeNonShownWords.count
 }

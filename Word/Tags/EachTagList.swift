@@ -23,17 +23,19 @@ struct EachTagList: View {
         List() {
             ForEach(sortWords(sortMode: sortMode, data: filteredWords(data: ModelData.word, tag: tag))){
                 word in
-                NavigationLink(){
-                    ListDetail(word: word)
-                }
-                label: {
-                ListRow(isShowEnglish: $showEnglishOnly,isShowChinese:$showChineseOnly,word: word)
-                    .swipeActions(edge: .trailing) {
-                        Button(role: .destructive) {
-                            ModelData.word.removeAll(where: {word.id==$0.id})
-                            saveData(data: ModelData.word)
-                        } label: {
-                            Label("Delete", systemImage: "trash")
+                if(word.isShow){
+                    NavigationLink(){
+                        ListDetail(word: word)
+                    }
+                    label: {
+                    ListRow(isShowEnglish: $showEnglishOnly,isShowChinese:$showChineseOnly,word: word)
+                        .swipeActions(edge: .trailing) {
+                            Button(role: .destructive) {
+                                ModelData.word.removeAll(where: {word.id==$0.id})
+                                saveData(data: ModelData.word)
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
                         }
                     }
                 }
