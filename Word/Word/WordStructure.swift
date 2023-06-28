@@ -6,20 +6,20 @@
 //
 
 import Foundation
-import UIKit
 
 struct singleWord:Hashable,Codable,Identifiable{
     var id = UUID()
     var name: String
     var definition: String
     var date: String
-//    struct group{
-//        var name: String
-//        var color: UIColor
-//    }
     var tag: [String]
 }
 
 //struct singleTag:Hashable,Codable,Identifiable{
-//    
+//    var id = UUID()
+//    var name: String
+//    var color: String
 //}
+//
+/////十六进制颜色扩展
+/////链接：https://juejin.cn/post/6948250295549820942

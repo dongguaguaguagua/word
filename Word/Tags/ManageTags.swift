@@ -47,7 +47,12 @@ struct Manage: View {
                         .tint(.blue)
                     }
                 }
-                .navigationTitle("标签")
+            }
+            .navigationTitle("标签")
+            .toolbar(){
+                ToolbarItem(placement: .primaryAction){
+                    AddTag()
+                }
             }
         }
     }

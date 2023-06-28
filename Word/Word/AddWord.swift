@@ -49,7 +49,7 @@ struct NewWordForm: View {
                 ToolbarItem(placement: .primaryAction) {
                     Button("完成"){
                         let time = getCurrentTime(timeFormat: .YYYYMMDDHHMMSS)
-                        let newWord = singleWord(id: UUID(), name: "\(wordName)", definition: "\(wordDefinition)",date: time,tag: [])
+                        let newWord = singleWord(name: "\(wordName)", definition: "\(wordDefinition)",date: time,tag: [])
                         ModelData.word.append(newWord)
                         self.showNewWordForm.toggle()
                         ///将单词写入本地文件

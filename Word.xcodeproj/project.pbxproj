@@ -11,6 +11,8 @@
 		9C53F7652A4BB8A000E49CAD /* SwitchShowMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C53F7642A4BB8A000E49CAD /* SwitchShowMode.swift */; };
 		9C53F7672A4BBB2700E49CAD /* SortModePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C53F7662A4BBB2700E49CAD /* SortModePicker.swift */; };
 		9C53F76A2A4BBDAE00E49CAD /* NoTagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C53F7692A4BBDAE00E49CAD /* NoTagList.swift */; };
+		9C53F76C2A4BCBFF00E49CAD /* AddTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C53F76B2A4BCBFE00E49CAD /* AddTag.swift */; };
+		9C53F76E2A4BCC8800E49CAD /* loadTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C53F76D2A4BCC8800E49CAD /* loadTags.swift */; };
 		9C9213B22A47153100DAA757 /* WordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9213B12A47153100DAA757 /* WordApp.swift */; };
 		9C9213B42A47153100DAA757 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9213B32A47153100DAA757 /* ContentView.swift */; };
 		9C9213B62A47153300DAA757 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C9213B52A47153300DAA757 /* Assets.xcassets */; };
@@ -54,6 +56,8 @@
 		9C53F7642A4BB8A000E49CAD /* SwitchShowMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchShowMode.swift; sourceTree = "<group>"; };
 		9C53F7662A4BBB2700E49CAD /* SortModePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortModePicker.swift; sourceTree = "<group>"; };
 		9C53F7692A4BBDAE00E49CAD /* NoTagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTagList.swift; sourceTree = "<group>"; };
+		9C53F76B2A4BCBFE00E49CAD /* AddTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTag.swift; sourceTree = "<group>"; };
+		9C53F76D2A4BCC8800E49CAD /* loadTags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadTags.swift; sourceTree = "<group>"; };
 		9C9213AE2A47153100DAA757 /* Word.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Word.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C9213B12A47153100DAA757 /* WordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordApp.swift; sourceTree = "<group>"; };
 		9C9213B32A47153100DAA757 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -109,7 +113,9 @@
 				9C9213E82A47188900DAA757 /* ManageTags.swift */,
 				9C53F7692A4BBDAE00E49CAD /* NoTagList.swift */,
 				9CED47222A49A15400285043 /* TagTools.swift */,
+				9C53F76B2A4BCBFE00E49CAD /* AddTag.swift */,
 				9CED47202A49A0C000285043 /* EachTagList.swift */,
+				9C53F76D2A4BCC8800E49CAD /* loadTags.swift */,
 			);
 			path = Tags;
 			sourceTree = "<group>";
@@ -338,6 +344,8 @@
 				9C9213E72A47160C00DAA757 /* LoadData.swift in Sources */,
 				9C9213E52A4715FD00DAA757 /* WordStructure.swift in Sources */,
 				9C9213B42A47153100DAA757 /* ContentView.swift in Sources */,
+				9C53F76C2A4BCBFF00E49CAD /* AddTag.swift in Sources */,
+				9C53F76E2A4BCC8800E49CAD /* loadTags.swift in Sources */,
 				9C9213B22A47153100DAA757 /* WordApp.swift in Sources */,
 				9C9213E12A4715D700DAA757 /* ListDetail.swift in Sources */,
 				9C53F76A2A4BBDAE00E49CAD /* NoTagList.swift in Sources */,

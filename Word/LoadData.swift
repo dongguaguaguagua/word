@@ -9,10 +9,10 @@ import Foundation
 import Combine
 
 class ModelDataClass:ObservableObject{
-    @Published var word: [singleWord] = load()
+    @Published var word: [singleWord] = loadWords()
 }
 
-func load<T: Decodable>() ->T{
+func loadWords<T: Decodable>() ->T{
     let file = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "data.json"
     
     ///防止文件为空,进行初始化操作
