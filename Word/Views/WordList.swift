@@ -53,7 +53,7 @@ struct WordList: View {
                     Text("\(showLanguage)")
                         .padding()
                         .onTapGesture {
-                            switchShowMode()
+                            switchShowMode(Language: &showLanguage, showChineseOnly: &showChineseOnly, showEnglishOnly: &showEnglishOnly)
                         }
                 }
                 Divider()
@@ -62,18 +62,13 @@ struct WordList: View {
             .toolbar(){
                 ///排序菜单
                 ToolbarItem(placement: .primaryAction) {
-                    Picker("sort", selection: $sortMode) {
-                        Text("从旧到新").tag(SortMode.byDateUp)
-                        Text("从新到旧").tag(SortMode.byDateDown)
-                        Text("从A到Z").tag(SortMode.byNameUp)
-                        Text("从Z到A").tag(SortMode.byNameDown)
-                        Text("随机打乱").tag(SortMode.random)
-                    }
+                    SortModePicker(sortMode: $sortMode)
                 }
                 ///标签过滤器
                 ToolbarItem(placement: .navigation) {
                     Picker("filter", selection: $filterTag) {
                         Text("全部").tag("全部")
+                        Text("无标签").tag("无标签")
                         ForEach(getTags(data: ModelData.word),id: \.self){
                             tag in
                             Text(tag)
@@ -81,32 +76,6 @@ struct WordList: View {
                     }
                 }
             }
-        }
-    }
-
-    ///判断显示方案和按钮文字
-    func switchShowMode(){
-        switch showLanguage{
-        case "隐藏中文":
-            showChineseOnly=false
-            showEnglishOnly=true
-            showLanguage="隐藏英文"
-            break
-        case "隐藏英文":
-            showChineseOnly=true
-            showEnglishOnly=false
-            showLanguage="中文英文"
-            break
-        case "中文英文":
-            showChineseOnly=false
-            showEnglishOnly=false
-            showLanguage="隐藏中文"
-            break
-        default:
-            showChineseOnly=false
-            showEnglishOnly=false
-            showLanguage="隐藏中文"
-            break
         }
     }
 }

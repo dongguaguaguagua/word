@@ -12,9 +12,22 @@ struct Manage: View {
     @State var isShowEditField:Bool=false
     @State var tagName:String=""
     
+    var noTagWord:[singleWord]{
+        ModelData.word.filter({$0.tag==[]})
+    }
+    
     var body: some View {
         NavigationView{
             List{
+                NavigationLink(){
+                    NoTagList()
+                }label: {
+                    Text("无标签")
+                    Text("\(noTagWord.count)")
+                        .bold()
+                        .foregroundColor(.pink)
+                }
+                
                 ForEach(getTags(data: ModelData.word),id: \.self){tag in
                     NavigationLink(){
                         EachTagList(tag: tag)
@@ -40,9 +53,6 @@ struct Manage: View {
     }
     
     func renameTagMessage(tagName:String) {
-        if(tagName=="无标签"){
-            return
-        }
         let message = UIAlertController(title: "重命名标签", message: "", preferredStyle: .alert)
         message.addTextField { textField in
             textField.placeholder = "Enter a new item"
@@ -71,22 +81,13 @@ struct deleteButton:View{
     var body: some View{
         ///删除标签
         Button(role: .destructive) {
-            if(tag=="无标签"){
-                deleteNoTagsAlert()
-            }else{
-                for i in 0..<ModelData.word.count{
-                    ModelData.word[i].tag.removeAll(where: {$0==tag})
-                }
-                saveData(data: ModelData.word)
+            for i in 0..<ModelData.word.count{
+                ModelData.word[i].tag.removeAll(where: {$0==tag})
             }
+            saveData(data: ModelData.word)
         } label: {
             Label("Delete", systemImage: "trash")
         }
-    }
-    func deleteNoTagsAlert() {
-        let alert = UIAlertController(title: "不能删除无标签哦", message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel))
-        UIApplication.shared.windows.first?.rootViewController?.present(alert, animated: true)
     }
 }
 

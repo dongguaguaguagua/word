@@ -19,3 +19,7 @@ struct singleWord:Hashable,Codable,Identifiable{
 //    }
     var tag: [String]
 }
+
+//struct singleTag:Hashable,Codable,Identifiable{
+//    
+//}

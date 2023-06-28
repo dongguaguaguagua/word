@@ -9,7 +9,7 @@ import Foundation
 
 func getTags(data:[singleWord])->[String]
 {
-    var tags:[String]=["无标签"]
+    var tags:[String]=[]
     for word in data{
         for tag in word.tag{
             if(!tags.contains(tag) && !(tag=="")){
