@@ -21,7 +21,9 @@ struct ListDetail: View {
             Text(word.definition)
                 .font(.title2)
             .navigationBarTitle(word.name, displayMode: .inline)
-        }.toolbar {
+        }
+
+        .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 EditWord(wordId: word.id,wordName: word.name, wordDef: word.definition)
             }
@@ -31,10 +33,10 @@ struct ListDetail: View {
                 ///返回以后单词还存在于原有标签中，
                 ///将导致再次进入`NavigationLink`时会带有原来的标签
                 NavigationLink{
-                    SelectTags(word: word,selectedTags: ModelData.word.filter({$0.id==word.id})[0].tag)
+                    SelectTags(word: word,selectedTags: ModelData.word.contains(word) ? ModelData.word.filter({$0.id==word.id})[0].tag : word.tag)
                 }
                 label: {
-                    Label("Select", systemImage: "tag.circle")
+                    Label("Select", systemImage: (ModelData.word.contains(word) ? ModelData.word.filter({$0.id==word.id})[0].tag.count==0 : word.tag.count==0) ? "tag" : "tag.fill")
                 }
             }
         }

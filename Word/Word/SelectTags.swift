@@ -11,20 +11,27 @@ struct SelectTags: View {
     @EnvironmentObject var ModelData:ModelDataClass
     @State var word:singleWord
     
-    @State var isShowActionSheet:Bool=false
-    
     @State var selectedTags: [String]
     
     var body: some View {
         List{
             ForEach(getTags(data: ModelData.word),id: \.self){
                 tag in
-                Toggle(tag, isOn: bindingForTag(tag))
-                    .toggleStyle(.button)
+                HStack{
+                    Toggle(tag, isOn: bindingForTag(tag: tag))
+                        .toggleStyle(.button)
+                }
+            }
+        }.toolbar(){
+            ToolbarItem(placement: .primaryAction){
+                AddTag(newTag: "")
             }
         }
+        .onDisappear{
+            addTagsForWord()
+        }
     }
-    private func bindingForTag(_ tag: String) -> Binding<Bool> {
+    private func bindingForTag(tag: String) -> Binding<Bool> {
         Binding<Bool>(
             get: {
                 selectedTags.contains(tag)
@@ -35,16 +42,16 @@ struct SelectTags: View {
                 } else {
                     selectedTags.removeAll { $0 == tag }
                 }
-                addTagsForWord()
             }
         )
     }
-    private func addTagsForWord(){
-        ///copy
-        word.tag=selectedTags.map{$0}
-        
-        ModelData.word.removeAll(where: {$0.id==word.id})
-        ModelData.word.append(word)
+    func addTagsForWord(){
+        for index in 0..<ModelData.word.count{
+            if(ModelData.word[index].id==word.id){
+                ///copy
+                ModelData.word[index].tag=selectedTags.map{$0}
+            }
+        }
         saveData(data: ModelData.word)
     }
 }

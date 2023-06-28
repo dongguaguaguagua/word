@@ -13,7 +13,11 @@ struct singleWord:Hashable,Codable,Identifiable{
     var definition: String
     var date: String
     var isShow: Bool = true
-    var tag: [String]
+    var tag : [String]
+//    struct tagStruct:Hashable,Codable{
+//        var name : String
+//        var color : String
+//    }
 }
 ///十六进制颜色扩展
 ///链接：https://juejin.cn/post/6948250295549820942

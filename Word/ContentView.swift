@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var selection: Tab = .manage
+    @State private var selection: Tab = .word
     @StateObject private var modelData=ModelDataClass()
     enum Tab {
         case word
@@ -25,7 +25,7 @@ struct ContentView: View {
             Manage()
                 .environmentObject(modelData)
                 .tabItem{
-                    Label("Manage",systemImage: "tag")
+                    Label("Manage",systemImage: "command.square")
                 }
                 .tag(Tab.manage)
         }

@@ -51,11 +51,13 @@ struct EditWordForm: View {
                 Divider()
                 TextEditor(text: $wordDef)
                     .padding()
-            }.toolbar {
+            }
+            .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button("完成"){
                         ModelData.word.removeAll(where: {wordId==$0.id})
                         let time = getCurrentTime(timeFormat: .YYYYMMDDHHMMSS)
+//                        let newWord = singleWord(id: wordId, name: "\(wordName)", definition: "\(wordDef)",date: time,tag: [singleWord.tagStruct(name: "\(newTag)", color: "#88c0b4")])
                         let newWord = singleWord(id: wordId, name: "\(wordName)", definition: "\(wordDef)",date: time,tag: [""])
                         ModelData.word.append(newWord)
                         self.showEditWordForm.toggle()

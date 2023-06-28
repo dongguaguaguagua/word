@@ -12,8 +12,6 @@ struct WordApp: App {
     @StateObject private var modelData=ModelDataClass()
     var body: some Scene {
         WindowGroup {
-//            WordList()
-//                .environmentObject(modelData)
             ContentView()
         }
     }
