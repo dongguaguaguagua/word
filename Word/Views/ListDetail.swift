@@ -33,10 +33,10 @@ struct ListDetail: View {
                 ///返回以后单词还存在于原有标签中，
                 ///将导致再次进入`NavigationLink`时会带有原来的标签
                 NavigationLink{
-                    SelectTags(word: word,selectedTags: ModelData.word.contains(word) ? ModelData.word.filter({$0.id==word.id})[0].tag : word.tag)
+                    SelectTags(word: word,selectedTags: ModelData.word.filter({$0.id==word.id}).count==1 ? ModelData.word.filter({$0.id==word.id})[0].tag : word.tag)
                 }
                 label: {
-                    Label("Select", systemImage: (ModelData.word.contains(word) ? ModelData.word.filter({$0.id==word.id})[0].tag.count==0 : word.tag.count==0) ? "tag" : "tag.fill")
+                    Label("Select", systemImage: (ModelData.word.filter({$0.id==word.id}).count==1 ? ModelData.word.filter({$0.id==word.id})[0].tag.count==0 : word.tag.count==0) ? "tag" : "tag.fill")
                 }
             }
         }

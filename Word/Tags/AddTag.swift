@@ -16,7 +16,7 @@ import SwiftUI
 struct AddTag: View {
     @EnvironmentObject var ModelData:ModelDataClass
     @State private var isConfirming = false
-    @State var newTag:String
+    @State var newTag:String = ""
     var body: some View {
         Button(){
             isConfirming=true
