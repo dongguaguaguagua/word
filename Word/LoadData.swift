@@ -30,8 +30,16 @@ func loadWords<T: Decodable>() ->T{
                 \"id\": \"\(UUID())\",
                 \"name\": \"massacre\",
                 \"definition\":\"n. 大屠杀，惨败 vt. 大屠杀，彻底击败，把…搞砸\",
-                \"date\":\"2002-07-03 05:52:44\",
+                \"date\":\"\(getCurrentTime(timeFormat: .YYYYMMDDHHMMSS))\",
                 \"isShow\":true,
+                \"tag\":[]
+            },
+            {
+                \"id\": \"\(UUID())\",
+                \"name\": \"__TAG_ITEM__\",
+                \"definition\":\"\",
+                \"date\":\"\(getCurrentTime(timeFormat: .YYYYMMDDHHMMSS))\",
+                \"isShow\":false,
                 \"tag\":[]
             },]
             """.data(using: .utf8)!)
