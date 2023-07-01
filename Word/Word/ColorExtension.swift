@@ -24,10 +24,6 @@ extension Color {
         let green:CGFloat=self.StringToFloat(str: String(splitedDs[2]))
         let blue:CGFloat=self.StringToFloat(str: String(splitedDs[3]))
         let alpha:CGFloat=self.StringToFloat(str: String(splitedDs[4]))
-        print(red*255.000000)
-        print(green*255.000000)
-        print(blue*255.000000)
-        print(alpha*255.000000)
         if alpha == 1.0 {
             return String(
                 format: "#%02lX%02lX%02lX",

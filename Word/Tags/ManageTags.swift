@@ -76,7 +76,7 @@ struct Manage: View {
             .sheet(item: $editItem){item in
                 ///将数据中的hex转化为color
                 let hexColor:String=item.color
-                let tagColor:Color=Color(hex: hexColor) ?? Color.black
+                let tagColor:Color=Color(hex: hexColor)
                 editTagSheet(orinigalName: item.name, tagName: item.name, tagColor: tagColor, isShowRenameTagSheet: $isShowRenameTagSheet)
             }
             .environment(\.editMode, $editMode)
@@ -120,7 +120,10 @@ struct editTagSheet:View{
                         }else{
                             let index=ModelData.tag.firstIndex(where: {$0.name==orinigalName})
                             ModelData.tag[index!].name=tagName
-                            ModelData.tag[index!].color=tagColor.hexString ?? "#000000"
+                            print("tagColor:\(tagColor.description)")
+                            if(tagColor.description.count>=21){
+                                ModelData.tag[index!].color=tagColor.hexString ?? "#000000"
+                            }
                             self.dismiss()
                             saveTags(data: ModelData.tag)
                         }
