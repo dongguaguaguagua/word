@@ -52,7 +52,11 @@ struct newTagSheet:View{
                         if(ModelData.tag.map{$0.name}.contains(tagName)){
                             showAlert=true
                         }else{
-                            ModelData.tag.append(singleTag(name: tagName, color: tagColor.hexString ?? "#000000"))
+                            if(tagColor.description.count>=21){
+                                ModelData.tag.append(singleTag(name: tagName, color: tagColor.hexString ?? "#000000"))
+                            }else{
+                                ModelData.tag.append(singleTag(name: tagName, color: "#000000"))
+                            }
                             self.showAddTagSheet=false
                             saveTags(data: ModelData.tag)
                         }

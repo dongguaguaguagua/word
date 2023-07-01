@@ -120,7 +120,7 @@ struct editTagSheet:View{
                         }else{
                             let index=ModelData.tag.firstIndex(where: {$0.name==orinigalName})
                             ModelData.tag[index!].name=tagName
-                            print("tagColor:\(tagColor.description)")
+//                            print("tagColor:\(tagColor.description)")
                             if(tagColor.description.count>=21){
                                 ModelData.tag[index!].color=tagColor.hexString ?? "#000000"
                             }
