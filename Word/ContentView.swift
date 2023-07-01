@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PartialSheet
 
 struct ContentView: View {
     @State private var selection: Tab = .word

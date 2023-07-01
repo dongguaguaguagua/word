@@ -18,7 +18,6 @@ struct EditWord: View {
     var body: some View {
         Button {
             self.showEditWordForm.toggle()
-            print(showEditWordForm)
         }label: {
             Label("Edit",systemImage: "square.and.pencil")
                 .labelStyle(.iconOnly)

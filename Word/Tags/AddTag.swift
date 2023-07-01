@@ -7,41 +7,67 @@
 
 import SwiftUI
 
-//struct FileDetails: Identifiable {
-//    var id: String { name }
-//    let name: String
-//    let fileType: UTType
-//}
-
 struct AddTag: View {
     @EnvironmentObject var ModelData:ModelDataClass
     @State var newTag:String = ""
+    @State var showAddTagSheet=false
     var body: some View {
         Button(){
-            addTagMessage()
+            self.showAddTagSheet=true
         }label: {
             Label("Add",systemImage: "plus")
         }
-    }
-    func addTagMessage() {
-        let message = UIAlertController(title: "添加标签", message: "", preferredStyle: .alert)
-        message.addTextField { textField in
-            textField.placeholder = "标签名称"
+        .sheet(isPresented: $showAddTagSheet){
+            newTagSheet(showAddTagSheet: $showAddTagSheet)
         }
-        message.addAction(UIAlertAction(title: "取消", style: .cancel))
-        message.addAction(UIAlertAction(title: "确定", style: .default) { _ in
-            if let newTag = message.textFields?.first?.text, !newTag.isEmpty {
-                if let index = ModelData.word.firstIndex(where: {$0.name=="__TAG_ITEM__"}) {
-                    ModelData.word[index].tag.append(newTag)
-                    saveData(data: ModelData.word)
-                }
-            }
-        })
-        UIApplication.shared.windows.first?.rootViewController?.present(message, animated: true)
     }
-
 }
 
+struct newTagSheet:View{
+    @EnvironmentObject var ModelData:ModelDataClass
+    @State var tagName:String = ""
+    @Binding var showAddTagSheet:Bool
+    @State private var tagColor = Color(.sRGB, red: 0, green: 0, blue: 0)
+    @State private var showAlert:Bool=false
+    var body: some View{
+        NavigationView{
+            VStack {
+                Text("添加标签")
+                    .font(.title2)
+                Divider()
+                TextField("标签名称", text: $tagName)
+                    .disableAutocorrection(true)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                Divider()
+                ColorPicker("选择一个颜色", selection: $tagColor)
+                    .padding()
+                Text("默认为黑色")
+                    .font(.footnote)
+                    .foregroundColor(Color.gray)
+                Divider()
+            }.toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button("完成"){
+                        if(ModelData.tag.map{$0.name}.contains(tagName)){
+                            showAlert=true
+                        }else{
+                            ModelData.tag.append(singleTag(name: tagName, color: tagColor.hexString ?? "#000000"))
+                            self.showAddTagSheet=false
+                            saveTags(data: ModelData.tag)
+                        }
+                    }
+                }
+                ToolbarItem(placement: .navigation){
+                    Button("取消"){
+                        self.showAddTagSheet=false
+                    }
+                }
+            }
+            .alert("标签已存在", isPresented: $showAlert){}
+        }
+    }
+}
 //struct AddTag_Previews: PreviewProvider {
 //    static var previews: some View {
 //        AddTag()

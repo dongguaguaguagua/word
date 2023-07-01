@@ -12,11 +12,10 @@ Features:
 
 * tag system
 
+* Tag color
 ---
 
 Todo:
-
-* Tag color
 
 * Type mode for words
 

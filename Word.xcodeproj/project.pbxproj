@@ -13,6 +13,10 @@
 		9C53F76A2A4BBDAE00E49CAD /* NoTagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C53F7692A4BBDAE00E49CAD /* NoTagList.swift */; };
 		9C53F76C2A4BCBFF00E49CAD /* AddTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C53F76B2A4BCBFE00E49CAD /* AddTag.swift */; };
 		9C53F7702A4BFFC000E49CAD /* SelectTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C53F76F2A4BFFC000E49CAD /* SelectTags.swift */; };
+		9C5974B72A5004F0004D33C3 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 9C5974B62A5004F0004D33C3 /* PartialSheet */; };
+		9C5974BA2A5038FD004D33C3 /* NVMColor in Frameworks */ = {isa = PBXBuildFile; productRef = 9C5974B92A5038FD004D33C3 /* NVMColor */; };
+		9C5974BC2A5041DE004D33C3 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5974BB2A5041DE004D33C3 /* ColorExtension.swift */; };
+		9C5B408E2A4F082300CA7DE4 /* TagData.json in Resources */ = {isa = PBXBuildFile; fileRef = 9C5B408D2A4F082300CA7DE4 /* TagData.json */; };
 		9C9213B22A47153100DAA757 /* WordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9213B12A47153100DAA757 /* WordApp.swift */; };
 		9C9213B42A47153100DAA757 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9213B32A47153100DAA757 /* ContentView.swift */; };
 		9C9213B62A47153300DAA757 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C9213B52A47153300DAA757 /* Assets.xcassets */; };
@@ -30,7 +34,6 @@
 		9C9213F12A472BF900DAA757 /* AddWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9213F02A472BF900DAA757 /* AddWord.swift */; };
 		9CED471E2A49597800285043 /* EditWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CED471D2A49597800285043 /* EditWord.swift */; };
 		9CED47212A49A0C000285043 /* EachTagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CED47202A49A0C000285043 /* EachTagList.swift */; };
-		9CED47232A49A15400285043 /* TagTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CED47222A49A15400285043 /* TagTools.swift */; };
 		9CED47272A4A732C00285043 /* SortAndFilterTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CED47262A4A732C00285043 /* SortAndFilterTools.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +61,8 @@
 		9C53F7692A4BBDAE00E49CAD /* NoTagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTagList.swift; sourceTree = "<group>"; };
 		9C53F76B2A4BCBFE00E49CAD /* AddTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTag.swift; sourceTree = "<group>"; };
 		9C53F76F2A4BFFC000E49CAD /* SelectTags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTags.swift; sourceTree = "<group>"; };
+		9C5974BB2A5041DE004D33C3 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		9C5B408D2A4F082300CA7DE4 /* TagData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TagData.json; sourceTree = "<group>"; };
 		9C9213AE2A47153100DAA757 /* Word.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Word.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C9213B12A47153100DAA757 /* WordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordApp.swift; sourceTree = "<group>"; };
 		9C9213B32A47153100DAA757 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -78,7 +83,6 @@
 		9C9213F02A472BF900DAA757 /* AddWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWord.swift; sourceTree = "<group>"; };
 		9CED471D2A49597800285043 /* EditWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWord.swift; sourceTree = "<group>"; };
 		9CED47202A49A0C000285043 /* EachTagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EachTagList.swift; sourceTree = "<group>"; };
-		9CED47222A49A15400285043 /* TagTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTools.swift; sourceTree = "<group>"; };
 		9CED47262A4A732C00285043 /* SortAndFilterTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortAndFilterTools.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +91,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C5974BA2A5038FD004D33C3 /* NVMColor in Frameworks */,
+				9C5974B72A5004F0004D33C3 /* PartialSheet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,7 +118,6 @@
 			children = (
 				9C9213E82A47188900DAA757 /* ManageTags.swift */,
 				9C53F7692A4BBDAE00E49CAD /* NoTagList.swift */,
-				9CED47222A49A15400285043 /* TagTools.swift */,
 				9C53F76B2A4BCBFE00E49CAD /* AddTag.swift */,
 				9CED47202A49A0C000285043 /* EachTagList.swift */,
 			);
@@ -151,6 +156,7 @@
 				9C31AE7D2A48011A000B3827 /* Time.swift */,
 				9CED47262A4A732C00285043 /* SortAndFilterTools.swift */,
 				9C9213E22A4715EE00DAA757 /* WordData.json */,
+				9C5B408D2A4F082300CA7DE4 /* TagData.json */,
 				9C9213B52A47153300DAA757 /* Assets.xcassets */,
 				9C9213B72A47153300DAA757 /* Preview Content */,
 			);
@@ -201,6 +207,7 @@
 				9CED471D2A49597800285043 /* EditWord.swift */,
 				9C53F76F2A4BFFC000E49CAD /* SelectTags.swift */,
 				9C9213E42A4715FD00DAA757 /* WordStructure.swift */,
+				9C5974BB2A5041DE004D33C3 /* ColorExtension.swift */,
 			);
 			path = Word;
 			sourceTree = "<group>";
@@ -221,6 +228,10 @@
 			dependencies = (
 			);
 			name = Word;
+			packageProductDependencies = (
+				9C5974B62A5004F0004D33C3 /* PartialSheet */,
+				9C5974B92A5038FD004D33C3 /* NVMColor */,
+			);
 			productName = Word;
 			productReference = 9C9213AE2A47153100DAA757 /* Word.app */;
 			productType = "com.apple.product-type.application";
@@ -293,6 +304,10 @@
 				Base,
 			);
 			mainGroup = 9C9213A52A47153100DAA757;
+			packageReferences = (
+				9C5974B52A5004F0004D33C3 /* XCRemoteSwiftPackageReference "PartialSheet" */,
+				9C5974B82A5038FD004D33C3 /* XCRemoteSwiftPackageReference "NVMColor_swift" */,
+			);
 			productRefGroup = 9C9213AF2A47153100DAA757 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -311,6 +326,7 @@
 			files = (
 				9C9213B92A47153300DAA757 /* Preview Assets.xcassets in Resources */,
 				9C9213E32A4715EE00DAA757 /* WordData.json in Resources */,
+				9C5B408E2A4F082300CA7DE4 /* TagData.json in Resources */,
 				9C9213B62A47153300DAA757 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,7 +355,6 @@
 				9C31AE7E2A48011A000B3827 /* Time.swift in Sources */,
 				9C53F7652A4BB8A000E49CAD /* SwitchShowMode.swift in Sources */,
 				9C9213E92A47188900DAA757 /* ManageTags.swift in Sources */,
-				9CED47232A49A15400285043 /* TagTools.swift in Sources */,
 				9C9213DE2A4715B900DAA757 /* ListRow.swift in Sources */,
 				9C53F7702A4BFFC000E49CAD /* SelectTags.swift in Sources */,
 				9C9213E72A47160C00DAA757 /* LoadData.swift in Sources */,
@@ -355,6 +370,7 @@
 				9CED47212A49A0C000285043 /* EachTagList.swift in Sources */,
 				9CED471E2A49597800285043 /* EditWord.swift in Sources */,
 				9C9213DC2A4715A200DAA757 /* WordList.swift in Sources */,
+				9C5974BC2A5041DE004D33C3 /* ColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -679,6 +695,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9C5974B52A5004F0004D33C3 /* XCRemoteSwiftPackageReference "PartialSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AndreaMiotto/PartialSheet";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		9C5974B82A5038FD004D33C3 /* XCRemoteSwiftPackageReference "NVMColor_swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/NVMNovem/NVMColor_swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9C5974B62A5004F0004D33C3 /* PartialSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9C5974B52A5004F0004D33C3 /* XCRemoteSwiftPackageReference "PartialSheet" */;
+			productName = PartialSheet;
+		};
+		9C5974B92A5038FD004D33C3 /* NVMColor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9C5974B82A5038FD004D33C3 /* XCRemoteSwiftPackageReference "NVMColor_swift" */;
+			productName = NVMColor;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9C9213A62A47153100DAA757 /* Project object */;
 }

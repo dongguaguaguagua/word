@@ -6,14 +6,17 @@
 //
 
 import SwiftUI
+import UIKit
+import PartialSheet
+
 
 struct Manage: View {
     @EnvironmentObject var ModelData:ModelDataClass
     @State var isShowEditField:Bool=false
+    @State var isShowRenameTagSheet:Bool=false
     @State var tagName:String=""
     @State var editMode:EditMode = .inactive
-    @State var editButtonText:String="编辑"
-    
+    @State var editItem:singleTag?=nil
     var noTagWord:[singleWord]{
         ModelData.word.filter({$0.tag==[]})
     }
@@ -24,43 +27,57 @@ struct Manage: View {
                 NavigationLink(){
                     NoTagList()
                 }label: {
-                    Text("无标签")
-                    Text("\(noTagWord.count)")
-                        .bold()
-                        .foregroundColor(.pink)
-                }
-                
-                ForEach(getTags(data: ModelData.word),id: \.self){tag in
-                    NavigationLink(){
-                        EachTagList(tag: tag)
-                    }label: {
-                        Text(tag)
-                        Text("\(getFilteredWordsCount(data:ModelData.word,tag:tag))")
+                    HStack{
+                        Text("无标签")
+                        Spacer()
+                        Text("\(noTagWord.count)")
                             .bold()
                             .foregroundColor(.pink)
                     }
-                    ///drag action
-                    .onDrag {
-                        let provider = NSItemProvider.init(object: NSString(string: tag))
-                        return provider
-                    }
-                    ///swipe action
-                    .swipeActions(edge: .trailing) {
-                        deleteButton(tag: tag)
-                        Button(){
-                            renameTagMessage(tagName: tag)
-                        }label: {
-                            Label("Rename",systemImage: "character.cursor.ibeam")
+                }
+                
+                ForEach(ModelData.tag,id: \.self){tag in
+                    NavigationLink(){
+                        EachTagList(tag: tag.name)
+                    }label: {
+                        HStack{
+                            Circle()
+                                .fixedSize()
+                                .foregroundColor(Color(hex: tag.color))
+                            Text(tag.name)
+                            Spacer()
+                            Text("\(getFilteredWordsCount(data:ModelData.word,tag:tag.name))")
+                                .bold()
+                                .foregroundColor(.pink)
                         }
-                        .tint(.blue)
+                        ///drag action
+                        .onDrag {
+                            let provider = NSItemProvider.init(object: NSString(string: tag.name))
+                            return provider
+                        }
+                        ///swipe action
+                        .swipeActions(edge: .trailing) {
+                            deleteButton(tag: tag.name)
+                            Button(){
+                                self.isShowRenameTagSheet=true
+                                editItem=tag
+                            }label: {
+                                Label("Rename",systemImage: "character.cursor.ibeam")
+                            }
+                            .tint(.blue)
+                        }
                     }
                 }
                 .onMove { fromSet, to in
-                    if let index = ModelData.word.firstIndex(where: {$0.name=="__TAG_ITEM__"}) {
-                        ModelData.word[index].tag.move(fromOffsets: fromSet, toOffset: to)
-                        saveData(data: ModelData.word)
-                    }
+                    ModelData.tag.move(fromOffsets: fromSet, toOffset: to)
+                    saveTags(data: ModelData.tag)
                 }
+            }
+            .sheet(item: $editItem){item in
+                ///将数据中的hex转化为color
+                let hexColor:String=item.color
+                let tagColor:Color=Color(hex: hexColor) ?? Color.black
+                editTagSheet(orinigalName: item.name, tagName: item.name, tagColor: tagColor, isShowRenameTagSheet: $isShowRenameTagSheet)
             }
             .environment(\.editMode, $editMode)
             .navigationTitle("标签")
@@ -68,40 +85,60 @@ struct Manage: View {
                 ToolbarItem(placement: .primaryAction){
                     AddTag()
                 }
-                ToolbarItem(placement: .navigation){
-                    Button("\(editButtonText)"){
-                        if(editMode == .active){
-                            editMode = .inactive
-                            editButtonText="编辑"
-                        }else{
-                            editMode = .active
-                            editButtonText="完成"
-                        }
-                    }
-                }
             }
         }
     }
-    
-    func renameTagMessage(tagName:String) {
-        let message = UIAlertController(title: "重命名标签", message: "", preferredStyle: .alert)
-        message.addTextField { textField in
-            textField.placeholder = "标签名称"
-            textField.text="\(tagName)"
-        }
-        message.addAction(UIAlertAction(title: "取消", style: .cancel))
-        message.addAction(UIAlertAction(title: "重命名", style: .default) { _ in
-            if let newItem = message.textFields?.first?.text, !newItem.isEmpty {
-                for i in 0..<ModelData.word.count{
-                    if(ModelData.word[i].tag.contains(tagName)){
-                        ModelData.word[i].tag.removeAll(where: {$0==tagName})
-                        ModelData.word[i].tag.append(newItem)
+}
+
+struct editTagSheet:View{
+    @EnvironmentObject var ModelData:ModelDataClass
+    let orinigalName:String
+    @State var tagName:String
+    @State var tagColor:Color
+
+    @Binding var isShowRenameTagSheet:Bool
+    @State private var showAlert:Bool=false
+    var body: some View{
+        NavigationView{
+            VStack {
+                Text("编辑标签")
+                    .font(.title2)
+                Divider()
+                TextField("标签名称", text: $tagName)
+                    .disableAutocorrection(true)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                Divider()
+                ColorPicker("选择一个颜色", selection: $tagColor)
+                    .padding()
+                Divider()
+            }.toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button("完成"){
+                        if(ModelData.tag.map{$0.name}.contains(tagName) && tagName != orinigalName){
+                            showAlert=true
+                        }else{
+                            let index=ModelData.tag.firstIndex(where: {$0.name==orinigalName})
+                            ModelData.tag[index!].name=tagName
+                            ModelData.tag[index!].color=tagColor.hexString ?? "#000000"
+                            self.dismiss()
+                            saveTags(data: ModelData.tag)
+                        }
                     }
                 }
-                saveData(data: ModelData.word)
+                ToolbarItem(placement: .navigation){
+                    Button("取消"){
+                        self.dismiss()
+                    }
+                }
             }
-        })
-        UIApplication.shared.windows.first?.rootViewController?.present(message, animated: true)
+            .alert("标签已存在", isPresented: $showAlert){}
+        }
+    }
+    private func dismiss() {
+        /// 关闭 sheet 视图的方法
+        /// 通过修改绑定的状态变量来实现
+        UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -115,7 +152,9 @@ struct deleteButton:View{
             for i in 0..<ModelData.word.count{
                 ModelData.word[i].tag.removeAll(where: {$0==tag})
             }
+            ModelData.tag.removeAll(where: {$0.name==tag})
             saveData(data: ModelData.word)
+            saveTags(data: ModelData.tag)
         } label: {
             Label("Delete", systemImage: "trash")
         }

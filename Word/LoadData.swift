@@ -10,6 +10,7 @@ import Combine
 
 class ModelDataClass:ObservableObject{
     @Published var word: [singleWord] = loadWords()
+    @Published var tag: [singleTag] = loadTags()
 }
 
 func loadWords<T: Decodable>() ->T{
@@ -33,15 +34,8 @@ func loadWords<T: Decodable>() ->T{
                 \"date\":\"\(getCurrentTime(timeFormat: .YYYYMMDDHHMMSS))\",
                 \"isShow\":true,
                 \"tag\":[]
-            },
-            {
-                \"id\": \"\(UUID())\",
-                \"name\": \"__TAG_ITEM__\",
-                \"definition\":\"\",
-                \"date\":\"\(getCurrentTime(timeFormat: .YYYYMMDDHHMMSS))\",
-                \"isShow\":false,
-                \"tag\":[]
-            },]
+            }
+            ]
             """.data(using: .utf8)!)
     }
     try? fileHandle.close()
@@ -74,6 +68,56 @@ func saveData(data:[singleWord]){
     }
 
     let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "data.json"
+    
+    let fileUrl=URL(fileURLWithPath: path)
+    do {
+        try jsonData.write(to: fileUrl)
+    } catch {
+        fatalError("Error occurs when writing to json file")
+    }
+}
+
+func loadTags<T: Decodable>() ->T{
+    let file = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "Tags.json"
+    print(file)
+    ///防止文件为空,进行初始化操作
+    if !FileManager.default.fileExists(atPath: file) {
+        FileManager.default.createFile(atPath: file, contents: nil, attributes: nil)
+    }
+    let fileHandle = FileHandle(forWritingAtPath: file)!
+    let fileLength = fileHandle.seekToEndOfFile()
+    
+    if(fileLength <= 1){
+        fileHandle.seekToEndOfFile()
+        fileHandle.write("""
+            []
+            """.data(using: .utf8)!)
+    }
+    try? fileHandle.close()
+    print(file)
+    let data:Data
+    let fileUrl = URL(fileURLWithPath: file)
+    do {
+        data=try Data(contentsOf: fileUrl)
+    }catch{
+        fatalError("Couldn't load data file from main bundle:\n\(error)")
+    }
+    do {
+        let decoder=JSONDecoder()
+        return try decoder.decode(T.self, from: data)
+    }catch{
+        fatalError("Couldn't parse data file as \(T.self):\n\(error)")
+    }
+}
+func saveTags(data:[singleTag]){
+    let encoder = JSONEncoder()
+
+    /// 将 `singleWord` 数组编码为 `JSON` 数据
+    guard let jsonData = try? encoder.encode(data) else {
+        fatalError("Could not encode data to json")
+    }
+
+    let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "Tags.json"
     
     let fileUrl=URL(fileURLWithPath: path)
     do {

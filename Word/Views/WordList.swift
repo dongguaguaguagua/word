@@ -71,7 +71,7 @@ struct WordList: View {
                     Picker("filter", selection: $filterTag) {
                         Text("全部").tag("全部")
                         Text("无标签").tag("无标签")
-                        ForEach(getTags(data: ModelData.word),id: \.self){
+                        ForEach(ModelData.tag.map { $0.name },id: \.self){
                             tag in
                             Text(tag)
                         }

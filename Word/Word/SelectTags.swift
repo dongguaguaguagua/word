@@ -15,7 +15,7 @@ struct SelectTags: View {
     
     var body: some View {
         List{
-            ForEach(getTags(data: ModelData.word),id: \.self){
+            ForEach(ModelData.tag.map { $0.name },id: \.self){
                 tag in
                 HStack{
                     Toggle(tag, isOn: bindingForTag(tag: tag))
