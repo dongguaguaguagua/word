@@ -7,8 +7,6 @@
 
 import SwiftUI
 import UIKit
-import PartialSheet
-
 
 struct Manage: View {
     @EnvironmentObject var ModelData:ModelDataClass

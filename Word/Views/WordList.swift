@@ -45,20 +45,25 @@ struct WordList: View {
                     }
                 }
                 .navigationTitle("生词本")
-                HStack {
+                Divider()
+                HStack() {
+                    Spacer()
                     Text("共计 \(getFilteredWordsCount(data:ModelData.word,tag:filterTag)) ")
                         .bold()
+                    Spacer()
+                    Spacer()
                     AddWord()
+                    Spacer()
+                    Spacer()
                     ///切换中英文显示模式
                     Text("\(showLanguage)")
-                        .padding()
                         .onTapGesture {
                             switchShowMode(Language: &showLanguage, showChineseOnly: &showChineseOnly, showEnglishOnly: &showEnglishOnly)
                         }
+                    Spacer()
                 }
                 Divider()
             }
-            .background(.ultraThinMaterial)
             .toolbar(){
                 ///排序菜单
                 ToolbarItem(placement: .primaryAction) {

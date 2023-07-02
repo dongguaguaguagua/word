@@ -18,6 +18,7 @@ struct AddWord: View {
         }label: {
             Label("Add new word",systemImage: "plus.square")
                 .labelStyle(.iconOnly)
+                .font(.title)
         }
         ///模态弹窗(ModalView)
         .sheet(isPresented: $showNewWordForm) {

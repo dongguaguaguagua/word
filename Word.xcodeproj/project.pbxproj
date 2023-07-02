@@ -13,8 +13,6 @@
 		9C53F76A2A4BBDAE00E49CAD /* NoTagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C53F7692A4BBDAE00E49CAD /* NoTagList.swift */; };
 		9C53F76C2A4BCBFF00E49CAD /* AddTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C53F76B2A4BCBFE00E49CAD /* AddTag.swift */; };
 		9C53F7702A4BFFC000E49CAD /* SelectTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C53F76F2A4BFFC000E49CAD /* SelectTags.swift */; };
-		9C5974B72A5004F0004D33C3 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 9C5974B62A5004F0004D33C3 /* PartialSheet */; };
-		9C5974BA2A5038FD004D33C3 /* NVMColor in Frameworks */ = {isa = PBXBuildFile; productRef = 9C5974B92A5038FD004D33C3 /* NVMColor */; };
 		9C5974BC2A5041DE004D33C3 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5974BB2A5041DE004D33C3 /* ColorExtension.swift */; };
 		9C5974BE2A511A65004D33C3 /* SelectTagsOnCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5974BD2A511A65004D33C3 /* SelectTagsOnCreate.swift */; };
 		9C5B408E2A4F082300CA7DE4 /* TagData.json in Resources */ = {isa = PBXBuildFile; fileRef = 9C5B408D2A4F082300CA7DE4 /* TagData.json */; };
@@ -93,8 +91,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C5974BA2A5038FD004D33C3 /* NVMColor in Frameworks */,
-				9C5974B72A5004F0004D33C3 /* PartialSheet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,8 +228,6 @@
 			);
 			name = Word;
 			packageProductDependencies = (
-				9C5974B62A5004F0004D33C3 /* PartialSheet */,
-				9C5974B92A5038FD004D33C3 /* NVMColor */,
 			);
 			productName = Word;
 			productReference = 9C9213AE2A47153100DAA757 /* Word.app */;
@@ -308,8 +302,6 @@
 			);
 			mainGroup = 9C9213A52A47153100DAA757;
 			packageReferences = (
-				9C5974B52A5004F0004D33C3 /* XCRemoteSwiftPackageReference "PartialSheet" */,
-				9C5974B82A5038FD004D33C3 /* XCRemoteSwiftPackageReference "NVMColor_swift" */,
 			);
 			productRefGroup = 9C9213AF2A47153100DAA757 /* Products */;
 			projectDirPath = "";
@@ -699,38 +691,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		9C5974B52A5004F0004D33C3 /* XCRemoteSwiftPackageReference "PartialSheet" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AndreaMiotto/PartialSheet";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
-			};
-		};
-		9C5974B82A5038FD004D33C3 /* XCRemoteSwiftPackageReference "NVMColor_swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/NVMNovem/NVMColor_swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		9C5974B62A5004F0004D33C3 /* PartialSheet */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9C5974B52A5004F0004D33C3 /* XCRemoteSwiftPackageReference "PartialSheet" */;
-			productName = PartialSheet;
-		};
-		9C5974B92A5038FD004D33C3 /* NVMColor */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9C5974B82A5038FD004D33C3 /* XCRemoteSwiftPackageReference "NVMColor_swift" */;
-			productName = NVMColor;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9C9213A62A47153100DAA757 /* Project object */;
 }
