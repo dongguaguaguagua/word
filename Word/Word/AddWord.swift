@@ -81,7 +81,6 @@ struct NewWordForm: View {
                         ForEach(selectedTags,id:\.self){
                             selectedTag in
                             Text("\(selectedTag)")
-//                                .cornerRadius(5)
                                 .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
                                 .background(Color(hex: fromTagNameGetColor(data: ModelData.tag, Tag: selectedTag)))
                                 .foregroundColor(Color.white)

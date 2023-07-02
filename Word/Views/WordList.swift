@@ -22,10 +22,16 @@ struct WordList: View {
     ///过滤用标签
     @State var filterTag:String = "全部"
     
+//    @State var editMode:EditMode = .inactive
+//    @Environment(\.editMode) var editMode
+    @State var isEditMode: EditMode = .inactive
+    @State var selectWordsID:Set<UUID> = []
+    
+    @State var SelectAllButtonText:String = "全选"
     var body: some View {
         NavigationView{
             VStack {
-                List() {
+                List(selection: $selectWordsID) {
                     ForEach(sortWords(sortMode: sortMode, data: filteredWords(data: ModelData.word, tag: filterTag))){
                         word in
                         NavigationLink(){
@@ -46,28 +52,78 @@ struct WordList: View {
                 }
                 .navigationTitle("生词本")
                 Divider()
+                
                 HStack() {
-                    Spacer()
-                    Text("共计 \(getFilteredWordsCount(data:ModelData.word,tag:filterTag)) ")
-                        .bold()
-                    Spacer()
-                    Spacer()
-                    AddWord()
-                    Spacer()
-                    Spacer()
-                    ///切换中英文显示模式
-                    Text("\(showLanguage)")
-                        .onTapGesture {
-                            switchShowMode(Language: &showLanguage, showChineseOnly: &showChineseOnly, showEnglishOnly: &showEnglishOnly)
+                    if(isEditMode == .inactive){
+                        Spacer()
+                        SortModePicker(sortMode: $sortMode)
+                        Spacer()
+                        Text("共计 \(getFilteredWordsCount(data:ModelData.word,tag:filterTag)) ")
+                            .bold()
+                        Spacer()
+                        ///切换中英文显示模式
+                        Text("\(showLanguage)")
+                            .onTapGesture {
+                                switchShowMode(Language: &showLanguage, showChineseOnly: &showChineseOnly, showEnglishOnly: &showEnglishOnly)
+                            }
+                        Spacer()
+                    }else{
+                        Spacer()
+                        NavigationLink{
+                            SelectTagsForMutiWords(WordsID: selectWordsID)
                         }
-                    Spacer()
+                        label: {
+                            Text("设置标签")
+                                .font(.title3)
+                        }
+                        .disabled(selectWordsID.count == 0)
+                        Spacer()
+                        Button("删除"){
+                            for id in selectWordsID{
+                                ModelData.word.removeAll(where: {$0.id==id})
+                            }
+                            saveData(data: ModelData.word)
+                        }
+                        .font(.title3)
+                        .foregroundColor(Color.red)
+                        .disabled(selectWordsID.count == 0)
+                        Spacer()
+                        Button(SelectAllButtonText){
+                            if(SelectAllButtonText=="全选"){
+                                selectWordsID=Set(filteredWords(data: ModelData.word, tag: filterTag).map { $0.id })
+                                SelectAllButtonText="取消"
+                            }else{
+                                selectWordsID=[]
+                                SelectAllButtonText="全选"
+                            }
+                        }
+                        .font(.title3)
+                        Spacer()
+                    }
                 }
+                .frame(
+                    minWidth: 0,
+                    maxWidth: .infinity,
+                    minHeight: 5,
+                    maxHeight: 30,
+                    alignment: .topLeading
+                )
                 Divider()
             }
             .toolbar(){
-                ///排序菜单
+                ///编辑按钮
                 ToolbarItem(placement: .primaryAction) {
-                    SortModePicker(sortMode: $sortMode)
+                    /// https://juejin.cn/post/6983640370403868702
+                    Button(isEditMode.isEditing ? "完成": "编辑") {
+                        switch isEditMode {
+                        case .active:
+                            self.isEditMode = .inactive
+                        case .inactive:
+                            self.isEditMode = .active
+                        default:
+                            break
+                        }
+                    }
                 }
                 ///标签过滤器
                 ToolbarItem(placement: .navigation) {
@@ -81,10 +137,10 @@ struct WordList: View {
                     }
                 }
             }
+            .environment(\.editMode, $isEditMode)
         }
     }
 }
-
 
 struct List_Previews: PreviewProvider {
     static let modelData=ModelDataClass()

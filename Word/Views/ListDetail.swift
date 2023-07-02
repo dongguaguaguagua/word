@@ -12,6 +12,17 @@ struct ListDetail: View {
     var word:singleWord
     var body: some View {
         VStack {
+            HStack(){
+                ForEach(word.tag,id:\.self){tag in
+                    ZStack{
+                        Text("\(tag)")
+                            .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
+                            .background(Color(hex: fromTagNameGetColor(data: ModelData.tag, Tag: tag)))
+                            .foregroundColor(Color.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 5))
+                    }
+                }
+            }
             Text(word.name)
                 .font(.title)
             Text("添加时间:\(word.date)")

@@ -1,5 +1,5 @@
 //
-//  SelectTagsOnCreate.swift
+//  SelectTagsForMutiWords.swift
 //  Word
 //
 //  Created by 胡宗禹 on 7/2/23.
@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct SelectTagsOnCreate: View {
+struct SelectTagsForMutiWords: View {
     @EnvironmentObject var ModelData:ModelDataClass
-    
-    @State var selectedTags: [String]
+    @State var WordsID:Set<UUID>
+    @State var selectedTags: [String]=[]
     
     var body: some View {
         List{
@@ -38,9 +38,9 @@ struct SelectTagsOnCreate: View {
                 AddTag(newTag: "")
             }
         }
-//        .onDisappear{
-//            addTagsForWord()
-//        }
+        .onDisappear{
+            addTagsForWord()
+        }
     }
     private func bindingForTag(tag: String) -> Binding<Bool> {
         Binding<Bool>(
@@ -56,19 +56,19 @@ struct SelectTagsOnCreate: View {
             }
         )
     }
-//    func addTagsForWord(){
-//        for index in 0..<ModelData.word.count{
-//            if(ModelData.word[index].id==word.id){
-//                ///copy
-//                ModelData.word[index].tag=selectedTags.map{$0}
-//            }
-//        }
-//        saveData(data: ModelData.word)
-//    }
+    func addTagsForWord(){
+        for index in 0..<ModelData.word.count{
+            if(WordsID.contains(ModelData.word[index].id)){
+                ///copy
+                ModelData.word[index].tag=selectedTags.map{$0}
+            }
+        }
+        saveData(data: ModelData.word)
+    }
 }
 
-//struct SelectTagsOnCreate_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SelectTagsOnCreate()
-//    }
-//}
+struct SelectTagsForMutiWords_Previews: PreviewProvider {
+    static var previews: some View {
+        SelectTagsForMutiWords(WordsID: [])
+    }
+}

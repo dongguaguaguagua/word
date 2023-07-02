@@ -10,16 +10,17 @@ Features:
 
 * Word sorting
 
-* tag system
+* Tag system
 
-* Tag color
+* Tag color with transparency
+
+* Mutiple-select
+
 ---
 
 Todo:
 
 * Type mode for words
-
-* muti-selection
 
 * word searching
 
