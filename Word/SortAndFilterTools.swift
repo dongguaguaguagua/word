@@ -49,8 +49,15 @@ func filteredWords(data:[singleWord],tag:String)->[singleWord]{
 }
 
 func getFilteredWordsCount(data:[singleWord],tag:String)->Int{
-    var excludeNonShownWords:[singleWord]{
-        filteredWords(data: data, tag: tag).filter({$0.isShow})
+    return filteredWords(data: data, tag: tag).count
+}
+
+func fromTagNameGetColor(data:[singleTag],Tag:String)->String{
+    let name:[String]=data.map({$0.name})
+    if(name.contains(Tag)){
+        let index=data.firstIndex(where: {$0.name==Tag}) ?? 0
+        return data[index].color
+    }else{
+        return ""
     }
-    return excludeNonShownWords.count
 }

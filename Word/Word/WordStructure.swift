@@ -13,7 +13,6 @@ struct singleWord:Hashable,Codable,Identifiable{
     var name: String
     var definition: String
     var date: String
-    var isShow: Bool = true
     var tag : [String]
 }
 

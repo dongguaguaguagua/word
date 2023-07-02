@@ -32,7 +32,6 @@ func loadWords<T: Decodable>() ->T{
                 \"name\": \"massacre\",
                 \"definition\":\"n. 大屠杀，惨败 vt. 大屠杀，彻底击败，把…搞砸\",
                 \"date\":\"\(getCurrentTime(timeFormat: .YYYYMMDDHHMMSS))\",
-                \"isShow\":true,
                 \"tag\":[]
             }
             ]

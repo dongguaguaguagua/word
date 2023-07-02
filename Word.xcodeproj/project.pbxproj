@@ -16,6 +16,7 @@
 		9C5974B72A5004F0004D33C3 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 9C5974B62A5004F0004D33C3 /* PartialSheet */; };
 		9C5974BA2A5038FD004D33C3 /* NVMColor in Frameworks */ = {isa = PBXBuildFile; productRef = 9C5974B92A5038FD004D33C3 /* NVMColor */; };
 		9C5974BC2A5041DE004D33C3 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5974BB2A5041DE004D33C3 /* ColorExtension.swift */; };
+		9C5974BE2A511A65004D33C3 /* SelectTagsOnCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5974BD2A511A65004D33C3 /* SelectTagsOnCreate.swift */; };
 		9C5B408E2A4F082300CA7DE4 /* TagData.json in Resources */ = {isa = PBXBuildFile; fileRef = 9C5B408D2A4F082300CA7DE4 /* TagData.json */; };
 		9C9213B22A47153100DAA757 /* WordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9213B12A47153100DAA757 /* WordApp.swift */; };
 		9C9213B42A47153100DAA757 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9213B32A47153100DAA757 /* ContentView.swift */; };
@@ -62,6 +63,7 @@
 		9C53F76B2A4BCBFE00E49CAD /* AddTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTag.swift; sourceTree = "<group>"; };
 		9C53F76F2A4BFFC000E49CAD /* SelectTags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTags.swift; sourceTree = "<group>"; };
 		9C5974BB2A5041DE004D33C3 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		9C5974BD2A511A65004D33C3 /* SelectTagsOnCreate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagsOnCreate.swift; sourceTree = "<group>"; };
 		9C5B408D2A4F082300CA7DE4 /* TagData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TagData.json; sourceTree = "<group>"; };
 		9C9213AE2A47153100DAA757 /* Word.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Word.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C9213B12A47153100DAA757 /* WordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordApp.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				9C9213F02A472BF900DAA757 /* AddWord.swift */,
+				9C5974BD2A511A65004D33C3 /* SelectTagsOnCreate.swift */,
 				9CED471D2A49597800285043 /* EditWord.swift */,
 				9C53F76F2A4BFFC000E49CAD /* SelectTags.swift */,
 				9C9213E42A4715FD00DAA757 /* WordStructure.swift */,
@@ -367,6 +370,7 @@
 				9C53F7672A4BBB2700E49CAD /* SortModePicker.swift in Sources */,
 				9CED47272A4A732C00285043 /* SortAndFilterTools.swift in Sources */,
 				9C9213F12A472BF900DAA757 /* AddWord.swift in Sources */,
+				9C5974BE2A511A65004D33C3 /* SelectTagsOnCreate.swift in Sources */,
 				9CED47212A49A0C000285043 /* EachTagList.swift in Sources */,
 				9CED471E2A49597800285043 /* EditWord.swift in Sources */,
 				9C9213DC2A4715A200DAA757 /* WordList.swift in Sources */,

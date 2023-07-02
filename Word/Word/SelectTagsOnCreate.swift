@@ -1,15 +1,14 @@
 //
-//  SelectTag.swift
+//  SelectTagsOnCreate.swift
 //  Word
 //
-//  Created by 胡宗禹 on 6/28/23.
+//  Created by 胡宗禹 on 7/2/23.
 //
 
 import SwiftUI
 
-struct SelectTags: View {
+struct SelectTagsOnCreate: View {
     @EnvironmentObject var ModelData:ModelDataClass
-    @State var word:singleWord
     
     @State var selectedTags: [String]
     
@@ -39,9 +38,9 @@ struct SelectTags: View {
                 AddTag(newTag: "")
             }
         }
-        .onDisappear{
-            addTagsForWord()
-        }
+//        .onDisappear{
+//            addTagsForWord()
+//        }
     }
     private func bindingForTag(tag: String) -> Binding<Bool> {
         Binding<Bool>(
@@ -57,19 +56,19 @@ struct SelectTags: View {
             }
         )
     }
-    func addTagsForWord(){
-        for index in 0..<ModelData.word.count{
-            if(ModelData.word[index].id==word.id){
-                ///copy
-                ModelData.word[index].tag=selectedTags.map{$0}
-            }
-        }
-        saveData(data: ModelData.word)
-    }
+//    func addTagsForWord(){
+//        for index in 0..<ModelData.word.count{
+//            if(ModelData.word[index].id==word.id){
+//                ///copy
+//                ModelData.word[index].tag=selectedTags.map{$0}
+//            }
+//        }
+//        saveData(data: ModelData.word)
+//    }
 }
 
-//struct SelectTags_Previews: PreviewProvider {
+//struct SelectTagsOnCreate_Previews: PreviewProvider {
 //    static var previews: some View {
-//        SelectTags()
+//        SelectTagsOnCreate()
 //    }
 //}
