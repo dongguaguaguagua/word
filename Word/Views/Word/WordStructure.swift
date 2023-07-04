@@ -16,9 +16,3 @@ struct singleWord:Hashable,Codable,Identifiable{
     var tag : [String]
 }
 
-
-struct singleTag:Hashable,Codable,Identifiable{
-    var id = UUID()
-    var name : String
-    var color : String
-}
