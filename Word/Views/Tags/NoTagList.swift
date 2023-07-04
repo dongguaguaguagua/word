@@ -17,44 +17,89 @@ struct NoTagList: View {
     ///`SortMode`包含四个case
     @State var sortMode:SortMode = .byNameDown
     
+    @State var isEditMode: EditMode = .inactive
+    @State var selectWordsID:Set<UUID> = []
+    @State var SelectAllButtonText:String = "全选"
+    
     var noTagWord:[singleWord]{
         ModelData.word.filter({$0.tag==[]})
     }
     
     var body: some View {
-        List() {
-            ForEach(sortWords(sortMode: sortMode, data: noTagWord)){
-                word in
-                NavigationLink(){
-                    ListDetail(word: word)
-                }
+        VStack{
+            List(selection: $selectWordsID) {
+                ForEach(sortWords(sortMode: sortMode, data: noTagWord)){
+                    word in
+                    NavigationLink(){
+                        ListDetail(word: word)
+                    }
                 label: {
-                ListRow(isShowEnglish: $showEnglishOnly,isShowChinese:$showChineseOnly,word: word)
-                    .swipeActions(edge: .trailing) {
-                        Button(role: .destructive) {
-                            ModelData.word.removeAll(where: {word.id==$0.id})
-                            saveData(data: ModelData.word)
-                        } label: {
-                            Label("Delete", systemImage: "trash")
+                    ListRow(isShowEnglish: $showEnglishOnly,isShowChinese:$showChineseOnly,word: word)
+                        .swipeActions(edge: .trailing) {
+                            Button(role: .destructive) {
+                                ModelData.word.removeAll(where: {word.id==$0.id})
+                                saveData(data: ModelData.word)
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
+                        }
+                }
+                }
+            }
+            .navigationBarTitle("无标签", displayMode: .inline)
+            Divider()
+            HStack {
+                if(isEditMode == .inactive){
+                    SortModePicker(sortMode: $sortMode)
+                    Text("共计 \(noTagWord.count) ")
+                        .bold()
+                    ///切换中英文显示模式
+                    Text("\(showLanguage)")
+                        .padding()
+                        .onTapGesture {
+                            switchShowMode(Language: &showLanguage, showChineseOnly: &showChineseOnly, showEnglishOnly: &showEnglishOnly)
+                        }
+                }else{
+                    Spacer()
+                    NavigationLink{
+                        SelectTagsForMutiWords(WordsID: selectWordsID)
+                    }
+                    label: {
+                        Text("设置标签")
+                            .font(.title3)
+                    }
+                    .disabled(selectWordsID.count == 0)
+                    Spacer()
+                    Button("删除"){
+                        for id in selectWordsID{
+                            ModelData.word.removeAll(where: {$0.id==id})
+                        }
+                        saveData(data: ModelData.word)
+                    }
+                    .font(.title3)
+                    .foregroundColor(Color.red)
+                    .disabled(selectWordsID.count == 0)
+                    Spacer()
+                    Button(SelectAllButtonText){
+                        if(SelectAllButtonText=="全选"){
+                            selectWordsID=Set(noTagWord.map { $0.id })
+                            SelectAllButtonText="取消"
+                        }else{
+                            selectWordsID=[]
+                            SelectAllButtonText="全选"
                         }
                     }
+                    .font(.title3)
+                    Spacer()
                 }
             }
         }
-        .navigationBarTitle("无标签", displayMode: .inline)
-        
-        HStack {
-            SortModePicker(sortMode: $sortMode)
-            Text("共计 \(noTagWord.count) ")
-                .bold()
-            ///切换中英文显示模式
-            Text("\(showLanguage)")
-                .padding()
-                .onTapGesture {
-                    switchShowMode(Language: &showLanguage, showChineseOnly: &showChineseOnly, showEnglishOnly: &showEnglishOnly)
-                }
+        .toolbar(){
+            ToolbarItem(placement: .primaryAction) {
+                EditButton(isEditMode: $isEditMode)
+            }
         }
-        Divider()
+        .environment(\.editMode, $isEditMode)
     }
 }
 

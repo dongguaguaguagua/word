@@ -14,20 +14,16 @@ struct WordList: View {
     ///中英文切换变量
     @State var showEnglishOnly:Bool=false
     @State var showChineseOnly:Bool=false
-    @State var showLanguage:String="隐藏中文"
     
     ///`SortMode`包含四个case
     @State var sortMode:SortMode = .byDateDown
     
     ///过滤用标签
     @State var filterTag:String = "全部"
-    
-//    @State var editMode:EditMode = .inactive
-//    @Environment(\.editMode) var editMode
+
     @State var isEditMode: EditMode = .inactive
     @State var selectWordsID:Set<UUID> = []
     
-    @State var SelectAllButtonText:String = "全选"
     var body: some View {
         NavigationView{
             VStack {
@@ -52,63 +48,7 @@ struct WordList: View {
                 }
                 .navigationTitle("生词本")
                 Divider()
-                
-                HStack() {
-                    if(isEditMode == .inactive){
-                        Spacer()
-                        SortModePicker(sortMode: $sortMode)
-                        Spacer()
-                        Text("共计 \(getFilteredWordsCount(data:ModelData.word,tag:filterTag)) ")
-                            .bold()
-                        Spacer()
-                        ///切换中英文显示模式
-                        Text("\(showLanguage)")
-                            .onTapGesture {
-                                switchShowMode(Language: &showLanguage, showChineseOnly: &showChineseOnly, showEnglishOnly: &showEnglishOnly)
-                            }
-                        Spacer()
-                    }else{
-                        Spacer()
-                        NavigationLink{
-                            SelectTagsForMutiWords(WordsID: selectWordsID)
-                        }
-                        label: {
-                            Text("设置标签")
-                                .font(.title3)
-                        }
-                        .disabled(selectWordsID.count == 0)
-                        Spacer()
-                        Button("删除"){
-                            for id in selectWordsID{
-                                ModelData.word.removeAll(where: {$0.id==id})
-                            }
-                            saveData(data: ModelData.word)
-                        }
-                        .font(.title3)
-                        .foregroundColor(Color.red)
-                        .disabled(selectWordsID.count == 0)
-                        Spacer()
-                        Button(SelectAllButtonText){
-                            if(SelectAllButtonText=="全选"){
-                                selectWordsID=Set(filteredWords(data: ModelData.word, tag: filterTag).map { $0.id })
-                                SelectAllButtonText="取消"
-                            }else{
-                                selectWordsID=[]
-                                SelectAllButtonText="全选"
-                            }
-                        }
-                        .font(.title3)
-                        Spacer()
-                    }
-                }
-                .frame(
-                    minWidth: 0,
-                    maxWidth: .infinity,
-                    minHeight: 5,
-                    maxHeight: 30,
-                    alignment: .topLeading
-                )
-                Divider()
+                BottomViews(sortMode: $sortMode, filterTag: filterTag, isEditMode: $isEditMode, showEnglishOnly: $showEnglishOnly, showChineseOnly: $showChineseOnly, selectWordsID: $selectWordsID)
             }
             .toolbar(){
                 ///编辑按钮
