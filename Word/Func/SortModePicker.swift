@@ -19,9 +19,3 @@ struct SortModePicker: View {
         }
     }
 }
-
-//struct SortModePicker_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SortModePicker(sortMode: .byDateDown)
-//    }
-//}

@@ -51,8 +51,15 @@ struct EachTagList: View {
             BottomViews(sortMode: $sortMode, filterTag: tag, isEditMode: $isEditMode, showEnglishOnly: $showEnglishOnly, showChineseOnly: $showChineseOnly, selectWordsID: $selectWordsID)
         }
         .toolbar(){
+            ///编辑按钮
             ToolbarItem(placement: .primaryAction) {
-                EditButton(isEditMode: $isEditMode)
+                Text(isEditMode.isEditing ? "完成": "编辑")
+                    .foregroundColor(Color.blue)
+                    .offset(x:40,y:0)
+            }
+            ToolbarItem(placement: .primaryAction) {
+                EditButton()
+                    .accentColor(.clear)
             }
         }
         .environment(\.editMode, $isEditMode)

@@ -7,7 +7,8 @@
 
 import Foundation
 
-///获取当前时间
+///get the current time. This function is used when creating or editing a word.
+///The return value will be inserted to the `date` attribute, which can be really helpful to sort words.
 enum TimeFormat:String {
     case YYYYMMDD = "YYYY-MM-dd"
     case YYYYMMDDHH = "YYYY-MM-dd HH"

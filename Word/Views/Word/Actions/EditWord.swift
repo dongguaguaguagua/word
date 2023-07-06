@@ -9,7 +9,6 @@ import SwiftUI
 
 struct EditWord: View {
     @EnvironmentObject var ModelData:ModelDataClass
-    ///`Binding`变量,用于判断是否应该弹出输入表单
     @State var showEditWordForm:Bool=false
     @State var wordId:UUID
     @State var wordName:String
@@ -24,6 +23,7 @@ struct EditWord: View {
         }
         ///模态弹窗(ModalView)
         .sheet(isPresented: $showEditWordForm) {
+            ///Use `id` to insert edited word. Use `wordName` and `wordDef` to be a placeholder.
             EditWordForm(wordId:$wordId, wordName: $wordName, wordDef: $wordDef, showEditWordForm: $showEditWordForm)
         }
     }
@@ -54,13 +54,12 @@ struct EditWordForm: View {
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button("完成"){
+                        ///A new word is created. After deleting the old word, insert the new word into `ModelData`
                         ModelData.word.removeAll(where: {wordId==$0.id})
                         let time = getCurrentTime(timeFormat: .YYYYMMDDHHMMSS)
-//                        let newWord = singleWord(id: wordId, name: "\(wordName)", definition: "\(wordDef)",date: time,tag: [singleWord.tagStruct(name: "\(newTag)", color: "#88c0b4")])
                         let newWord = singleWord(id: wordId, name: "\(wordName)", definition: "\(wordDef)",date: time,tag: [""])
                         ModelData.word.append(newWord)
                         self.showEditWordForm.toggle()
-                        ///将单词写入本地文件
                         saveData(data: ModelData.word)
                     }
                 }

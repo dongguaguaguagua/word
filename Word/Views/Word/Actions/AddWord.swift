@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddWord: View {
     @EnvironmentObject var ModelData:ModelDataClass
-    ///`Binding`变量,用于判断是否应该弹出输入表单
+    ///used to decide whether the new word form should be presented.
     @State var showNewWordForm:Bool=false
     
     var body: some View {
@@ -48,11 +48,12 @@ struct NewWordForm: View {
                 TextEditor(text: $wordDefinition)
                     .padding()
                 Divider()
-                ///选标签
+                ///Select tags
                 NavigationLink{
                     List{
                         ForEach(ModelData.tag ,id: \.self){
                             tag in
+                            ///Tag color in small circles
                             HStack{
                                 Circle()
                                     .fixedSize()
@@ -76,6 +77,7 @@ struct NewWordForm: View {
                         }
                     }
                 }
+                ///It shows which tag user select. If there are no tags, it shows "选择标签".
                 label: {
                         Text("\(selectedTagsText)")
                         ForEach(selectedTags,id:\.self){

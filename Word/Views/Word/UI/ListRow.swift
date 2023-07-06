@@ -7,15 +7,21 @@
 
 import SwiftUI
 
+///This is the navigation label of each single word.
+///It shows the word's name, definition. And provide button to hide or show them individually.
 struct ListRow: View {
     @EnvironmentObject var ModelData:ModelDataClass
+    
     @Binding var isShowEnglish:Bool
     @Binding var isShowChinese:Bool
-    ///实现在每个row上点按可以单独开启
+    
+    ///whether show Chinese or English individually
     @State var isShowEnglishSingle:Bool=false
     @State var isShowChineseSingle:Bool=false
-
+    
+    ///receive a word
     var word:singleWord
+    
     var body: some View {
         VStack(alignment: .leading){
             HStack {
@@ -25,7 +31,10 @@ struct ListRow: View {
                     }
                 Text(word.name)
                     .font(.title3)
+                    ///The hide action is realized by modifying the color.(`Color.clear`)
                     .foregroundColor((!isShowChinese)||(isShowChineseSingle) ? Color.black : Color.clear)
+                    ///ease in and out animation
+                    .animation(.easeInOut(duration: 0.2),value: isShowChineseSingle)
             }
             HStack {
                 Text("\(getText(input: "english"))")
@@ -35,6 +44,7 @@ struct ListRow: View {
                 Text(word.definition)
                     .font(.subheadline)
                     .foregroundColor((!isShowEnglish)||(isShowEnglishSingle) ? Color.gray : Color.clear)
+                    .animation(.easeInOut(duration: 0.2),value: isShowEnglishSingle)
             }
         }
     }
@@ -50,7 +60,7 @@ struct ListRow: View {
         }else if(input=="english" && isShowEnglish){
             return "◯"
         }else{
-            ///永远不会到的
+            ///This situation would never appear.
             return "unknown"
         }
     }

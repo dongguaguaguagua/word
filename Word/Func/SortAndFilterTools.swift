@@ -12,7 +12,7 @@ enum SortMode: String, CaseIterable, Identifiable {
     var id: Self { self }
 }
 
-///接收`sortMode`作为参数,返回的是排序好的`ModelData`
+///receive `sortMode` as parameter,and return the sorted `ModelData`
 func sortWords(sortMode: SortMode,data: [singleWord]) -> [singleWord] {
     switch sortMode {
     case .byDateUp:

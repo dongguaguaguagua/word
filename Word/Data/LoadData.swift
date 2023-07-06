@@ -16,7 +16,7 @@ class ModelDataClass:ObservableObject{
 func loadWords<T: Decodable>() ->T{
     let file = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "data.json"
     
-    ///防止文件为空,进行初始化操作
+    ///Initialize in case the file is empty.
     if !FileManager.default.fileExists(atPath: file) {
         FileManager.default.createFile(atPath: file, contents: nil, attributes: nil)
     }
@@ -58,10 +58,11 @@ func loadWords<T: Decodable>() ->T{
     }
 }
 
+///Write word data to the disk
 func saveData(data:[singleWord]){
     let encoder = JSONEncoder()
 
-    /// 将 `singleWord` 数组编码为 `JSON` 数据
+    /// encode `singleWord` to `JSON` data
     guard let jsonData = try? encoder.encode(data) else {
         fatalError("Could not encode data to json")
     }
@@ -108,6 +109,8 @@ func loadTags<T: Decodable>() ->T{
         fatalError("Couldn't parse data file as \(T.self):\n\(error)")
     }
 }
+
+///Write tag data to the disk
 func saveTags(data:[singleTag]){
     let encoder = JSONEncoder()
 

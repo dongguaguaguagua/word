@@ -60,7 +60,7 @@ struct SelectTags: View {
     func addTagsForWord(){
         for index in 0..<ModelData.word.count{
             if(ModelData.word[index].id==word.id){
-                ///copy
+                ///copy data
                 ModelData.word[index].tag=selectedTags.map{$0}
             }
         }

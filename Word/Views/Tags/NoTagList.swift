@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+///This is no tag word list
+///It's main difference between `EachTagList` is that the no tag word data is stored in `noTagWord`.
+///while the `EachTagList` is stored in `ModelData` and filter it according to tags
 struct NoTagList: View {
     @EnvironmentObject var ModelData:ModelDataClass
     
@@ -48,55 +51,78 @@ struct NoTagList: View {
             }
             .navigationBarTitle("无标签", displayMode: .inline)
             Divider()
-            HStack {
+            HStack() {
                 if(isEditMode == .inactive){
-                    SortModePicker(sortMode: $sortMode)
-                    Text("共计 \(noTagWord.count) ")
-                        .bold()
-                    ///切换中英文显示模式
-                    Text("\(showLanguage)")
-                        .padding()
-                        .onTapGesture {
-                            switchShowMode(Language: &showLanguage, showChineseOnly: &showChineseOnly, showEnglishOnly: &showEnglishOnly)
-                        }
+                    HStack{
+                        Spacer()
+                        SortModePicker(sortMode: $sortMode)
+                        Spacer()
+                        Text("共计 \(noTagWord.count) ")
+                            .bold()
+                        Spacer()
+                        ///切换中英文显示模式
+                        Text("\(showLanguage)")
+                            .onTapGesture {
+                                switchShowMode(Language: &showLanguage, showChineseOnly: &showChineseOnly, showEnglishOnly: &showEnglishOnly)
+                            }
+                        Spacer()
+                    }
+                    .transition(.asymmetric(insertion: .backslide, removal: .slide  ))
                 }else{
-                    Spacer()
-                    NavigationLink{
-                        SelectTagsForMutiWords(WordsID: selectWordsID)
-                    }
-                    label: {
-                        Text("设置标签")
-                            .font(.title3)
-                    }
-                    .disabled(selectWordsID.count == 0)
-                    Spacer()
-                    Button("删除"){
-                        for id in selectWordsID{
-                            ModelData.word.removeAll(where: {$0.id==id})
+                    HStack{
+                        Spacer()
+                        NavigationLink{
+                            SelectTagsForMutiWords(WordsID: selectWordsID)
                         }
-                        saveData(data: ModelData.word)
-                    }
-                    .font(.title3)
-                    .foregroundColor(Color.red)
-                    .disabled(selectWordsID.count == 0)
-                    Spacer()
-                    Button(SelectAllButtonText){
-                        if(SelectAllButtonText=="全选"){
-                            selectWordsID=Set(noTagWord.map { $0.id })
-                            SelectAllButtonText="取消"
-                        }else{
-                            selectWordsID=[]
-                            SelectAllButtonText="全选"
+                        label: {
+                            Text("设置标签...")
                         }
+                        .disabled(selectWordsID.count == 0)
+                        Spacer()
+                        Button("删除"){
+                            for id in selectWordsID{
+                                ModelData.word.removeAll(where: {$0.id==id})
+                            }
+                            saveData(data: ModelData.word)
+                        }
+                        .disabled(selectWordsID.count == 0)
+                        Spacer()
+                        Button(SelectAllButtonText){
+                            if(SelectAllButtonText=="全选"){
+                                selectWordsID=Set(noTagWord.map { $0.id })
+                                SelectAllButtonText="取消"
+                            }else{
+                                selectWordsID=[]
+                                SelectAllButtonText="全选"
+                            }
+                        }
+                        Spacer()
                     }
-                    .font(.title3)
-                    Spacer()
+                    .offset(x:0,y:7)
+                    .transition(.asymmetric(insertion: .slide, removal: .backslide))
                 }
             }
+            .frame(
+                minWidth: 0,
+                maxWidth: .infinity,
+                minHeight: 5,
+                maxHeight: 30,
+                alignment: .topLeading
+            )
+            .animation(.default,value: isEditMode)
+    //        .offset(x:0,y:20)
+            Divider()
         }
         .toolbar(){
+            ///编辑按钮
             ToolbarItem(placement: .primaryAction) {
-                EditButton(isEditMode: $isEditMode)
+                Text(isEditMode.isEditing ? "完成": "编辑")
+                    .foregroundColor(Color.blue)
+                    .offset(x:40,y:0)
+            }
+            ToolbarItem(placement: .primaryAction) {
+                EditButton()
+                    .accentColor(.clear)
             }
         }
         .environment(\.editMode, $isEditMode)

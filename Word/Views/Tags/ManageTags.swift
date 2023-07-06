@@ -71,8 +71,9 @@ struct Manage: View {
                     saveTags(data: ModelData.tag)
                 }
             }
+            ///The `ModelView` is showed when `$editItem` isn't empty
             .sheet(item: $editItem){item in
-                ///将数据中的hex转化为color
+                ///turn hex string to `UIColor`
                 let hexColor:String=item.color
                 let tagColor:Color=Color(hex: hexColor)
                 editTagSheet(orinigalName: item.name, tagName: item.name, tagColor: tagColor, isShowRenameTagSheet: $isShowRenameTagSheet)

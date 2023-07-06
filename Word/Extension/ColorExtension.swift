@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-///十六进制颜色扩展
+///A `Color` extension that turns `hex` to `UIColor` or back.
 extension Color {
 
     ///https://stackoverflow.com/questions/57257704/how-can-i-change-a-swiftui-color-to-uicolor
@@ -18,14 +18,20 @@ extension Color {
     
     // UIColor -> Hex String
     var hexString: String? {
+        ///get the description string
+        ///it can be `kCGColorSpaceModelRGB r g b a`
+        ///note that `r g b a` are `CGFloat` that ranges from `0` to `1`
         let ds:String=self.description
+        ///so split it to several parts and get what I want
         let splitedDs:[String.SubSequence]=ds.split(separator: " ")
         let red:CGFloat=self.StringToFloat(str: String(splitedDs[1]))
         let green:CGFloat=self.StringToFloat(str: String(splitedDs[2]))
         let blue:CGFloat=self.StringToFloat(str: String(splitedDs[3]))
         let alpha:CGFloat=self.StringToFloat(str: String(splitedDs[4]))
+        
         if alpha == 1.0 {
             return String(
+                ///return 6 number hex string
                 format: "#%02lX%02lX%02lX",
                 Int(red * 255.000000),
                 Int(green * 255.000000),
@@ -34,6 +40,7 @@ extension Color {
         }
         else {
             return String(
+                ///return 8 number hex string, the first two numbers represents alpha
                 format: "#%02lX%02lX%02lX%02lX",
                 Int(alpha * 255.000000),
                 Int(red * 255.000000),
@@ -69,6 +76,7 @@ extension Color {
              opacity: Double(a) / 255
          )
     }
+    ///turn `String` type to `Float`
     func StringToFloat(str:String)->(CGFloat){
         let string = str
         var cgFloat: CGFloat = 0

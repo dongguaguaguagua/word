@@ -7,7 +7,7 @@
 
 import Foundation
 
-///判断显示方案和按钮文字
+///decide what text to show based on current situation
 func switchShowMode(Language:inout String,showChineseOnly:inout Bool,showEnglishOnly:inout Bool){
     switch Language{
     case "隐藏中文":

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+///Actually, it is a clone of `SelectTags.swift` in `Actions`, with a few modifies
 struct SelectTagsForMutiWords: View {
     @EnvironmentObject var ModelData:ModelDataClass
     @State var WordsID:Set<UUID>

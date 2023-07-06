@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftUI
 
 struct singleWord:Hashable,Codable,Identifiable{
     var id = UUID()
