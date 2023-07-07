@@ -33,20 +33,35 @@ struct NoTagList: View {
             List(selection: $selectWordsID) {
                 ForEach(sortWords(sortMode: sortMode, data: noTagWord)){
                     word in
-                    NavigationLink(){
-                        ListDetail(word: word)
-                    }
-                label: {
-                    ListRow(isShowEnglish: $showEnglishOnly,isShowChinese:$showChineseOnly,word: word)
-                        .swipeActions(edge: .trailing) {
-                            Button(role: .destructive) {
-                                ModelData.word.removeAll(where: {word.id==$0.id})
-                                saveData(data: ModelData.word)
-                            } label: {
-                                Label("Delete", systemImage: "trash")
-                            }
+                    ZStack(alignment: .leading){
+                        if(ModelData.settings.showDetailDefinition){
+                            ListRow(isShowEnglish: $showEnglishOnly,isShowChinese:$showChineseOnly,word: word)
+                            ///`swipeActions` only available in `iOS 15.0, macOS 12.0` or later.
+                            ///To support `iOS 14.0` and ealier, use https://github.com/SwipeCellKit/SwipeCellKit
+                                .swipeActions(edge: .trailing) {
+                                    Button(role: .destructive) {
+                                        ModelData.word.removeAll(where: {word.id==$0.id})
+                                        saveData(data: ModelData.word)
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
+                                    }
+                                }
+                        }else{
+                            ListRowOneLine(isShowEnglish: $showEnglishOnly,isShowChinese:$showChineseOnly,word: word)
+                                .swipeActions(edge: .trailing) {
+                                    Button(role: .destructive) {
+                                        ModelData.word.removeAll(where: {word.id==$0.id})
+                                        saveData(data: ModelData.word)
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
+                                    }
+                                }
                         }
-                }
+
+                        NavigationLink(destination: ListDetail(selectWordsID: $selectWordsID,word: word)){
+                            EmptyView()
+                        }.opacity(0.0)
+                    }
                 }
             }
             .navigationBarTitle("无标签", displayMode: .inline)

@@ -13,22 +13,27 @@ struct ContentView: View {
     enum Tab {
         case word
         case manage
+        case setting
     }
     var body: some View {
         TabView(selection: $selection){
             WordList()
-                .environmentObject(modelData)
                 .tabItem{
                     Label("Word",systemImage: "list.bullet")
                 }
                 .tag(Tab.word)
             Manage()
-                .environmentObject(modelData)
                 .tabItem{
                     Label("Manage",systemImage: "command.square")
                 }
                 .tag(Tab.manage)
+            Setting()
+                .tabItem{
+                    Label("Setting",systemImage: "gearshape")
+                }
+                .tag(Tab.setting)
         }
+        .environmentObject(modelData)
     }
 }
 

@@ -17,6 +17,8 @@
 		9C5974C02A517F26004D33C3 /* SelectTagsForMutiWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5974BF2A517F26004D33C3 /* SelectTagsForMutiWords.swift */; };
 		9C5974C22A517F55004D33C3 /* DeleteForMutiWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5974C12A517F55004D33C3 /* DeleteForMutiWords.swift */; };
 		9C5B408E2A4F082300CA7DE4 /* TagData.json in Resources */ = {isa = PBXBuildFile; fileRef = 9C5B408D2A4F082300CA7DE4 /* TagData.json */; };
+		9C881BA32A57C29F0088A9C4 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C881BA22A57C29F0088A9C4 /* UserSettings.swift */; };
+		9C881BA52A57D1C20088A9C4 /* ListRowOneLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C881BA42A57D1C20088A9C4 /* ListRowOneLine.swift */; };
 		9C9213B22A47153100DAA757 /* WordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9213B12A47153100DAA757 /* WordApp.swift */; };
 		9C9213B42A47153100DAA757 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9213B32A47153100DAA757 /* ContentView.swift */; };
 		9C9213B62A47153300DAA757 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C9213B52A47153300DAA757 /* Assets.xcassets */; };
@@ -34,6 +36,7 @@
 		9C9213F12A472BF900DAA757 /* AddWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9213F02A472BF900DAA757 /* AddWord.swift */; };
 		9CC0DB1A2A543FA80055BF3B /* TagStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC0DB192A543FA80055BF3B /* TagStructure.swift */; };
 		9CC0DB1C2A5444560055BF3B /* BottomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC0DB1B2A5444560055BF3B /* BottomViews.swift */; };
+		9CC0DB202A56C3620055BF3B /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC0DB1F2A56C3620055BF3B /* Setting.swift */; };
 		9CED471E2A49597800285043 /* EditWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CED471D2A49597800285043 /* EditWord.swift */; };
 		9CED47212A49A0C000285043 /* EachTagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CED47202A49A0C000285043 /* EachTagList.swift */; };
 		9CED47272A4A732C00285043 /* SortAndFilterTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CED47262A4A732C00285043 /* SortAndFilterTools.swift */; };
@@ -67,6 +70,8 @@
 		9C5974BF2A517F26004D33C3 /* SelectTagsForMutiWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagsForMutiWords.swift; sourceTree = "<group>"; };
 		9C5974C12A517F55004D33C3 /* DeleteForMutiWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteForMutiWords.swift; sourceTree = "<group>"; };
 		9C5B408D2A4F082300CA7DE4 /* TagData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TagData.json; sourceTree = "<group>"; };
+		9C881BA22A57C29F0088A9C4 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		9C881BA42A57D1C20088A9C4 /* ListRowOneLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRowOneLine.swift; sourceTree = "<group>"; };
 		9C9213AE2A47153100DAA757 /* Word.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Word.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C9213B12A47153100DAA757 /* WordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordApp.swift; sourceTree = "<group>"; };
 		9C9213B32A47153100DAA757 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -88,6 +93,7 @@
 		9CC0DB172A54294B0055BF3B /* WordData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = WordData.json; sourceTree = "<group>"; };
 		9CC0DB192A543FA80055BF3B /* TagStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagStructure.swift; sourceTree = "<group>"; };
 		9CC0DB1B2A5444560055BF3B /* BottomViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomViews.swift; sourceTree = "<group>"; };
+		9CC0DB1F2A56C3620055BF3B /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		9CED471D2A49597800285043 /* EditWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWord.swift; sourceTree = "<group>"; };
 		9CED47202A49A0C000285043 /* EachTagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EachTagList.swift; sourceTree = "<group>"; };
 		9CED47262A4A732C00285043 /* SortAndFilterTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortAndFilterTools.swift; sourceTree = "<group>"; };
@@ -128,6 +134,15 @@
 				9CC0DB192A543FA80055BF3B /* TagStructure.swift */,
 			);
 			path = Tags;
+			sourceTree = "<group>";
+		};
+		9C881B9F2A57C2180088A9C4 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				9CC0DB1F2A56C3620055BF3B /* Setting.swift */,
+				9C881BA22A57C29F0088A9C4 /* UserSettings.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		9C9213A52A47153100DAA757 = {
@@ -194,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				9CED471F2A499F7D00285043 /* Word */,
+				9C881B9F2A57C2180088A9C4 /* Settings */,
 				9C53F7682A4BBD8300E49CAD /* Tags */,
 				9C9213B32A47153100DAA757 /* ContentView.swift */,
 			);
@@ -252,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				9C9213DD2A4715B900DAA757 /* ListRow.swift */,
+				9C881BA42A57D1C20088A9C4 /* ListRowOneLine.swift */,
 				9C9213DF2A4715D000DAA757 /* ListDetail.swift */,
 				9C9213DB2A4715A200DAA757 /* WordList.swift */,
 				9CC0DB1B2A5444560055BF3B /* BottomViews.swift */,
@@ -408,12 +425,14 @@
 			files = (
 				9C5974C22A517F55004D33C3 /* DeleteForMutiWords.swift in Sources */,
 				9C31AE7E2A48011A000B3827 /* Time.swift in Sources */,
+				9C881BA32A57C29F0088A9C4 /* UserSettings.swift in Sources */,
 				9C53F7652A4BB8A000E49CAD /* SwitchShowMode.swift in Sources */,
 				9C9213E92A47188900DAA757 /* ManageTags.swift in Sources */,
 				9C5974C02A517F26004D33C3 /* SelectTagsForMutiWords.swift in Sources */,
 				9C9213DE2A4715B900DAA757 /* ListRow.swift in Sources */,
 				9C53F7702A4BFFC000E49CAD /* SelectTags.swift in Sources */,
 				9C9213E72A47160C00DAA757 /* LoadData.swift in Sources */,
+				9C881BA52A57D1C20088A9C4 /* ListRowOneLine.swift in Sources */,
 				9CC0DB1A2A543FA80055BF3B /* TagStructure.swift in Sources */,
 				9C9213E52A4715FD00DAA757 /* WordStructure.swift in Sources */,
 				9C9213B42A47153100DAA757 /* ContentView.swift in Sources */,
@@ -424,6 +443,7 @@
 				9C53F76A2A4BBDAE00E49CAD /* NoTagList.swift in Sources */,
 				9C53F7672A4BBB2700E49CAD /* SortModePicker.swift in Sources */,
 				9CED47272A4A732C00285043 /* SortAndFilterTools.swift in Sources */,
+				9CC0DB202A56C3620055BF3B /* Setting.swift in Sources */,
 				9C9213F12A472BF900DAA757 /* AddWord.swift in Sources */,
 				9CED47212A49A0C000285043 /* EachTagList.swift in Sources */,
 				9CED471E2A49597800285043 /* EditWord.swift in Sources */,

@@ -11,6 +11,7 @@ import Combine
 class ModelDataClass:ObservableObject{
     @Published var word: [singleWord] = loadWords()
     @Published var tag: [singleTag] = loadTags()
+    @Published var settings: settings = loadSettings()
 }
 
 func loadWords<T: Decodable>() ->T{
@@ -38,7 +39,6 @@ func loadWords<T: Decodable>() ->T{
             """.data(using: .utf8)!)
     }
     try? fileHandle.close()
-    print(file)
     let data:Data
     let fileUrl = URL(fileURLWithPath: file)
 //    guard let file=Bundle.main.url(forResource: filename, withExtension: nil)
@@ -94,7 +94,6 @@ func loadTags<T: Decodable>() ->T{
             """.data(using: .utf8)!)
     }
     try? fileHandle.close()
-    print(file)
     let data:Data
     let fileUrl = URL(fileURLWithPath: file)
     do {
@@ -120,6 +119,55 @@ func saveTags(data:[singleTag]){
     }
 
     let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "Tags.json"
+    
+    let fileUrl=URL(fileURLWithPath: path)
+    do {
+        try jsonData.write(to: fileUrl)
+    } catch {
+        fatalError("Error occurs when writing to json file")
+    }
+}
+
+func loadSettings<T: Decodable>() ->T{
+    let file = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "Settings.json"
+    print(file)
+    ///防止文件为空,进行初始化操作
+    if !FileManager.default.fileExists(atPath: file) {
+        FileManager.default.createFile(atPath: file, contents: nil, attributes: nil)
+    }
+    let fileHandle = FileHandle(forWritingAtPath: file)!
+    let fileLength = fileHandle.seekToEndOfFile()
+    
+    if(fileLength <= 1){
+        fileHandle.seekToEndOfFile()
+        fileHandle.write("""
+            {"showDetailDefinition":true}
+            """.data(using: .utf8)!)
+    }
+    try? fileHandle.close()
+    let data:Data
+    let fileUrl = URL(fileURLWithPath: file)
+    do {
+        data=try Data(contentsOf: fileUrl)
+    }catch{
+        fatalError("Couldn't load setting file from main bundle:\n\(error)")
+    }
+    do {
+        let decoder=JSONDecoder()
+        return try decoder.decode(T.self, from: data)
+    }catch{
+        fatalError("Couldn't parse setting file as \(T.self):\n\(error)")
+    }
+}
+
+func saveSettings(data:settings){
+    let encoder = JSONEncoder()
+
+    guard let jsonData = try? encoder.encode(data) else {
+        fatalError("Could not encode setting to json")
+    }
+
+    let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "Settings.json"
     
     let fileUrl=URL(fileURLWithPath: path)
     do {

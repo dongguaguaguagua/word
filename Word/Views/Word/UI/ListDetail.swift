@@ -18,7 +18,7 @@ import SwiftUI
 ///- two button, you can press them to show the next/previous word's detail
 struct ListDetail: View {
     @EnvironmentObject var ModelData:ModelDataClass
-    
+    @Binding var selectWordsID:Set<UUID>
     ///receive a word
     var word:singleWord
     
@@ -71,13 +71,17 @@ struct ListDetail: View {
                 }
             }
         }
+        ///To fix the bug that you enter the word detail, then the word is selected.
+        .onDisappear{
+            selectWordsID=[]
+        }
     }
 }
-
-struct ListDetail_Previews: PreviewProvider {
-    static var word=ModelDataClass().word
-    static var previews: some View {
-        ListDetail(word: word[0])
-            .environmentObject(ModelDataClass())
-    }
-}
+//
+//struct ListDetail_Previews: PreviewProvider {
+//    static var word=ModelDataClass().word
+//    static var previews: some View {
+//        ListDetail(selectWordsID: [],word: word[0])
+//            .environmentObject(ModelDataClass())
+//    }
+//}

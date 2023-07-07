@@ -1,15 +1,13 @@
 //
-//  ListRow.swift
-//  WordList
+//  ListRowOneLine.swift
+//  Word
 //
-//  Created by 胡宗禹 on 6/24/23.
+//  Created by 胡宗禹 on 7/7/23.
 //
 
 import SwiftUI
 
-///This is the navigation label of each single word.
-///It shows the word's name, definition. And provide button to hide or show them individually.
-struct ListRow: View {
+struct ListRowOneLine: View {
     @EnvironmentObject var ModelData:ModelDataClass
     
     @Binding var isShowEnglish:Bool
@@ -23,7 +21,7 @@ struct ListRow: View {
     var word:singleWord
     
     var body: some View {
-        VStack(alignment: .leading){
+        HStack(){
             HStack {
                 Text("\(getText(input: "chinese"))")
                     .onTapGesture {
@@ -35,7 +33,9 @@ struct ListRow: View {
                     .foregroundColor((!isShowChinese)||(isShowChineseSingle) ? Color.black : Color.clear)
                 ///ease in and out animation
                     .animation(.easeInOut(duration: 0.2),value: isShowChineseSingle)
+                    .lineLimit(1)
             }
+            Spacer()
             HStack {
                 Text("\(getText(input: "english"))")
                     .onTapGesture {
@@ -45,6 +45,7 @@ struct ListRow: View {
                     .font(.subheadline)
                     .foregroundColor((!isShowEnglish)||(isShowEnglishSingle) ? Color.gray : Color.clear)
                     .animation(.easeInOut(duration: 0.2),value: isShowEnglishSingle)
+                    .lineLimit(1)
             }
         }
     }
@@ -65,11 +66,3 @@ struct ListRow: View {
         }
     }
 }
-//
-//struct ListRow_Previews: PreviewProvider {
-//    static var word = ModelDataClass().word
-//    static var previews: some View {
-//        ListRow(word: word[0])
-//            .environmentObject(ModelDataClass())
-//    }
-//}
