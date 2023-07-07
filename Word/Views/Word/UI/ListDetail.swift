@@ -72,7 +72,7 @@ struct ListDetail: View {
             }
         }
         ///To fix the bug that you enter the word detail, then the word is selected.
-        .onDisappear{
+        .onAppear{
             selectWordsID=[]
         }
     }

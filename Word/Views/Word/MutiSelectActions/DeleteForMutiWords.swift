@@ -16,7 +16,6 @@ struct DeleteForMutiWords: View {
             for id in WordsID{
                 ModelData.word.removeAll(where: {$0.id==id})
             }
-            print(WordsID)
             saveData(data: ModelData.word)
         }
     }
