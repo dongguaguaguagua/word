@@ -16,13 +16,13 @@ struct NoTagList: View {
     ///中英文切换变量
     @State var showEnglishOnly:Bool=false
     @State var showChineseOnly:Bool=false
-    @State var showLanguage:String="隐藏中文"
+    @State var showLanguage:String="hide_native_language"
     ///`SortMode`包含四个case
     @State var sortMode:SortMode = .byNameDown
     
     @State var isEditMode: EditMode = .inactive
     @State var selectWordsID:Set<UUID> = []
-    @State var SelectAllButtonText:String = "全选"
+    @State var SelectAllButtonText:String = "select_all"
     
     var noTagWord:[singleWord]{
         ModelData.word.filter({$0.tag==[]})
@@ -64,7 +64,7 @@ struct NoTagList: View {
                     }
                 }
             }
-            .navigationBarTitle("无标签", displayMode: .inline)
+            .navigationBarTitle("no_tag_title", displayMode: .inline)
             Divider()
             HStack() {
                 if(isEditMode == .inactive){
@@ -90,11 +90,11 @@ struct NoTagList: View {
                             SelectTagsForMutiWords(WordsID: selectWordsID)
                         }
                         label: {
-                            Text("设置标签...")
+                            Text("select_tags")
                         }
                         .disabled(selectWordsID.count == 0)
                         Spacer()
-                        Button("删除"){
+                        Button("delete"){
                             for id in selectWordsID{
                                 ModelData.word.removeAll(where: {$0.id==id})
                             }
@@ -103,12 +103,12 @@ struct NoTagList: View {
                         .disabled(selectWordsID.count == 0)
                         Spacer()
                         Button(SelectAllButtonText){
-                            if(SelectAllButtonText=="全选"){
+                            if(SelectAllButtonText=="select_all"){
                                 selectWordsID=Set(noTagWord.map { $0.id })
-                                SelectAllButtonText="取消"
+                                SelectAllButtonText="cancel"
                             }else{
                                 selectWordsID=[]
-                                SelectAllButtonText="全选"
+                                SelectAllButtonText="select_all"
                             }
                         }
                         Spacer()
@@ -129,9 +129,9 @@ struct NoTagList: View {
             Divider()
         }
         .toolbar(){
-            ///编辑按钮
+            ///edit button
             ToolbarItem(placement: .primaryAction) {
-                Text(isEditMode.isEditing ? "完成": "编辑")
+                Text(isEditMode.isEditing ? "done": "edit")
                     .foregroundColor(Color.blue)
                     .offset(x:40,y:0)
             }

@@ -20,7 +20,7 @@ struct WordList: View {
     @State var sortMode:SortMode = .byDateDown
     
     ///Tag to filter, and default is `All`
-    @State var filterTag:String = "全部"
+    @State var filterTag:String = "all_words"
 
     @State var isEditMode: EditMode = .inactive
     
@@ -74,10 +74,10 @@ struct WordList: View {
                         }
                     }
                 }
-                .navigationTitle("生词本")
+                .navigationTitle("word_book_title")
                 Divider()
                 ///The bottom view.
-                BottomViews(sortMode: $sortMode, filterTag: filterTag, isEditMode: $isEditMode, showEnglishOnly: $showEnglishOnly, showChineseOnly: $showChineseOnly, selectWordsID: $selectWordsID)
+                BottomViews(sortMode: $sortMode, filterTag: $filterTag, isEditMode: $isEditMode, showEnglishOnly: $showEnglishOnly, showChineseOnly: $showChineseOnly, selectWordsID: $selectWordsID)
             }
             .toolbar(){
                 ///Apple provide `EditButton()` to switch edit mode.
@@ -99,7 +99,7 @@ struct WordList: View {
                 ///But the button has no animation. It is not what I want.
                 ///So I have no way but let `text` overlap with `EditButton()`.
                 ToolbarItem(placement: .primaryAction) {
-                    Text(isEditMode.isEditing ? "完成": "编辑")
+                    Text(isEditMode.isEditing ? "done": "edit")
                         .foregroundColor(Color.blue)
                         .offset(x:40,y:0)
                 }
@@ -110,8 +110,8 @@ struct WordList: View {
                 ///Tag picker
                 ToolbarItem(placement: .navigation) {
                     Picker("filter", selection: $filterTag) {
-                        Text("全部").tag("全部")
-                        Text("无标签").tag("无标签")
+                        Text("all_words").tag("all_words")
+                        Text("no_tag").tag("no_tag")
                         ForEach(ModelData.tag.map { $0.name },id: \.self){
                             tag in
                             Text(tag)

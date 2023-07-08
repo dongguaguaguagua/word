@@ -32,23 +32,23 @@ struct newTagSheet:View{
     var body: some View{
         NavigationView{
             VStack {
-                Text("添加标签")
+                Text("add_tag")
                     .font(.title2)
                 Divider()
-                TextField("标签名称", text: $tagName)
+                TextField("tag_name", text: $tagName)
                     .disableAutocorrection(true)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                 Divider()
-                ColorPicker("选择一个颜色", selection: $tagColor)
+                ColorPicker("choose_one_color", selection: $tagColor)
                     .padding()
-                Text("默认为黑色")
+                Text("default_color_note")
                     .font(.footnote)
                     .foregroundColor(Color.gray)
                 Divider()
             }.toolbar {
                 ToolbarItem(placement: .primaryAction) {
-                    Button("完成"){
+                    Button("done"){
                         if(ModelData.tag.map{$0.name}.contains(tagName)){
                             showAlert=true
                         }else{
@@ -63,12 +63,12 @@ struct newTagSheet:View{
                     }
                 }
                 ToolbarItem(placement: .navigation){
-                    Button("取消"){
+                    Button("cancel"){
                         self.showAddTagSheet=false
                     }
                 }
             }
-            .alert("标签已存在", isPresented: $showAlert){}
+            .alert("tag_exist_alert", isPresented: $showAlert){}
         }
     }
 }

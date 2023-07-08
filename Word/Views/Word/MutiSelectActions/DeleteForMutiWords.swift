@@ -12,7 +12,7 @@ struct DeleteForMutiWords: View {
     @State var WordsID:Set<UUID>
     
     var body: some View {
-        Button("删除"){
+        Button("delete"){
             for id in WordsID{
                 ModelData.word.removeAll(where: {$0.id==id})
             }

@@ -1,0 +1,44 @@
+/* 
+  Localizable.strings
+  Word
+
+  Created by 胡宗禹 on 7/8/23.
+  
+*/
+"Hello, world!"="Hello, world!";
+"word_tab"="Word";
+"manage_tab"="Manage";
+"setting_tab"="Setting";
+"word_book_title"="Word Book";
+"done"="Done";
+"edit"="Edit";
+"no_tag"="No tag";
+"hide_native_language"="Hide Chinese";
+"hide_foreign_language"="Hide English";
+"show_all"="Show all";
+"select_all"="Select all";
+"select_tags"="Set tags...";
+"delete"="Delete";
+"cancel"="Cancel";
+"add_word"="Add a word";
+"add_tag"="Add a tag";
+"word_placeholder"="word/phrase";
+"edit_word"="Edit word";
+"appearance"="Appearance";
+"show_full_definition"="Show full definition";
+"edit_tag"="Edit tag";
+"tag_name"="Tag name";
+"choose_one_color"="Choose one color";
+"default_color_note"="The default color is black";
+"tag_exist_alert"="Tag exists";
+"manage_title"="Tags";
+"no_tag_title"="No tag";
+"tag_name"="Tag name";
+"all_words"="All";
+"old_to_new"="Old-new";
+"new_to_old"="New-old";
+"A_to_Z"="A-Z";
+"Z_to_A"="Z-A";
+"random"="Random";
+"add_time:%@"="Add time:%@";
+"word_count %lld"="All %lld";

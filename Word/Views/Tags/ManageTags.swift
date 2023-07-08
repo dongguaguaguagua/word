@@ -26,7 +26,7 @@ struct Manage: View {
                     NoTagList()
                 }label: {
                     HStack{
-                        Text("无标签")
+                        Text("no_tag")
                         Spacer()
                         Text("\(noTagWord.count)")
                             .bold()
@@ -79,7 +79,7 @@ struct Manage: View {
                 editTagSheet(orinigalName: item.name, tagName: item.name, tagColor: tagColor, isShowRenameTagSheet: $isShowRenameTagSheet)
             }
             .environment(\.editMode, $editMode)
-            .navigationTitle("标签")
+            .navigationTitle("manage_title")
             .toolbar(){
                 ToolbarItem(placement: .primaryAction){
                     AddTag()
@@ -100,20 +100,20 @@ struct editTagSheet:View{
     var body: some View{
         NavigationView{
             VStack {
-                Text("编辑标签")
+                Text("edit_tag")
                     .font(.title2)
                 Divider()
-                TextField("标签名称", text: $tagName)
+                TextField("tag_name", text: $tagName)
                     .disableAutocorrection(true)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                 Divider()
-                ColorPicker("选择一个颜色", selection: $tagColor)
+                ColorPicker("choose_one_color", selection: $tagColor)
                     .padding()
                 Divider()
             }.toolbar {
                 ToolbarItem(placement: .primaryAction) {
-                    Button("完成"){
+                    Button("done"){
                         if(ModelData.tag.map{$0.name}.contains(tagName) && tagName != orinigalName){
                             showAlert=true
                         }else{
@@ -129,12 +129,12 @@ struct editTagSheet:View{
                     }
                 }
                 ToolbarItem(placement: .navigation){
-                    Button("取消"){
+                    Button("cancel"){
                         self.dismiss()
                     }
                 }
             }
-            .alert("标签已存在", isPresented: $showAlert){}
+            .alert("tag_exist_alert", isPresented: $showAlert){}
         }
     }
     private func dismiss() {
@@ -149,7 +149,7 @@ struct deleteButton:View{
     
     var tag:String
     var body: some View{
-        ///删除标签
+        ///delete tags
         Button(role: .destructive) {
             for i in 0..<ModelData.word.count{
                 ModelData.word[i].tag.removeAll(where: {$0==tag})

@@ -11,11 +11,11 @@ struct SortModePicker: View {
     @Binding var sortMode:SortMode
     var body: some View {
         Picker("sort", selection: $sortMode) {
-            Text("从旧到新").tag(SortMode.byDateUp)
-            Text("从新到旧").tag(SortMode.byDateDown)
-            Text("从A到Z").tag(SortMode.byNameUp)
-            Text("从Z到A").tag(SortMode.byNameDown)
-            Text("随机打乱").tag(SortMode.random)
+            Text("old_to_new").tag(SortMode.byDateUp)
+            Text("new_to_old").tag(SortMode.byDateDown)
+            Text("A_to_Z").tag(SortMode.byNameUp)
+            Text("Z_to_A").tag(SortMode.byNameDown)
+            Text("random").tag(SortMode.random)
         }
     }
 }

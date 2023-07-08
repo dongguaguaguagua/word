@@ -10,25 +10,25 @@ import Foundation
 ///decide what text to show based on current situation
 func switchShowMode(Language:inout String,showChineseOnly:inout Bool,showEnglishOnly:inout Bool){
     switch Language{
-    case "隐藏中文":
+    case "hide_native_language":
         showChineseOnly=false
         showEnglishOnly=true
-        Language="隐藏英文"
+        Language="hide_foreign_language"
         break
-    case "隐藏英文":
+    case "hide_foreign_language":
         showChineseOnly=true
         showEnglishOnly=false
-        Language="中文英文"
+        Language="show_all"
         break
-    case "中文英文":
+    case "show_all":
         showChineseOnly=false
         showEnglishOnly=false
-        Language="隐藏中文"
+        Language="hide_native_language"
         break
     default:
         showChineseOnly=false
         showEnglishOnly=false
-        Language="隐藏中文"
+        Language="hide_native_language"
         break
     }
 }

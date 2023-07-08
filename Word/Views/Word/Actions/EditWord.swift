@@ -40,10 +40,10 @@ struct EditWordForm: View {
     var body: some View{
         NavigationView{
             VStack {
-                Text("编辑单词")
+                Text("edit_word")
                     .font(.title2)
                 Divider()
-                TextField("单词/词组", text: $wordName)
+                TextField("word_placeholder", text: $wordName)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .disableAutocorrection(true)
                     .padding()
@@ -53,7 +53,7 @@ struct EditWordForm: View {
             }
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
-                    Button("完成"){
+                    Button("done"){
                         ///A new word is created. After deleting the old word, insert the new word into `ModelData`
                         ModelData.word.removeAll(where: {wordId==$0.id})
                         let time = getCurrentTime(timeFormat: .YYYYMMDDHHMMSS)
@@ -64,7 +64,7 @@ struct EditWordForm: View {
                     }
                 }
                 ToolbarItem(placement: .navigation){
-                    Button("取消"){
+                    Button("cancel"){
                         self.showEditWordForm.toggle()
                     }
                 }

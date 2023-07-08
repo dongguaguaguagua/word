@@ -19,21 +19,22 @@ struct ContentView: View {
         TabView(selection: $selection){
             WordList()
                 .tabItem{
-                    Label("Word",systemImage: "list.bullet")
+                    Label("word_tab",systemImage: "list.bullet")
                 }
                 .tag(Tab.word)
             Manage()
                 .tabItem{
-                    Label("Manage",systemImage: "command.square")
+                    Label("manage_tab",systemImage: "command.square")
                 }
                 .tag(Tab.manage)
             Setting()
                 .tabItem{
-                    Label("Setting",systemImage: "gearshape")
+                    Label("setting_tab",systemImage: "gearshape")
                 }
                 .tag(Tab.setting)
         }
         .environmentObject(modelData)
+        
     }
 }
 

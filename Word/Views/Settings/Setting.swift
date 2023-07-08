@@ -12,13 +12,13 @@ struct Setting: View {
     var body: some View {
         NavigationView{
             Form(){
-                Section(header:Text("外观")){
+                Section(header:Text("appearance")){
                     Toggle(isOn: $ModelData.settings.showDetailDefinition) {
-                        Text("显示完整释义")
+                        Text("show_full_definition")
                     }
                 }
-            }.navigationTitle("设置")
-        }.navigationTitle("设置")
+            }.navigationTitle("Setting")
+        }
     }
 }
 //

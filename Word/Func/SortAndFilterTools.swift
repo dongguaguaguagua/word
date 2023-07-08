@@ -41,10 +41,10 @@ func sortWords(sortMode: SortMode,data: [singleWord]) -> [singleWord] {
 }
 
 func filteredWords(data:[singleWord],tag:String)->[singleWord]{
-    if(tag=="全部"){
+    if(tag=="all_words"){
         return data
     }else{
-        return  tag=="无标签" ? data.filter({$0.tag==[]}) : data.filter({$0.tag.contains(tag)})
+        return  tag=="no_tag" ? data.filter({$0.tag==[]}) : data.filter({$0.tag.contains(tag)})
     }
 }
 

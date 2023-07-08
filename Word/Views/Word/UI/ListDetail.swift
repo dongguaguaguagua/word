@@ -13,9 +13,9 @@ import SwiftUI
 ///It also has edit button and tag-select button on the tool bar.
 ///
 ///Many works need to be done.
-///- markdown support
-///- each tag is a navigation link
-///- two button, you can press them to show the next/previous word's detail
+/// - markdown support
+/// - each tag is a navigation link
+/// - two button, you can press them to show the next/previous word's detail
 struct ListDetail: View {
     @EnvironmentObject var ModelData:ModelDataClass
     @Binding var selectWordsID:Set<UUID>
@@ -40,7 +40,7 @@ struct ListDetail: View {
                 .font(.title)
             ///Actually, the `create time` is not accurate yet. When you edit a word, this will also be refreshed.
             ///So I consider creating another attribute `edit date`.(NOT IN PROGRESS)
-            Text("添加时间:\(word.date)")
+            Text("add_time:\(word.date)")
                 .foregroundColor(.gray)
             Spacer()
                 .frame(minHeight: 10,maxHeight: 20)

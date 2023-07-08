@@ -33,14 +33,14 @@ struct NewWordForm: View {
     @State var wordDefinition:String = ""
     @Binding var showNewWordForm:Bool
     @State var selectedTags: [String]=[]
-    @State var selectedTagsText: String="选择标签"
+    @State var selectedTagsText: String="select_tags"
     var body: some View{
         NavigationView{
             VStack {
-                Text("添加单词")
+                Text("add_word")
                     .font(.title2)
                 Divider()
-                TextField("单词/词组", text: $wordName)
+                TextField("word_placeholder", text: $wordName)
                     .disableAutocorrection(true)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
@@ -93,7 +93,7 @@ struct NewWordForm: View {
                 Divider()
             }.toolbar {
                 ToolbarItem(placement: .primaryAction) {
-                    Button("完成"){
+                    Button("done"){
                         let time = getCurrentTime(timeFormat: .YYYYMMDDHHMMSS)
                         let newWord = singleWord(name: "\(wordName)", definition: "\(wordDefinition)",date: time,tag: selectedTags)
                         ModelData.word.append(newWord)
@@ -103,7 +103,7 @@ struct NewWordForm: View {
                     }
                 }
                 ToolbarItem(placement: .navigation){
-                    Button("取消"){
+                    Button("cancel"){
                         self.showNewWordForm.toggle()
                     }
                 }
@@ -122,7 +122,7 @@ struct NewWordForm: View {
                     selectedTags.removeAll { $0 == tag }
                 }
                 if(selectedTags==[]){
-                    selectedTagsText="选择标签"
+                    selectedTagsText="select_tags"
                 }else{
                     selectedTagsText=""
                 }

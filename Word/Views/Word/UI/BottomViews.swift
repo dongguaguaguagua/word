@@ -20,16 +20,16 @@ struct BottomViews: View {
     @EnvironmentObject var ModelData:ModelDataClass
     
     @Binding var sortMode:SortMode
-    @State var filterTag:String
+    @Binding var filterTag:String
     @Binding var isEditMode: EditMode
     
-    @State var showLanguage:String="隐藏中文"
+    @State var showLanguage:String="hide_native_language"
     @Binding var showEnglishOnly:Bool
     @Binding var showChineseOnly:Bool
     
     @Binding var selectWordsID:Set<UUID>
     
-    @State var SelectAllButtonText:String = "全选"
+    @State var SelectAllButtonText:LocalizedStringKey = "select_all"
     
     var body: some View {
         HStack() {
@@ -38,11 +38,14 @@ struct BottomViews: View {
                     Spacer()
                     SortModePicker(sortMode: $sortMode)
                     Spacer()
-                    Text("共计 \(getFilteredWordsCount(data:ModelData.word,tag:filterTag)) ")
+                    Text("word_count \(getFilteredWordsCount(data:ModelData.word,tag:filterTag))")
+                        .onTapGesture {
+                            print(filterTag)
+                        }
                         .bold()
                     Spacer()
                     ///switch the show language mode
-                    Text("\(showLanguage)")
+                    Text(LocalizedStringKey(showLanguage))
                         .onTapGesture {
                             switchShowMode(Language: &showLanguage, showChineseOnly: &showChineseOnly, showEnglishOnly: &showEnglishOnly)
                         }
@@ -57,12 +60,12 @@ struct BottomViews: View {
                         SelectTagsForMutiWords(WordsID: selectWordsID)
                     }
                     label: {
-                        Text("设置标签...")
+                        Text("select_tags")
                     }
                     ///This will be disabled when there is not words selected.
                     .disabled(selectWordsID.count == 0)
                     Spacer()
-                    Button("删除"){
+                    Button("delete"){
                         for id in selectWordsID{
                             ModelData.word.removeAll(where: {$0.id==id})
                         }
@@ -72,12 +75,12 @@ struct BottomViews: View {
                     .disabled(selectWordsID.count == 0)
                     Spacer()
                     Button(SelectAllButtonText){
-                        if(SelectAllButtonText=="全选"){
+                        if(SelectAllButtonText=="select_all"){
                             selectWordsID=Set(filteredWords(data: ModelData.word, tag: filterTag).map { $0.id })
-                            SelectAllButtonText="取消"
+                            SelectAllButtonText="cancel"
                         }else{
                             selectWordsID=[]
-                            SelectAllButtonText="全选"
+                            SelectAllButtonText="select_all"
                         }
                     }
                     Spacer()

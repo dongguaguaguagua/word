@@ -1,0 +1,45 @@
+/* 
+  Localizable.strings
+  Word
+
+  Created by 胡宗禹 on 7/8/23.
+  
+*/
+"Hello, world!"="你好世界！";
+"word_tab"="单词";
+"manage_tab"="管理";
+"setting_tab"="设置";
+"Add time:"="添加时间：";
+"word_book_title"="生词本";
+"done"="完成";
+"edit"="编辑";
+"no_tag"="无标签";
+"hide_native_language"="隐藏中文";
+"hide_foreign_language"="隐藏英文";
+"show_all"="中文英文";
+"select_all"="全选";
+"select_tags"="设置标签...";
+"delete"="删除";
+"cancel"="取消";
+"add_word"="添加单词";
+"add_tag"="添加标签";
+"word_placeholder"="单词/词组";
+"edit_word"="编辑单词";
+"appearance"="外观";
+"show_full_definition"="显示完整释义";
+"edit_tag"="编辑标签";
+"tag_name"="标签名称";
+"choose_one_color"="选择一个颜色";
+"default_color_note"="默认为黑色";
+"tag_exist_alert"="标签已存在";
+"manage_title"="标签";
+"no_tag_title"="无标签";
+"tag_name"="标签名称";
+"all_words"="全部";
+"old_to_new"="从旧到新";
+"new_to_old"="从新到旧";
+"A_to_Z"="从A到Z";
+"Z_to_A"="从Z到A";
+"random"="随机打乱";
+"add_time:%@"="添加时间：%@";
+"word_count %lld"="共计 %lld";

@@ -10,19 +10,19 @@ import SwiftUI
 struct EachTagList: View {
     @EnvironmentObject var ModelData:ModelDataClass
     
-    var tag:String
+    @State var tag:String
     
     ///中英文切换变量
     @State var showEnglishOnly:Bool=false
     @State var showChineseOnly:Bool=false
-    @State var showLanguage:String="隐藏中文"
+    @State var showLanguage:String="hide_native_language"
     ///`SortMode`包含四个case
     @State var sortMode:SortMode = .byNameDown
     
     @State var isEditMode: EditMode = .inactive
     @State var selectWordsID:Set<UUID> = []
     
-    @State var SelectAllButtonText:String = "全选"
+    @State var SelectAllButtonText:String = "select_all"
     
     var body: some View {
         VStack {
@@ -63,12 +63,12 @@ struct EachTagList: View {
             .navigationBarTitle("\(tag)",displayMode: .inline)
             Divider()
             
-            BottomViews(sortMode: $sortMode, filterTag: tag, isEditMode: $isEditMode, showEnglishOnly: $showEnglishOnly, showChineseOnly: $showChineseOnly, selectWordsID: $selectWordsID)
+            BottomViews(sortMode: $sortMode, filterTag: $tag, isEditMode: $isEditMode, showEnglishOnly: $showEnglishOnly, showChineseOnly: $showChineseOnly, selectWordsID: $selectWordsID)
         }
         .toolbar(){
             ///编辑按钮
             ToolbarItem(placement: .primaryAction) {
-                Text(isEditMode.isEditing ? "完成": "编辑")
+                Text(isEditMode.isEditing ? "done": "edit")
                     .foregroundColor(Color.blue)
                     .offset(x:40,y:0)
             }
