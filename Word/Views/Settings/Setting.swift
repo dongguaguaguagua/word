@@ -17,6 +17,11 @@ struct Setting: View {
                         Text("show_full_definition")
                     }
                 }
+                Section(header:Text("gesture")){
+                    Toggle(isOn: $ModelData.settings.clickBottomToShuffle) {
+                        Text("click_bottom_to_shuffle")
+                    }
+                }
             }.navigationTitle("Setting")
         }
     }

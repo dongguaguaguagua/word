@@ -22,12 +22,16 @@ struct EachTagList: View {
     @State var isEditMode: EditMode = .inactive
     @State var selectWordsID:Set<UUID> = []
     
+    ///About the random words
+    @State var isRandom:Bool=false
+    @State var randomWords:[singleWord]=[]
+    
     @State var SelectAllButtonText:String = "select_all"
     
     var body: some View {
         VStack {
             List(selection: $selectWordsID) {
-                ForEach(sortWords(sortMode: sortMode, data: filteredWords(data: ModelData.word, tag: tag))){
+                ForEach(isRandom ? randomWords : sortWords(sortMode: sortMode, data: filteredWords(data: ModelData.word, tag: tag))){
                     word in
                     ZStack(alignment: .leading){
                         if(ModelData.settings.showDetailDefinition){
@@ -63,7 +67,78 @@ struct EachTagList: View {
             .navigationBarTitle("\(tag)",displayMode: .inline)
             Divider()
             
-            BottomViews(sortMode: $sortMode, filterTag: $tag, isEditMode: $isEditMode, showEnglishOnly: $showEnglishOnly, showChineseOnly: $showChineseOnly, selectWordsID: $selectWordsID)
+            HStack() {
+                if(isEditMode == .inactive){
+                    HStack{
+                        Spacer()
+                        SortModePicker(sortMode: $sortMode)
+                        Spacer()
+                        Text("word_count \(getFilteredWordsCount(data:ModelData.word,tag:tag))")
+                            .onTapGesture {
+                                if(ModelData.settings.clickBottomToShuffle){
+                                    randomWords=filteredWords(data: ModelData.word, tag: tag).shuffled()
+                                    isRandom.toggle()
+                                }
+                            }
+                            .bold()
+                        Spacer()
+                        ///switch the show language mode
+                        Text(LocalizedStringKey(showLanguage))
+                            .onTapGesture {
+                                switchShowMode(Language: &showLanguage, showChineseOnly: &showChineseOnly, showEnglishOnly: &showEnglishOnly)
+                            }
+                        Spacer()
+                    }
+                    ///The animation
+                    .transition(.asymmetric(insertion: .backslide, removal: .slide))
+                }else{
+                    HStack{
+                        Spacer()
+                        NavigationLink{
+                            SelectTagsForMutiWords(WordsID: selectWordsID)
+                        }
+                        label: {
+                            Text("select_tags")
+                        }
+                        ///This will be disabled when there is not words selected.
+                        .disabled(selectWordsID.count == 0)
+                        Spacer()
+                        Button("delete"){
+                            for id in selectWordsID{
+                                ModelData.word.removeAll(where: {$0.id==id})
+                            }
+                            saveData(data: ModelData.word)
+                        }
+                        ///This will be disabled when there is not words selected.
+                        .disabled(selectWordsID.count == 0)
+                        Spacer()
+                        Button(SelectAllButtonText){
+                            if(SelectAllButtonText=="select_all"){
+                                selectWordsID=Set(filteredWords(data: ModelData.word, tag: tag).map { $0.id })
+                                SelectAllButtonText="cancel"
+                            }else{
+                                selectWordsID=[]
+                                SelectAllButtonText="select_all"
+                            }
+                        }
+                        Spacer()
+                    }
+                    ///If you don't set `offset`, the whole bar will shift about 7 pixels up.
+                    ///But it may not look very well on iPad. I will test it later.
+                    .offset(x:0,y:7)
+                    .transition(.asymmetric(insertion: .slide, removal: .backslide))
+                }
+            }
+            ///make the `HStack` look better.
+            .frame(
+                minWidth: 0,
+                maxWidth: .infinity,
+                minHeight: 5,
+                maxHeight: 30,
+                alignment: .topLeading
+            )
+            .animation(.default,value: isEditMode)
+            Divider()
         }
         .toolbar(){
             ///编辑按钮

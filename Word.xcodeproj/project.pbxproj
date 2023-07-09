@@ -177,6 +177,7 @@
 				9CC0DB132A5428190055BF3B /* Extension */,
 				9CC0DB122A5427350055BF3B /* Func */,
 				9C9213EF2A472BBB00DAA757 /* Views */,
+				9C881BBA2A5912510088A9C4 /* Localizable.strings */,
 				9CC0DB162A54294B0055BF3B /* Data */,
 				9C9213E22A4715EE00DAA757 /* WordData.json */,
 				9C9213B52A47153300DAA757 /* Assets.xcassets */,
@@ -217,7 +218,6 @@
 				9C881B9F2A57C2180088A9C4 /* Settings */,
 				9C53F7682A4BBD8300E49CAD /* Tags */,
 				9C9213B32A47153100DAA757 /* ContentView.swift */,
-				9C881BBA2A5912510088A9C4 /* Localizable.strings */,
 			);
 			path = Views;
 			sourceTree = "<group>";

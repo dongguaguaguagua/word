@@ -8,7 +8,8 @@
 import Foundation
 
 enum SortMode: String, CaseIterable, Identifiable {
-    case byDateUp, byDateDown, byNameUp, byNameDown, random
+//    case byDateUp, byDateDown, byNameUp, byNameDown, random
+    case byDateUp, byDateDown, byNameUp, byNameDown
     var id: Self { self }
 }
 
@@ -23,8 +24,8 @@ func sortWords(sortMode: SortMode,data: [singleWord]) -> [singleWord] {
         return data.sorted { $0.name < $1.name }
     case .byNameDown:
         return data.sorted { $0.name > $1.name }
-    case .random:
-        return data.shuffled()
+//    case .random:
+//        return data.shuffled()
         
         ///it can be done like this:
         ///```

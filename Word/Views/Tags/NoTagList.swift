@@ -22,6 +22,11 @@ struct NoTagList: View {
     
     @State var isEditMode: EditMode = .inactive
     @State var selectWordsID:Set<UUID> = []
+    
+    ///About the random words
+    @State var isRandom:Bool=false
+    @State var randomWords:[singleWord]=[]
+    
     @State var SelectAllButtonText:String = "select_all"
     
     var noTagWord:[singleWord]{
@@ -31,7 +36,7 @@ struct NoTagList: View {
     var body: some View {
         VStack{
             List(selection: $selectWordsID) {
-                ForEach(sortWords(sortMode: sortMode, data: noTagWord)){
+                ForEach(isRandom ? randomWords : sortWords(sortMode: sortMode, data: noTagWord)){
                     word in
                     ZStack(alignment: .leading){
                         if(ModelData.settings.showDetailDefinition){
@@ -72,17 +77,24 @@ struct NoTagList: View {
                         Spacer()
                         SortModePicker(sortMode: $sortMode)
                         Spacer()
-                        Text("共计 \(noTagWord.count) ")
+                        Text("word_count \(noTagWord.count)")
+                            .onTapGesture {
+                                if(ModelData.settings.clickBottomToShuffle){
+                                    randomWords=noTagWord.shuffled()
+                                    isRandom.toggle()
+                                }
+                            }
                             .bold()
                         Spacer()
-                        ///切换中英文显示模式
-                        Text("\(showLanguage)")
+                        ///switch the show language mode
+                        Text(LocalizedStringKey(showLanguage))
                             .onTapGesture {
                                 switchShowMode(Language: &showLanguage, showChineseOnly: &showChineseOnly, showEnglishOnly: &showEnglishOnly)
                             }
                         Spacer()
                     }
-                    .transition(.asymmetric(insertion: .backslide, removal: .slide  ))
+                    ///The animation
+                    .transition(.asymmetric(insertion: .backslide, removal: .slide))
                 }else{
                     HStack{
                         Spacer()
@@ -92,6 +104,7 @@ struct NoTagList: View {
                         label: {
                             Text("select_tags")
                         }
+                        ///This will be disabled when there is not words selected.
                         .disabled(selectWordsID.count == 0)
                         Spacer()
                         Button("delete"){
@@ -100,6 +113,7 @@ struct NoTagList: View {
                             }
                             saveData(data: ModelData.word)
                         }
+                        ///This will be disabled when there is not words selected.
                         .disabled(selectWordsID.count == 0)
                         Spacer()
                         Button(SelectAllButtonText){
@@ -113,10 +127,13 @@ struct NoTagList: View {
                         }
                         Spacer()
                     }
+                    ///If you don't set `offset`, the whole bar will shift about 7 pixels up.
+                    ///But it may not look very well on iPad. I will test it later.
                     .offset(x:0,y:7)
                     .transition(.asymmetric(insertion: .slide, removal: .backslide))
                 }
             }
+            ///make the `HStack` look better.
             .frame(
                 minWidth: 0,
                 maxWidth: .infinity,
@@ -125,7 +142,6 @@ struct NoTagList: View {
                 alignment: .topLeading
             )
             .animation(.default,value: isEditMode)
-    //        .offset(x:0,y:20)
             Divider()
         }
         .toolbar(){

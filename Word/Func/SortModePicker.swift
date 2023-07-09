@@ -15,7 +15,7 @@ struct SortModePicker: View {
             Text("new_to_old").tag(SortMode.byDateDown)
             Text("A_to_Z").tag(SortMode.byNameUp)
             Text("Z_to_A").tag(SortMode.byNameDown)
-            Text("random").tag(SortMode.random)
+//            Text("random").tag(SortMode.random)
         }
     }
 }

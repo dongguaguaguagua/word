@@ -9,4 +9,5 @@ import Combine
 
 struct settings:Hashable,Codable{
     var showDetailDefinition:Bool
+    var clickBottomToShuffle:Bool
 }

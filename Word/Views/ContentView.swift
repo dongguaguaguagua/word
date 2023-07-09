@@ -18,7 +18,7 @@ struct ContentView: View {
     }
     var body: some View {
         TabView(selection: $selection){
-            WordList()
+            EmptyView()
                 .tabItem{
                     Label("search_tab",systemImage: "magnifyingglass")
                 }
