@@ -11,12 +11,18 @@ struct ContentView: View {
     @State private var selection: Tab = .word
     @StateObject private var modelData=ModelDataClass()
     enum Tab {
+        case search
         case word
         case manage
         case setting
     }
     var body: some View {
         TabView(selection: $selection){
+            WordList()
+                .tabItem{
+                    Label("search_tab",systemImage: "magnifyingglass")
+                }
+                .tag(Tab.search)
             WordList()
                 .tabItem{
                     Label("word_tab",systemImage: "list.bullet")

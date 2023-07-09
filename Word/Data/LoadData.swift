@@ -33,7 +33,7 @@ func loadWords<T: Decodable>() ->T{
                 \"name\": \"massacre\",
                 \"definition\":\"n. 大屠杀，惨败 vt. 大屠杀，彻底击败，把…搞砸\",
                 \"date\":\"\(getCurrentTime(timeFormat: .YYYYMMDDHHMMSS))\",
-                \"tag\":[]
+                \"tag\":["作文"]
             }
             ]
             """.data(using: .utf8)!)
@@ -90,7 +90,13 @@ func loadTags<T: Decodable>() ->T{
     if(fileLength <= 1){
         fileHandle.seekToEndOfFile()
         fileHandle.write("""
-            []
+            [
+                {
+                    "id": "88155DA9-F30B-41EB-A426-47E452C405C5",
+                    "name": "作文",
+                    "color": "#000000"
+                }
+            ]
             """.data(using: .utf8)!)
     }
     try? fileHandle.close()

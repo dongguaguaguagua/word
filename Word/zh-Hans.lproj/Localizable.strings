@@ -43,3 +43,4 @@
 "random"="随机打乱";
 "add_time:%@"="添加时间：%@";
 "word_count %lld"="共计 %lld";
+"search_tab"="搜索";

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import MarkdownUI
 ///This is the detail view of each word.
 ///It will appear when user click the navigation link.
 ///It contains: The word's name, definition, create/edit date, tags with color.
@@ -21,19 +21,17 @@ struct ListDetail: View {
     @Binding var selectWordsID:Set<UUID>
     ///receive a word
     var word:singleWord
-    
+
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             HStack(){
                 ForEach(word.tag,id:\.self){tag in
-                    ZStack{
-                        ///The tags. Currently it is represented by `text` with round edge and colorful background.
-                        Text("\(tag)")
-                            .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
-                            .background(Color(hex: fromTagNameGetColor(data: ModelData.tag, Tag: tag)))
-                            .foregroundColor(Color.white)
-                            .clipShape(RoundedRectangle(cornerRadius: 5))
-                    }
+                    ///The tags. Currently, it is represented by `text` with round edge and colorful background.
+                    Text("\(tag)")
+                        .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
+                        .background(Color(hex: fromTagNameGetColor(data: ModelData.tag, Tag: tag)))
+                        .foregroundColor(Color.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 5))
                 }
             }
             Text(word.name)
@@ -42,12 +40,14 @@ struct ListDetail: View {
             ///So I consider creating another attribute `edit date`.(NOT IN PROGRESS)
             Text("add_time:\(word.date)")
                 .foregroundColor(.gray)
-            Spacer()
-                .frame(minHeight: 10,maxHeight: 20)
-            Text(word.definition)
-                .font(.title2)
+            ScrollView{
+                Markdown(word.definition)
+                    .markdownTheme(.gitHub)
+            }
             .navigationBarTitle(word.name, displayMode: .inline)
         }
+        .padding()
+        .frame(maxWidth:.infinity, maxHeight: .infinity, alignment: .topLeading)
 
         .toolbar {
             ///edit button
