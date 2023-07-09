@@ -16,6 +16,8 @@ Features:
 
 * Mutiple-select
 
+* Github flavored Markdown support
+
 ---
 
 Todo:
