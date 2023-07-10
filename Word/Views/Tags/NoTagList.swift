@@ -116,7 +116,7 @@ struct NoTagList: View {
                         ///This will be disabled when there is not words selected.
                         .disabled(selectWordsID.count == 0)
                         Spacer()
-                        Button(SelectAllButtonText){
+                        Button(LocalizedStringKey(SelectAllButtonText)){
                             if(SelectAllButtonText=="select_all"){
                                 selectWordsID=Set(noTagWord.map { $0.id })
                                 SelectAllButtonText="cancel"

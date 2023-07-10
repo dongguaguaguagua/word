@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var selection: Tab = .word
+    @State private var selection: Tab = .search
     @StateObject private var modelData=ModelDataClass()
     enum Tab {
         case search
@@ -18,7 +18,7 @@ struct ContentView: View {
     }
     var body: some View {
         TabView(selection: $selection){
-            EmptyView()
+            SearchView()
                 .tabItem{
                     Label("search_tab",systemImage: "magnifyingglass")
                 }
