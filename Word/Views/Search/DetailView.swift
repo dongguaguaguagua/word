@@ -10,7 +10,7 @@ import SwiftUI
 struct DetailView: View {
     @State var word:DictStruct
     var body: some View {
-        HStack{
+        VStack(alignment: .leading){
             Text(word.name)
                 .font(.title)
             Text(word.phonetic)
@@ -23,6 +23,7 @@ struct DetailView: View {
             Text(word.translation)
             Text(word.definition)
         }
+        .padding()
         .frame(maxWidth:.infinity, maxHeight: .infinity, alignment: .topLeading)
     }
 }
