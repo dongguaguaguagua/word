@@ -5,6 +5,7 @@ func fetchData(word:String)->[DictStruct]{
     var result:[DictStruct]=[]
     do {
         let db = try Connection("/Users/huzongyu/Downloads/ECDICT/sqlite.db")
+        let CollinsDict = Table("Collins")
         let dict = Table("stardict")
         
         let id = Expression<Int64>("id")
@@ -20,8 +21,11 @@ func fetchData(word:String)->[DictStruct]{
         let frq = Expression<Int?>("frq")
         let exchange = Expression<String?>("exchange")
         
-        let res1 = dict.filter(swName.like("\(word)%")).limit(20)
-        let res2 = dict.filter(swName.like("%\(word)%")).limit(20)
+        ///collins 1-5
+        let res1 = CollinsDict.filter(swName.like("\(word)%")).limit(5)
+        
+        let res2 = dict.filter(swName.like("\(word)%")).limit(20)
+        let res3 = dict.filter(swName.like("%\(word)%")).limit(20)
         
         for word in try db.prepare(res1) {
 //                print("""
@@ -39,8 +43,29 @@ func fetchData(word:String)->[DictStruct]{
                                      frq: word[frq] ?? -1,
                                      exchange: word[exchange] ?? ""))
         }
+        
         for word in try db.prepare(res2) {
-            if(result.count == 20){
+            if(result.count == 30){
+                break
+            }
+            if(result.map{Int64($0.id)}.contains(word[id]))
+            {
+                continue
+            }
+            result.append(DictStruct(id: Int(word[id]),
+                                     name: word[name] ?? "",
+                                     phonetic: word[phonetic] ?? "",
+                                     definition: word[definition] ?? "",
+                                     translation: word[translation] ?? "",
+                                     collins: word[collins] ?? -1,
+                                     oxford: word[oxford] ?? -1,
+                                     tag: word[tag] ?? "",
+                                     bnc: word[bnc] ?? -1,
+                                     frq: word[frq] ?? -1,
+                                     exchange: word[exchange] ?? ""))
+        }
+        for word in try db.prepare(res3) {
+            if(result.count == 40){
                 break
             }
             if(result.map{Int64($0.id)}.contains(word[id]))

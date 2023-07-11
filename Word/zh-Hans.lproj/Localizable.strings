@@ -44,4 +44,4 @@
 "add_time:%@"="添加时间：%@";
 "word_count %lld"="共计 %lld";
 "search_tab"="搜索";
-"click_button_to_shuffle"="点击底栏可一键随机";
+"click_bottom_to_shuffle"="点击底栏可一键随机";
