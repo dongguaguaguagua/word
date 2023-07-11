@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DetailView: View {
+    @EnvironmentObject var ModelData:ModelDataClass
     @State var word:DictStruct
     var body: some View {
         VStack(alignment: .leading){
@@ -25,6 +26,11 @@ struct DetailView: View {
         }
         .padding()
         .frame(maxWidth:.infinity, maxHeight: .infinity, alignment: .topLeading)
+        .onAppear{
+            if(!ModelData.settings.recentSearchWord.contains(word.name)){
+                ModelData.settings.recentSearchWord.append(word.name)
+            }
+        }
     }
 }
 

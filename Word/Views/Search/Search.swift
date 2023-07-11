@@ -84,35 +84,62 @@ func fetchData(word:String)->[DictStruct]{
                                      frq: word[frq] ?? -1,
                                      exchange: word[exchange] ?? ""))
         }
-//        let word = dict.filter(id == rowid)
-//        print(word)
-//        let respond = dict.filter(swName.match("community"))
-        
+    } catch {
+        print (error)
+    }
+    return result
+}
 
-//        print("---------------------")
-//        let Vdict = VirtualTable("VDict")
-//        let Vid = Expression<Int64>("id")
-//        let Vname = Expression<String?>("word")
-//        let VswName = Expression<String?>("sw")
-//        let Vphonetic = Expression<String?>("phonetic")
-//        let Vtranslation = Expression<String?>("translation")
-//
-//        try db.run(Vdict.create(.FTS4([Vid,Vname,VswName,Vphonetic,Vtranslation], tokenize: .Porter)))
-//        for singleWord in try db.prepare(dict) {
-//                try db.run(Vdict.insert(
-//                    Vid <- singleWord[id],
-//                    Vname <- singleWord[name],
-//                    VswName <- singleWord[swName],
-//                    Vphonetic <- singleWord[phonetic],
-//                    Vtranslation <- singleWord[translation]
-//                ))
-//            }
-//        let respond = Vdict.filter(VswName.match(word))
-//        for singleWord in try db.prepare(respond){
-//            print("word: \(singleWord[name] ?? "")")
-//            print("translation: \(singleWord[translation] ?? "")")
-//            result.append(singleWord[name] ?? "")
-//        }
+func fetchDataFromWordName(word:String)->DictStruct{
+    var result:DictStruct = DictStruct(id: 0, name: "", phonetic: "", definition: "", translation: "", collins: -1, oxford: -1, tag: "", bnc: -1, frq: -1, exchange: "")
+    do {
+        let db = try Connection("/Users/huzongyu/Downloads/ECDICT/sqlite.db")
+        let CollinsDict = Table("Collins")
+        let dict = Table("stardict")
+        
+        let id = Expression<Int64>("id")
+        let name = Expression<String?>("word")
+        let phonetic = Expression<String?>("phonetic")
+        let definition = Expression<String?>("definition")
+        let translation = Expression<String?>("translation")
+        let collins = Expression<Int?>("collins")
+        let oxford = Expression<Int?>("oxford")
+        let tag = Expression<String?>("tag")
+        let bnc = Expression<Int?>("bnc")
+        let frq = Expression<Int?>("frq")
+        let exchange = Expression<String?>("exchange")
+        
+        ///collins 1-5
+        let res1 = CollinsDict.filter(name==word)
+        let res2 = dict.filter(name==word)
+        
+        for res in try db.prepare(res1) {
+            result=DictStruct(id: Int(res[id]),
+                              name: word,
+                              phonetic: res[phonetic] ?? "",
+                              definition: res[definition] ?? "",
+                              translation: res[translation] ?? "",
+                              collins: res[collins] ?? -1,
+                              oxford: res[oxford] ?? -1,
+                              tag: res[tag] ?? "",
+                              bnc: res[bnc] ?? -1,
+                              frq: res[frq] ?? -1,
+                              exchange: res[exchange] ?? "")
+        }
+        for res in try db.prepare(res2) {
+            result=DictStruct(id: Int(res[id]),
+                              name: word,
+                              phonetic: res[phonetic] ?? "",
+                              definition: res[definition] ?? "",
+                              translation: res[translation] ?? "",
+                              collins: res[collins] ?? -1,
+                              oxford: res[oxford] ?? -1,
+                              tag: res[tag] ?? "",
+                              bnc: res[bnc] ?? -1,
+                              frq: res[frq] ?? -1,
+                              exchange: res[exchange] ?? "")
+        }
+        return result
     } catch {
         print (error)
     }
