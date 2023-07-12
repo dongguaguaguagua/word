@@ -22,15 +22,12 @@ func fetchData(word:String)->[DictStruct]{
         let exchange = Expression<String?>("exchange")
         
         ///collins 1-5
-        let res1 = CollinsDict.filter(swName.like("\(word)%")).limit(5)
+        let res1 = CollinsDict.filter(swName.like("\(word)%")).limit(20)
         
         let res2 = dict.filter(swName.like("\(word)%")).limit(20)
-        let res3 = dict.filter(swName.like("%\(word)%")).limit(20)
+//        let res3 = dict.filter(swName.lie("%\(word)%")).limit(2
         
         for word in try db.prepare(res1) {
-//                print("""
-//                    \(String(describing: word[name]))
-//                """)
             result.append(DictStruct(id: Int(word[id]),
                                      name: word[name] ?? "",
                                      phonetic: word[phonetic] ?? "",
@@ -45,28 +42,8 @@ func fetchData(word:String)->[DictStruct]{
         }
         
         for word in try db.prepare(res2) {
-            if(result.count == 30){
-                break
-            }
-            if(result.map{Int64($0.id)}.contains(word[id]))
-            {
-                continue
-            }
-            result.append(DictStruct(id: Int(word[id]),
-                                     name: word[name] ?? "",
-                                     phonetic: word[phonetic] ?? "",
-                                     definition: word[definition] ?? "",
-                                     translation: word[translation] ?? "",
-                                     collins: word[collins] ?? -1,
-                                     oxford: word[oxford] ?? -1,
-                                     tag: word[tag] ?? "",
-                                     bnc: word[bnc] ?? -1,
-                                     frq: word[frq] ?? -1,
-                                     exchange: word[exchange] ?? ""))
-        }
-        for word in try db.prepare(res3) {
             if(result.count == 40){
-                break
+                return result
             }
             if(result.map{Int64($0.id)}.contains(word[id]))
             {
@@ -84,6 +61,26 @@ func fetchData(word:String)->[DictStruct]{
                                      frq: word[frq] ?? -1,
                                      exchange: word[exchange] ?? ""))
         }
+//        for word in try db.prepare(res3) {
+//            if(result.count == 40){
+//                break
+//            }
+//            if(result.map{Int64($0.id)}.contains(word[id]))
+//            {
+//                continue
+//            }
+//            result.append(DictStruct(id: Int(word[id]),
+//                                     name: word[name] ?? "",
+//                                     phonetic: word[phonetic] ?? "",
+//                                     definition: word[definition] ?? "",
+//                                     translation: word[translation] ?? "",
+//                                     collins: word[collins] ?? -1,
+//                                     oxford: word[oxford] ?? -1,
+//                                     tag: word[tag] ?? "",
+//                                     bnc: word[bnc] ?? -1,
+//                                     frq: word[frq] ?? -1,
+//                                     exchange: word[exchange] ?? ""))
+//        }
     } catch {
         print (error)
     }
@@ -140,6 +137,45 @@ func fetchDataFromWordName(word:String)->DictStruct{
                               exchange: res[exchange] ?? "")
         }
         return result
+    } catch {
+        print (error)
+    }
+    return result
+}
+
+///**CAUTION: POOR PERFORMENCE**
+///Use the fuzzy search extension
+///To maximize performence, this func will only be excuted when `fetchData` returns `NILL`
+func fuzzySearch(str:String)->[DictStruct]{
+    var result:[DictStruct]=[]
+    do {
+        let db = try Connection("/Users/huzongyu/Downloads/ECDICT/sqlite.db")
+        let CollinsDict = Table("Collins")
+        
+        let name = Expression<String?>("word")
+
+        var score=[String:Double]()
+        
+        let startIndexOfStr=str.startIndex
+        let firstLetter=str[startIndexOfStr].lowercased()
+        
+        for word in try db.prepare(CollinsDict) {
+            let startIndexOfWord=(word[name]?.startIndex)!
+            let firstLetterOfWord=word[name]?[startIndexOfWord].lowercased()
+            ///the first letter user input is correct in most situation.
+            ///so just score the word whose first letter is the same.
+            if(firstLetter==firstLetterOfWord){
+                let wordScore = (word[name]?.score(word: str,fuzziness:0.5))!
+                score.updateValue(wordScore, forKey: word[name]!)
+            }
+        }
+        
+        let sortedEntries = score.sorted(by: { $0.value > $1.value })
+        let top10Entries = sortedEntries.prefix(10)
+
+        for (key, _) in top10Entries {
+            result.append(fetchDataFromWordName(word: key))
+        }
     } catch {
         print (error)
     }

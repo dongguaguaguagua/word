@@ -45,7 +45,7 @@ struct EditWordForm: View {
                 Divider()
                 TextField("word_placeholder", text: $wordName)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .disableAutocorrection(true)
+                    .disableAutocorrection(ModelData.settings.disableAutoCorrection)
                     .padding()
                 Divider()
                 TextEditor(text: $wordDef)

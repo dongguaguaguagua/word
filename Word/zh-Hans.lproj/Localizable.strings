@@ -45,3 +45,4 @@
 "word_count %lld"="共计 %lld";
 "search_tab"="搜索";
 "click_bottom_to_shuffle"="点击底栏可一键随机";
+"disable_auto_correction"="禁用自动纠错";

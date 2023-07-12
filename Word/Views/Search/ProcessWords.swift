@@ -8,9 +8,20 @@
 import Foundation
 import SwiftUI
 import UIKit
-func processInput(str:String)->String{
-    ///remove all whitespaces
-    return str.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
+
+func regexWord(str:String)->String{
+    let pattern = "[^a-zA-Z0-9]"
+
+    do {
+        let regex = try NSRegularExpression(pattern: pattern, options: .caseInsensitive)
+        let range = NSRange(location: 0, length: str.utf16.count)
+        let modifiedString = regex.stringByReplacingMatches(in: str, options: [], range: range, withTemplate: "")
+        
+        return modifiedString
+    } catch {
+        print("Error: \(error)")
+    }
+    return str
 }
 
 //https://w3toppers.com/highlight-a-specific-part-of-the-text-in-swiftui
@@ -57,18 +68,18 @@ func splitString(str:String,sep:String) -> [String]{
         ///`endNext`:Next position of `end`
         ///`startPrevious`:Previous position of `start`
         for i in 0...strlen-seplen{
-            var start=str.index(str.startIndex, offsetBy: i)
-            var end=str.index(startIndex, offsetBy: i+seplen-1)
+            let start=str.index(str.startIndex, offsetBy: i)
+            let end=str.index(startIndex, offsetBy: i+seplen-1)
             if(str[start...end].localizedCaseInsensitiveContains(sep)){
                 if(i==0){
-                    var endNext=str.index(end,offsetBy: 1)
+                    let endNext=str.index(end,offsetBy: 1)
                     return [String(str[startIndex...end]),String(str[endNext...endIndex])]
                 }else if(i==strlen-seplen){
-                    var startPrevious=str.index(start,offsetBy: -1)
+                    let startPrevious=str.index(start,offsetBy: -1)
                     return [String(str[startIndex...startPrevious]),String(str[start...endIndex])]
                 }else{
-                    var startPrevious=str.index(start,offsetBy: -1)
-                    var endNext=str.index(end,offsetBy: 1)
+                    let startPrevious=str.index(start,offsetBy: -1)
+                    let endNext=str.index(end,offsetBy: 1)
                     return [String(str[startIndex...startPrevious]),String(str[start...end]),String(str[endNext...endIndex])]
                 }
             }
@@ -76,3 +87,22 @@ func splitString(str:String,sep:String) -> [String]{
     }
     return [str]
 }
+///example:
+///`str`:               vicissitude
+///`searched`:    vi
+///output:            **vi**c**i**ss**i**tude
+func fuzzyHighlightedText(str: String, searched: String) -> Text {
+    guard !str.isEmpty && !searched.isEmpty else { return Text(str) }
+    var result: Text!
+    var i=str.startIndex
+    while i != str.endIndex {
+        if(searched.localizedCaseInsensitiveContains(String(str[i]))){
+            result = (result == nil ? Text(String(str[i])).bold() : result + Text(String(str[i])).bold())
+        }else{
+            result = (result == nil ? Text(String(str[i])) : result + Text(String(str[i])))
+        }
+        str.formIndex(after: &i)
+    }
+    return result ?? Text(str)
+}
+

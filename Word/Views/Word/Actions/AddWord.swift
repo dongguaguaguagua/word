@@ -41,7 +41,7 @@ struct NewWordForm: View {
                     .font(.title2)
                 Divider()
                 TextField("word_placeholder", text: $wordName)
-                    .disableAutocorrection(true)
+                    .disableAutocorrection(ModelData.settings.disableAutoCorrection)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                 Divider()

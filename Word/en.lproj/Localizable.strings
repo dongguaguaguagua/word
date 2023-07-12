@@ -44,3 +44,4 @@
 "word_count %lld"="All %lld";
 "search_tab"="Search";
 "click_bottom_to_shuffle"="Click bottom to shuffle";
+"disable_auto_correction"="Disable auto correction";

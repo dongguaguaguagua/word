@@ -36,7 +36,7 @@ struct newTagSheet:View{
                     .font(.title2)
                 Divider()
                 TextField("tag_name", text: $tagName)
-                    .disableAutocorrection(true)
+                    .disableAutocorrection(ModelData.settings.disableAutoCorrection)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                 Divider()

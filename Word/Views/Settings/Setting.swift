@@ -22,6 +22,11 @@ struct Setting: View {
                         Text("click_bottom_to_shuffle")
                     }
                 }
+                Section(header:Text("auxiliary")){
+                    Toggle(isOn: $ModelData.settings.disableAutoCorrection) {
+                        Text("disable_auto_correction")
+                    }
+                }
             }.navigationTitle("Setting")
         }
     }
