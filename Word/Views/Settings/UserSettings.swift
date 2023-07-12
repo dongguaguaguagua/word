@@ -12,4 +12,7 @@ struct settings:Hashable,Codable{
     var clickBottomToShuffle:Bool
     var recentSearchWord:[String]
     var disableAutoCorrection:Bool
+    var enableMarkdown:Bool
+    var enableFuzzySearch:Bool
+    var fuzziness:Double
 }

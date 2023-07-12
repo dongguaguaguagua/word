@@ -41,8 +41,12 @@ struct ListDetail: View {
             Text("add_time:\(word.date)")
                 .foregroundColor(.gray)
             ScrollView{
-                Markdown(word.definition)
-                    .markdownTheme(.gitHub)
+                if(ModelData.settings.enableMarkdown){
+                    Markdown(word.definition)
+                        .markdownTheme(.gitHub)
+                }else{
+                    Text(word.definition)
+                }
             }
             .navigationBarTitle(word.name, displayMode: .inline)
         }

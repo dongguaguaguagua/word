@@ -45,3 +45,6 @@
 "search_tab"="Search";
 "click_bottom_to_shuffle"="Click bottom to shuffle";
 "disable_auto_correction"="Disable auto correction";
+"history_records"="History";
+"enable_markdown"="Enable markdown";
+"enable_fuzzy_search"="Enable fuzzy search";

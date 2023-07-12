@@ -26,8 +26,17 @@ struct Setting: View {
                     Toggle(isOn: $ModelData.settings.disableAutoCorrection) {
                         Text("disable_auto_correction")
                     }
+                    Toggle(isOn: $ModelData.settings.enableMarkdown) {
+                        Text("enable_markdown")
+                    }
+                    Toggle(isOn: $ModelData.settings.enableFuzzySearch) {
+                        Text("enable_fuzzy_search")
+                    }
+                    Text("fuzziness:\(ModelData.settings.fuzziness)")
+                    Slider(value: $ModelData.settings.fuzziness,in: 0...1, step: 0.1)
+                        .disabled(!ModelData.settings.enableFuzzySearch)
                 }
-            }.navigationTitle("Setting")
+            }.navigationTitle("Settings")
         }
     }
 }

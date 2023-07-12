@@ -146,7 +146,7 @@ func fetchDataFromWordName(word:String)->DictStruct{
 ///**CAUTION: POOR PERFORMENCE**
 ///Use the fuzzy search extension
 ///To maximize performence, this func will only be excuted when `fetchData` returns `NILL`
-func fuzzySearch(str:String)->[DictStruct]{
+func fuzzySearch(str:String,fuzziness:Double)->[DictStruct]{
     var result:[DictStruct]=[]
     do {
         let db = try Connection("/Users/huzongyu/Downloads/ECDICT/sqlite.db")
@@ -165,7 +165,7 @@ func fuzzySearch(str:String)->[DictStruct]{
             ///the first letter user input is correct in most situation.
             ///so just score the word whose first letter is the same.
             if(firstLetter==firstLetterOfWord){
-                let wordScore = (word[name]?.score(word: str,fuzziness:0.5))!
+                let wordScore = (word[name]?.score(word: str,fuzziness:fuzziness))!
                 score.updateValue(wordScore, forKey: word[name]!)
             }
         }

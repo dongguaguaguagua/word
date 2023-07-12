@@ -44,5 +44,9 @@
 "add_time:%@"="添加时间：%@";
 "word_count %lld"="共计 %lld";
 "search_tab"="搜索";
+"Settings"="设置";
 "click_bottom_to_shuffle"="点击底栏可一键随机";
 "disable_auto_correction"="禁用自动纠错";
+"history_records"="历史记录";
+"enable_markdown"="启用 Markdown";
+"enable_fuzzy_search"="启用模糊搜索";
