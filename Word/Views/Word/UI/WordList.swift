@@ -92,25 +92,35 @@ struct WordList: View {
 //                    }
                 HStack() {
                     if(isEditMode == .inactive){
-                        HStack{
-                            Spacer()
-                            SortModePicker(sortMode: $sortMode)
-                            Spacer()
-                            Text("word_count \(getFilteredWordsCount(data:ModelData.word,tag:filterTag))")
-                                .onTapGesture {
+                        ZStack() {
+                            HStack() {
+                                SortModePicker(sortMode: $sortMode)
+                                    .gridColumnAlignment(.leading)
+                                Spacer()
+                                ///switch the show language mode
+                                Button(action: {
+                                    // Action to perform when the button is tapped
+                                    switchShowMode(Language: &showLanguage, showChineseOnly: &showChineseOnly, showEnglishOnly: &showEnglishOnly)
+                                }) {
+                                    Text(LocalizedStringKey(showLanguage))
+                                        .padding(.trailing, 10)
+                                }
+                            }
+                            HStack() {
+                                Spacer()
+                                Button(action: {
+                                    // Action to perform when the button is tapped
                                     if(ModelData.settings.clickBottomToShuffle){
                                         randomWords=filteredWords(data: ModelData.word, tag: filterTag).shuffled()
                                         isRandom.toggle()
                                     }
+                                }) {
+                                    Text("word_count \(getFilteredWordsCount(data:ModelData.word,tag:filterTag))")
+                                        .bold()
+                                        .foregroundColor(Color.black)
                                 }
-                                .bold()
-                            Spacer()
-                            ///switch the show language mode
-                            Text(LocalizedStringKey(showLanguage))
-                                .onTapGesture {
-                                    switchShowMode(Language: &showLanguage, showChineseOnly: &showChineseOnly, showEnglishOnly: &showEnglishOnly)
-                                }
-                            Spacer()
+                                Spacer()
+                            }
                         }
                         ///The animation
                         .transition(.asymmetric(insertion: .backslide, removal: .slide))
@@ -163,7 +173,7 @@ struct WordList: View {
                 .animation(.default,value: isEditMode)
                 Divider()
             }
-            .toolbar(){
+            .toolbar() {
                 ///Apple provide `EditButton()` to switch edit mode.
                 ///But unfortunately, this Button is currently **not customizable**
                 ///You have no way to change the button's text or something.
@@ -182,17 +192,16 @@ struct WordList: View {
                 ///```
                 ///But the button has no animation. It is not what I want.
                 ///So I have no way but let `text` overlap with `EditButton()`.
-                ToolbarItem(placement: .primaryAction) {
-                    Text(isEditMode.isEditing ? "done": "edit")
-                        .foregroundColor(Color.blue)
-                        .offset(x:40,y:0)
-                }
-                ToolbarItem(placement: .primaryAction) {
-                    EditButton()
-                        .accentColor(.clear)
+                ToolbarItem(placement: .navigationBarLeading) {
+                    ZStack() {
+                        Text(isEditMode.isEditing ? "done" : "edit")
+                            .foregroundColor(Color.blue)
+                        EditButton()
+                            .accentColor(.clear)
+                    }
                 }
                 ///Tag picker
-                ToolbarItem(placement: .navigation) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Picker("filter", selection: $filterTag) {
                         Text("all_words").tag("all_words")
                         Text("no_tag").tag("no_tag")

@@ -16,56 +16,102 @@ struct ListRow: View {
     @Binding var isShowChinese:Bool
     
     ///whether show Chinese or English individually
-    @State var isShowEnglishSingle:Bool=false
-    @State var isShowChineseSingle:Bool=false
-    
+    @State var showMaskSingleWord:Bool = true
+
     ///receive a word
     var word:singleWord
     
     var body: some View {
         VStack(alignment: .leading){
             HStack {
-                Text("\(getText(input: "chinese"))")
-                    .onTapGesture {
-                        isShowChineseSingle.toggle()
+                HStack() {
+                    if (isShowChinese) {
+                        VStack(alignment: .leading) {
+                            if (showMaskSingleWord) {
+                                Text("点击显示")
+                                    .font(.system(size: 15))
+                                    .foregroundColor(Color.gray)
+                                    .padding()
+                            }else{
+                                Spacer()
+                                Text(word.name)
+                                    .font(.title2)
+                                    .foregroundColor(Color.black)
+                                    .padding(.bottom, 2)
+                                Text(word.date)
+                                    .font(.system(size: 12))
+                                    .foregroundColor(Color.black)
+                                    .padding(.top, 2)
+                                Spacer()
+                            }
+                        }
+                        .frame(height: 70)
+                        .frame(maxWidth: .infinity)
+                        .background(showMaskSingleWord ? Color(red: 240/255, green: 240/255, blue: 240/255) : Color.white)
+                        .cornerRadius(5)
+                        .onTapGesture {
+                            showMaskSingleWord = !showMaskSingleWord
+                        }
+                    }else{
+                        VStack(alignment: .leading) {
+                            Spacer()
+                            Text(word.name)
+                                .font(.title2)
+                                .foregroundColor(Color.black)
+                                .padding(.bottom, 2)
+                            Text(word.date)
+                                .font(.system(size: 12))
+                                .foregroundColor(Color.black)
+                                .padding(.top, 2)
+                            Spacer()
+                        }
+                        .frame(height: 70)
+                        .frame(maxWidth: .infinity)
                     }
-                Text(word.name)
-                    .font(.title3)
-                ///The hide action is realized by modifying the color.(`Color.clear`)
-                    .foregroundColor((!isShowChinese)||(isShowChineseSingle) ? Color.black : Color.clear)
-                ///ease in and out animation
-                    .animation(.easeInOut(duration: 0.2),value: isShowChineseSingle)
-            }
-            HStack {
-                Text("\(getText(input: "english"))")
-                    .onTapGesture {
-                        isShowEnglishSingle.toggle()
+                    Spacer()
+                    if (isShowEnglish) {
+                        VStack(alignment: .leading) {
+                            if (showMaskSingleWord) {
+                                Text("点击显示")
+                                    .font(.system(size: 15))
+                                    .foregroundColor(Color.gray)
+                                    .padding()
+                            }else{
+                                Text(word.definition)
+                                    .font(.system(size: 15))
+                                    .padding(.top, 1)
+                                    .padding(.bottom, 1)
+                                    .padding(.leading, 1)
+                                    .padding(.trailing, 1)
+                                    .foregroundColor(Color.gray)
+                            }
+                        }
+                        .frame(height: 70)
+                        .frame(maxWidth: .infinity)
+                        .background(showMaskSingleWord ? Color(red: 240/255, green: 240/255, blue: 240/255) : Color.white)
+                        .cornerRadius(5)
+                        .onTapGesture {
+                            showMaskSingleWord = !showMaskSingleWord
+                        }
+                    }else{
+                        VStack(alignment: .leading) {
+                            Text(word.definition)
+                                .font(.system(size: 15))
+                                .padding(.top, 1)
+                                .padding(.bottom, 1)
+                                .padding(.leading, 1)
+                                .padding(.trailing, 1)
+                                .foregroundColor(Color.gray)
+                        }
+                        .frame(height: 70)
+                        .frame(maxWidth: .infinity)
                     }
-                Text(word.definition)
-                    .font(.subheadline)
-                    .foregroundColor((!isShowEnglish)||(isShowEnglishSingle) ? Color.gray : Color.clear)
-                    .animation(.easeInOut(duration: 0.2),value: isShowEnglishSingle)
+                }
             }
-        }
-    }
-    func getText(input:String)->String{
-        if((!isShowEnglish) && (!isShowChinese)){
-            return ""
-        }else if(input=="chinese" && !isShowChinese){
-            return ""
-        }else if(input=="chinese" && isShowChinese){
-            return "◯"
-        }else if(input=="english" && !isShowEnglish){
-            return ""
-        }else if(input=="english" && isShowEnglish){
-            return "◯"
-        }else{
-            ///This situation would never appear.
-            return "unknown"
         }
     }
 }
-//
+
 //struct ListRow_Previews: PreviewProvider {
 //    static var word = ModelDataClass().word
 //    static var previews: some View {

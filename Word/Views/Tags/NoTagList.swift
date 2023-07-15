@@ -73,25 +73,32 @@ struct NoTagList: View {
             Divider()
             HStack() {
                 if(isEditMode == .inactive){
-                    HStack{
-                        Spacer()
-                        SortModePicker(sortMode: $sortMode)
-                        Spacer()
-                        Text("word_count \(noTagWord.count)")
-                            .onTapGesture {
+                    ZStack() {
+                        HStack() {
+                            SortModePicker(sortMode: $sortMode)
+                                .gridColumnAlignment(.leading)
+                            Spacer()
+                            Button(action: {
+                                switchShowMode(Language: &showLanguage, showChineseOnly: &showChineseOnly, showEnglishOnly: &showEnglishOnly)
+                            }) {
+                                Text(LocalizedStringKey(showLanguage))
+                                    .padding(.trailing, 10)
+                            }
+                        }
+                        HStack() {
+                            Spacer()
+                            Button(action: {
                                 if(ModelData.settings.clickBottomToShuffle){
                                     randomWords=noTagWord.shuffled()
                                     isRandom.toggle()
                                 }
+                            }) {
+                                Text("word_count \(noTagWord.count)")
+                                    .bold()
+                                    .foregroundColor(Color.black)
                             }
-                            .bold()
-                        Spacer()
-                        ///switch the show language mode
-                        Text(LocalizedStringKey(showLanguage))
-                            .onTapGesture {
-                                switchShowMode(Language: &showLanguage, showChineseOnly: &showChineseOnly, showEnglishOnly: &showEnglishOnly)
-                            }
-                        Spacer()
+                            Spacer()
+                        }
                     }
                     ///The animation
                     .transition(.asymmetric(insertion: .backslide, removal: .slide))
@@ -146,14 +153,15 @@ struct NoTagList: View {
         }
         .toolbar(){
             ///edit button
-            ToolbarItem(placement: .primaryAction) {
-                Text(isEditMode.isEditing ? "done": "edit")
-                    .foregroundColor(Color.blue)
-                    .offset(x:40,y:0)
-            }
-            ToolbarItem(placement: .primaryAction) {
-                EditButton()
-                    .accentColor(.clear)
+            ToolbarItem(placement: .navigationBarTrailing) {
+                ZStack() {
+                    Text(isEditMode.isEditing ? "done": "edit")
+                        .foregroundColor(Color.blue)
+                        .frame(width: 50, alignment: .trailing)
+                        .padding(.trailing, 10)
+                    EditButton()
+                        .accentColor(.clear)
+                }
             }
         }
         .environment(\.editMode, $isEditMode)

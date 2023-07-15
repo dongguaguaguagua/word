@@ -4,7 +4,7 @@ import SQLite
 func fetchData(word:String)->[DictStruct]{
     var result:[DictStruct]=[]
     do {
-        let db = try Connection("/Users/huzongyu/Downloads/ECDICT/sqlite.db")
+        let db = try Connection("/Users/huzongyao/Downloads/ECDict/sqlite.db")
         let CollinsDict = Table("Collins")
         let dict = Table("stardict")
         
@@ -90,7 +90,7 @@ func fetchData(word:String)->[DictStruct]{
 func fetchDataFromWordName(word:String)->DictStruct{
     var result:DictStruct = DictStruct(id: 0, name: "", phonetic: "", definition: "", translation: "", collins: -1, oxford: -1, tag: "", bnc: -1, frq: -1, exchange: "")
     do {
-        let db = try Connection("/Users/huzongyu/Downloads/ECDICT/sqlite.db")
+        let db = try Connection("/Users/huzongyao/Downloads/ECDict/sqlite.db")
         let CollinsDict = Table("Collins")
         let dict = Table("stardict")
         
@@ -149,7 +149,7 @@ func fetchDataFromWordName(word:String)->DictStruct{
 func fuzzySearch(str:String,fuzziness:Double)->[DictStruct]{
     var result:[DictStruct]=[]
     do {
-        let db = try Connection("/Users/huzongyu/Downloads/ECDICT/sqlite.db")
+        let db = try Connection("~/Downloads/ECDict/sqlite.db")
         let CollinsDict = Table("Collins")
         
         let name = Expression<String?>("word")

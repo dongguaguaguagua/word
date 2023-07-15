@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9C3086B32A5BA25D00502D6D /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9C3086B22A5BA25D00502D6D /* MarkdownUI */; };
+		3274438F2A5E8ED300F44ACF /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 3274438E2A5E8ED300F44ACF /* SQLite */; };
+		327443922A5E8EDF00F44ACF /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 327443912A5E8EDF00F44ACF /* MarkdownUI */; };
+		328FF10F2A60063A001CA966 /* vip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328FF10E2A60063A001CA966 /* vip.swift */; };
 		9C3086B52A5BC1E800502D6D /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3086B42A5BC1E700502D6D /* Search.swift */; };
-		9C3086B82A5BC23E00502D6D /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 9C3086B72A5BC23E00502D6D /* SQLite */; };
 		9C3086BA2A5C031A00502D6D /* ProcessWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3086B92A5C031A00502D6D /* ProcessWords.swift */; };
 		9C3086BC2A5C082300502D6D /* DictStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3086BB2A5C082300502D6D /* DictStructure.swift */; };
 		9C31AE7E2A48011A000B3827 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C31AE7D2A48011A000B3827 /* Time.swift */; };
@@ -38,7 +39,6 @@
 		9C9213DC2A4715A200DAA757 /* WordList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9213DB2A4715A200DAA757 /* WordList.swift */; };
 		9C9213DE2A4715B900DAA757 /* ListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9213DD2A4715B900DAA757 /* ListRow.swift */; };
 		9C9213E12A4715D700DAA757 /* ListDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9213DF2A4715D000DAA757 /* ListDetail.swift */; };
-		9C9213E32A4715EE00DAA757 /* WordData.json in Resources */ = {isa = PBXBuildFile; fileRef = 9C9213E22A4715EE00DAA757 /* WordData.json */; };
 		9C9213E52A4715FD00DAA757 /* WordStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9213E42A4715FD00DAA757 /* WordStructure.swift */; };
 		9C9213E72A47160C00DAA757 /* LoadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9213E62A47160C00DAA757 /* LoadData.swift */; };
 		9C9213E92A47188900DAA757 /* ManageTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9213E82A47188900DAA757 /* ManageTags.swift */; };
@@ -71,6 +71,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		328FF10E2A60063A001CA966 /* vip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vip.swift; sourceTree = "<group>"; };
 		9C3086B42A5BC1E700502D6D /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		9C3086B92A5C031A00502D6D /* ProcessWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessWords.swift; sourceTree = "<group>"; };
 		9C3086BB2A5C082300502D6D /* DictStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictStructure.swift; sourceTree = "<group>"; };
@@ -102,7 +103,6 @@
 		9C9213DB2A4715A200DAA757 /* WordList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordList.swift; sourceTree = "<group>"; };
 		9C9213DD2A4715B900DAA757 /* ListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRow.swift; sourceTree = "<group>"; };
 		9C9213DF2A4715D000DAA757 /* ListDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetail.swift; sourceTree = "<group>"; };
-		9C9213E22A4715EE00DAA757 /* WordData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = WordData.json; path = ../../WordList/WordList/WordData.json; sourceTree = "<group>"; };
 		9C9213E42A4715FD00DAA757 /* WordStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordStructure.swift; sourceTree = "<group>"; };
 		9C9213E62A47160C00DAA757 /* LoadData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadData.swift; sourceTree = "<group>"; };
 		9C9213E82A47188900DAA757 /* ManageTags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageTags.swift; sourceTree = "<group>"; };
@@ -123,8 +123,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C3086B82A5BC23E00502D6D /* SQLite in Frameworks */,
-				9C3086B32A5BA25D00502D6D /* MarkdownUI in Frameworks */,
+				3274438F2A5E8ED300F44ACF /* SQLite in Frameworks */,
+				327443922A5E8EDF00F44ACF /* MarkdownUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,7 +207,6 @@
 				9C9213EF2A472BBB00DAA757 /* Views */,
 				9C881BBA2A5912510088A9C4 /* Localizable.strings */,
 				9CC0DB162A54294B0055BF3B /* Data */,
-				9C9213E22A4715EE00DAA757 /* WordData.json */,
 				9C9213B52A47153300DAA757 /* Assets.xcassets */,
 				9C9213B72A47153300DAA757 /* Preview Content */,
 			);
@@ -307,6 +306,7 @@
 				9C881BA42A57D1C20088A9C4 /* ListRowOneLine.swift */,
 				9C9213DF2A4715D000DAA757 /* ListDetail.swift */,
 				9C9213DB2A4715A200DAA757 /* WordList.swift */,
+				328FF10E2A60063A001CA966 /* vip.swift */,
 				9CC0DB1B2A5444560055BF3B /* BottomViews.swift */,
 			);
 			path = UI;
@@ -340,8 +340,8 @@
 			);
 			name = Word;
 			packageProductDependencies = (
-				9C3086B22A5BA25D00502D6D /* MarkdownUI */,
-				9C3086B72A5BC23E00502D6D /* SQLite */,
+				3274438E2A5E8ED300F44ACF /* SQLite */,
+				327443912A5E8EDF00F44ACF /* MarkdownUI */,
 			);
 			productName = Word;
 			productReference = 9C9213AE2A47153100DAA757 /* Word.app */;
@@ -417,9 +417,8 @@
 			);
 			mainGroup = 9C9213A52A47153100DAA757;
 			packageReferences = (
-				9C3086B12A5BA25D00502D6D /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
-				9C3086B62A5BC23E00502D6D /* XCRemoteSwiftPackageReference "SQLite" */,
-				9CFF6C2A2A5D4E330018D5B2 /* XCRemoteSwiftPackageReference "fuse-swift" */,
+				3274438D2A5E8ED300F44ACF /* XCRemoteSwiftPackageReference "SQLite" */,
+				327443902A5E8EDF00F44ACF /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 			);
 			productRefGroup = 9C9213AF2A47153100DAA757 /* Products */;
 			projectDirPath = "";
@@ -439,7 +438,6 @@
 			files = (
 				9C881BB62A5912510088A9C4 /* Localizable.strings in Resources */,
 				9C9213B92A47153300DAA757 /* Preview Assets.xcassets in Resources */,
-				9C9213E32A4715EE00DAA757 /* WordData.json in Resources */,
 				9C5B408E2A4F082300CA7DE4 /* TagData.json in Resources */,
 				9C9213B62A47153300DAA757 /* Assets.xcassets in Resources */,
 			);
@@ -499,6 +497,7 @@
 				9CFF6C322A5E8D7F0018D5B2 /* SearchView.swift in Sources */,
 				9C9213DC2A4715A200DAA757 /* WordList.swift in Sources */,
 				9C5974BC2A5041DE004D33C3 /* ColorExtension.swift in Sources */,
+				328FF10F2A60063A001CA966 /* vip.swift in Sources */,
 				9C3086BA2A5C031A00502D6D /* ProcessWords.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -679,7 +678,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -710,7 +709,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -838,7 +837,15 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		9C3086B12A5BA25D00502D6D /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
+		3274438D2A5E8ED300F44ACF /* XCRemoteSwiftPackageReference "SQLite" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stephencelis/SQLite.swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		327443902A5E8EDF00F44ACF /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
 			requirement = {
@@ -846,34 +853,18 @@
 				kind = branch;
 			};
 		};
-		9C3086B62A5BC23E00502D6D /* XCRemoteSwiftPackageReference "SQLite" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/stephencelis/SQLite.swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.9.2;
-			};
-		};
-		9CFF6C2A2A5D4E330018D5B2 /* XCRemoteSwiftPackageReference "fuse-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/krisk/fuse-swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		9C3086B22A5BA25D00502D6D /* MarkdownUI */ = {
+		3274438E2A5E8ED300F44ACF /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9C3086B12A5BA25D00502D6D /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
-			productName = MarkdownUI;
-		};
-		9C3086B72A5BC23E00502D6D /* SQLite */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9C3086B62A5BC23E00502D6D /* XCRemoteSwiftPackageReference "SQLite" */;
+			package = 3274438D2A5E8ED300F44ACF /* XCRemoteSwiftPackageReference "SQLite" */;
 			productName = SQLite;
+		};
+		327443912A5E8EDF00F44ACF /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 327443902A5E8EDF00F44ACF /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
+			productName = MarkdownUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
