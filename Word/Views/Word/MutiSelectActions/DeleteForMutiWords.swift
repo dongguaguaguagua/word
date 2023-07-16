@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct DeleteForMutiWords: View {
-    @EnvironmentObject var ModelData:ModelDataClass
-    @State var WordsID:Set<UUID>
-    
+    @EnvironmentObject var ModelData: ModelDataClass
+    @State var WordsID: Set<UUID>
+
     var body: some View {
-        Button("delete"){
-            for id in WordsID{
-                ModelData.word.removeAll(where: {$0.id==id})
+        Button("delete") {
+            for id in WordsID {
+                ModelData.word.removeAll(where: { $0.id == id })
             }
             saveData(data: ModelData.word)
         }

@@ -7,11 +7,10 @@
 
 import Foundation
 
-struct singleWord:Hashable,Codable,Identifiable{
+struct singleWord: Hashable, Codable, Identifiable {
     var id = UUID()
     var name: String
     var definition: String
     var date: String
-    var tag : [String]
+    var tag: [String]
 }
-

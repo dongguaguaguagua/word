@@ -8,21 +8,21 @@
 import SwiftUI
 
 struct Setting: View {
-    @EnvironmentObject var ModelData:ModelDataClass
+    @EnvironmentObject var ModelData: ModelDataClass
     var body: some View {
-        NavigationView{
-            Form(){
-                Section(header:Text("appearance")){
+        NavigationView {
+            Form {
+                Section(header: Text("appearance")) {
                     Toggle(isOn: $ModelData.settings.showDetailDefinition) {
                         Text("show_full_definition")
                     }
                 }
-                Section(header:Text("gesture")){
+                Section(header: Text("gesture")) {
                     Toggle(isOn: $ModelData.settings.clickBottomToShuffle) {
                         Text("click_bottom_to_shuffle")
                     }
                 }
-                Section(header:Text("auxiliary")){
+                Section(header: Text("auxiliary")) {
                     Toggle(isOn: $ModelData.settings.disableAutoCorrection) {
                         Text("disable_auto_correction")
                     }
@@ -33,16 +33,17 @@ struct Setting: View {
                         Text("enable_fuzzy_search")
                     }
                     Text("fuzziness:\(ModelData.settings.fuzziness)")
-                    Slider(value: $ModelData.settings.fuzziness,in: 0...1, step: 0.1)
+                    Slider(value: $ModelData.settings.fuzziness, in: 0 ... 1, step: 0.1)
                         .disabled(!ModelData.settings.enableFuzzySearch)
                 }
             }.navigationTitle("Settings")
         }
     }
 }
+
 //
-//struct Settings_Previews: PreviewProvider {
+// struct Settings_Previews: PreviewProvider {
 //    static var previews: some View {
 //        Settings()
 //    }
-//}
+// }

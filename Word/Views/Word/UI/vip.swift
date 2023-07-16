@@ -6,7 +6,7 @@ struct Test: View {
             ZStack {
                 // 设置页面背景色
                 Color(red: 39/255, green: 46/255, blue: 71/255).edgesIgnoringSafeArea(.all)
-                ScrollView(showsIndicators: false)  {
+                ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading) {
                         VStack(alignment: .leading) {
                             Text("付费会员卡")
@@ -37,18 +37,19 @@ struct Test: View {
                         ),
                         center: .center,
                         startRadius: 2,
-                        endRadius: 650)
+                        endRadius: 650
+                    )
                     )
                     // 圆角边框
                     .overlay(
                         RoundedRectangle(cornerRadius: 12, style: .continuous)
                             .stroke(Color(red: 231/255, green: 200/255, blue: 153/255), lineWidth: 1)
-                        
+
                     ).padding(.bottom, 10)
-                    VStack() {
+                    VStack {
                         HStack(spacing: 0) {
                             VStack(alignment: .leading, spacing: 20) {
-                                HStack() {
+                                HStack {
                                     Image(systemName: "infinity")
                                     Text("付费会员卡").bold()
                                 }.padding(.bottom, -5)
@@ -64,7 +65,7 @@ struct Test: View {
                             .foregroundColor(Color(red: 231/255, green: 200/255, blue: 153/255))
                             Spacer()
                             VStack(alignment: .leading, spacing: 20) {
-                                HStack() {
+                                HStack {
                                     Image(systemName: "infinity")
                                     Text("体验卡")
                                 }.padding(.bottom, -5)
@@ -86,8 +87,8 @@ struct Test: View {
             }
             // 设置一个底部固定区域，然后自定义其内部子视图
             .safeAreaInset(edge: .bottom) {
-                VStack() {
-                    VStack() {
+                VStack {
+                    VStack {
                         HStack {
                             VStack(alignment: .leading) {
                                 Text("连续包月 19.00").bold().padding(.bottom, 6)
@@ -116,7 +117,7 @@ struct Test: View {
                                     Text("228.00").font(.headline)
                                     Text("(19元/月)").font(.subheadline)
                                 }
-                            }.frame(maxWidth: .infinity).font(.system(size: 14)) .foregroundColor(Color(red: 231/255, green: 200/255, blue: 153/255)).padding().background(Color(red: 52/255, green: 58/255, blue: 78/255)).cornerRadius(12)
+                            }.frame(maxWidth: .infinity).font(.system(size: 14)).foregroundColor(Color(red: 231/255, green: 200/255, blue: 153/255)).padding().background(Color(red: 52/255, green: 58/255, blue: 78/255)).cornerRadius(12)
                             HStack {
                                 Image(systemName: "gift").font(.system(size: 20))
                                 VStack(alignment: .leading) {
@@ -125,7 +126,7 @@ struct Test: View {
                                         Text("228.00").font(.headline)
                                     }
                                 }
-                            }.frame(maxWidth: .infinity).font(.system(size: 14)) .foregroundColor(Color(red: 231/255, green: 200/255, blue: 153/255)).padding().background(Color(red: 52/255, green: 58/255, blue: 78/255)).cornerRadius(12)
+                            }.frame(maxWidth: .infinity).font(.system(size: 14)).foregroundColor(Color(red: 231/255, green: 200/255, blue: 153/255)).padding().background(Color(red: 52/255, green: 58/255, blue: 78/255)).cornerRadius(12)
                         }
                         HStack {
                             VStack(alignment: .leading) {
@@ -134,22 +135,21 @@ struct Test: View {
                                     Text("60.00").font(.headline)
                                     Text("(20元/月)").font(.subheadline)
                                 }
-                            }.frame(maxWidth: .infinity).font(.system(size: 14)) .foregroundColor(Color(red: 231/255, green: 200/255, blue: 153/255)).padding().background(Color(red: 52/255, green: 58/255, blue: 78/255)).cornerRadius(12)
+                            }.frame(maxWidth: .infinity).font(.system(size: 14)).foregroundColor(Color(red: 231/255, green: 200/255, blue: 153/255)).padding().background(Color(red: 52/255, green: 58/255, blue: 78/255)).cornerRadius(12)
                             VStack(alignment: .leading) {
                                 Text("购买月卡").padding(.bottom, 1)
                                 VStack(alignment: .leading) {
                                     Text("30.00").font(.headline)
                                 }
-                            }.frame(maxWidth: .infinity).font(.system(size: 14)) .foregroundColor(Color(red: 231/255, green: 200/255, blue: 153/255)).padding().background(Color(red: 52/255, green: 58/255, blue: 78/255)).cornerRadius(12)
+                            }.frame(maxWidth: .infinity).font(.system(size: 14)).foregroundColor(Color(red: 231/255, green: 200/255, blue: 153/255)).padding().background(Color(red: 52/255, green: 58/255, blue: 78/255)).cornerRadius(12)
                         }
                         Text("确认购买后，将向您的 iTunes 账户收款。购买连续包月项目，将自动续订，iTunes 账户会在到期前 24 小时内扣费。在此之前，您可以在系统[设置] -> [iTunes Store 与 App Store] -> [Apple ID] 里面进行退订。").font(.system(size: 10)).foregroundColor(Color.gray).padding(.top, 10)
                     }
-                    
                 }
                 .padding()
                 .background(
                     Color(red: 41/255, green: 50/255, blue: 75/255)
-                        )
+                )
             }
             // 设置导航栏为行内模式
             .navigationBarTitleDisplayMode(.inline)
@@ -174,7 +174,8 @@ struct Test: View {
                 }, label: {
                     Text("明细")
                         .foregroundColor(Color(red: 231/255, green: 200/255, blue: 153/255))
-                }))
+                })
+            )
         }
     }
 }

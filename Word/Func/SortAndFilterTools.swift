@@ -13,8 +13,8 @@ enum SortMode: String, CaseIterable, Identifiable {
     var id: Self { self }
 }
 
-///receive `sortMode` as parameter,and return the sorted `ModelData`
-func sortWords(sortMode: SortMode,data: [singleWord]) -> [singleWord] {
+/// receive `sortMode` as parameter,and return the sorted `ModelData`
+func sortWords(sortMode: SortMode, data: [singleWord])->[singleWord] {
     switch sortMode {
     case .byDateUp:
         return data.sorted { $0.date < $1.date }
@@ -26,39 +26,39 @@ func sortWords(sortMode: SortMode,data: [singleWord]) -> [singleWord] {
         return data.sorted { $0.name > $1.name }
 //    case .random:
 //        return data.shuffled()
-        
-        ///it can be done like this:
-        ///```
-        ///var shuffled = data
-        ///for i in 0..<data.count {
+
+        /// it can be done like this:
+        /// ```
+        /// var shuffled = data
+        /// for i in 0..<data.count {
         ///    let index = Int.random(in: i..<data.count)
         ///    if index != i {
         ///        shuffled.swapAt(i, index)
         ///    }
-        ///}
-        ///return shuffled
-        ///```
+        /// }
+        /// return shuffled
+        /// ```
     }
 }
 
-func filteredWords(data:[singleWord],tag:String)->[singleWord]{
-    if(tag=="all_words"){
+func filteredWords(data: [singleWord], tag: String)->[singleWord] {
+    if tag=="all_words" {
         return data
-    }else{
-        return  tag=="no_tag" ? data.filter({$0.tag==[]}) : data.filter({$0.tag.contains(tag)})
+    } else {
+        return tag=="no_tag" ? data.filter { $0.tag==[] } : data.filter { $0.tag.contains(tag) }
     }
 }
 
-func getFilteredWordsCount(data:[singleWord],tag:String)->Int{
+func getFilteredWordsCount(data: [singleWord], tag: String)->Int {
     return filteredWords(data: data, tag: tag).count
 }
 
-func fromTagNameGetColor(data:[singleTag],Tag:String)->String{
-    let name:[String]=data.map({$0.name})
-    if(name.contains(Tag)){
-        let index=data.firstIndex(where: {$0.name==Tag}) ?? 0
+func fromTagNameGetColor(data: [singleTag], Tag: String)->String {
+    let name: [String]=data.map { $0.name }
+    if name.contains(Tag) {
+        let index=data.firstIndex(where: { $0.name==Tag }) ?? 0
         return data[index].color
-    }else{
+    } else {
         return ""
     }
 }

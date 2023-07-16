@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SortModePicker: View {
-    @Binding var sortMode:SortMode
+    @Binding var sortMode: SortMode
     var body: some View {
         Picker("sort", selection: $sortMode) {
             Text("old_to_new").tag(SortMode.byDateUp)

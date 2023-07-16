@@ -7,9 +7,9 @@
 
 import Foundation
 
-///get the current time. This function is used when creating or editing a word.
-///The return value will be inserted to the `date` attribute, which can be really helpful to sort words.
-enum TimeFormat:String {
+/// get the current time. This function is used when creating or editing a word.
+/// The return value will be inserted to the `date` attribute, which can be really helpful to sort words.
+enum TimeFormat: String {
     case YYYYMMDD = "YYYY-MM-dd"
     case YYYYMMDDHH = "YYYY-MM-dd HH"
     case YYYYMMDDHHMM = "YYYY-MM-dd HH:mm"
@@ -17,11 +17,11 @@ enum TimeFormat:String {
     case YYYYMMDDHHMMSSsss = "YYYY-MM-dd HH:mm:ss.SSS"
 }
 
-func getCurrentTime(timeFormat:TimeFormat) -> String{
+func getCurrentTime(timeFormat: TimeFormat) -> String {
     let formatter = DateFormatter()
     formatter.dateFormat = timeFormat.rawValue
-    let timezone = TimeZone.init(identifier: "Asia/Beijing")
+    let timezone = TimeZone(identifier: "Asia/Beijing")
     formatter.timeZone = timezone
-    let dateTime = formatter.string(from: Date.init())
+    let dateTime = formatter.string(from: Date())
     return dateTime
 }

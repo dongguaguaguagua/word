@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct singleTag:Hashable,Codable,Identifiable{
+struct singleTag: Hashable, Codable, Identifiable {
     var id = UUID()
-    var name : String
-    var color : String
+    var name: String
+    var color: String
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct WordApp: App {
-    @StateObject private var modelData=ModelDataClass()
+    @StateObject private var modelData = ModelDataClass()
     var body: some Scene {
         WindowGroup {
             ContentView()

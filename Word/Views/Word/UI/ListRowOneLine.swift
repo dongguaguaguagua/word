@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct ListRowOneLine: View {
-    @EnvironmentObject var ModelData:ModelDataClass
+    @EnvironmentObject var ModelData: ModelDataClass
     
-    @Binding var isShowEnglish:Bool
-    @Binding var isShowChinese:Bool
+    @Binding var isShowEnglish: Bool
+    @Binding var isShowChinese: Bool
     
-    ///whether show Chinese or English individually
-    @State var isShowEnglishSingle:Bool=false
-    @State var isShowChineseSingle:Bool=false
+    /// whether show Chinese or English individually
+    @State var isShowEnglishSingle: Bool=false
+    @State var isShowChineseSingle: Bool=false
     
-    ///receive a word
-    var word:singleWord
+    /// receive a word
+    var word: singleWord
     
     var body: some View {
-        HStack(){
+        HStack {
             HStack {
                 Text("\(getText(input: "chinese"))")
                     .onTapGesture {
@@ -29,10 +29,10 @@ struct ListRowOneLine: View {
                     }
                 Text(word.name)
                     .font(.title3)
-                ///The hide action is realized by modifying the color.(`Color.clear`)
-                    .foregroundColor((!isShowChinese)||(isShowChineseSingle) ? Color.black : Color.clear)
-                ///ease in and out animation
-                    .animation(.easeInOut(duration: 0.2),value: isShowChineseSingle)
+                    /// The hide action is realized by modifying the color.(`Color.clear`)
+                    .foregroundColor((!isShowChinese)||isShowChineseSingle ? Color.black : Color.clear)
+                    /// ease in and out animation
+                    .animation(.easeInOut(duration: 0.2), value: isShowChineseSingle)
                     .lineLimit(1)
             }
             Spacer()
@@ -43,25 +43,26 @@ struct ListRowOneLine: View {
                     }
                 Text(word.definition)
                     .font(.subheadline)
-                    .foregroundColor((!isShowEnglish)||(isShowEnglishSingle) ? Color.gray : Color.clear)
-                    .animation(.easeInOut(duration: 0.2),value: isShowEnglishSingle)
+                    .foregroundColor((!isShowEnglish)||isShowEnglishSingle ? Color.gray : Color.clear)
+                    .animation(.easeInOut(duration: 0.2), value: isShowEnglishSingle)
                     .lineLimit(1)
             }
         }
     }
-    func getText(input:String)->String{
-        if((!isShowEnglish) && (!isShowChinese)){
+
+    func getText(input: String) -> String {
+        if !isShowEnglish && !isShowChinese {
             return ""
-        }else if(input=="chinese" && !isShowChinese){
+        } else if input=="chinese" && !isShowChinese {
             return ""
-        }else if(input=="chinese" && isShowChinese){
+        } else if input=="chinese" && isShowChinese {
             return "◯"
-        }else if(input=="english" && !isShowEnglish){
+        } else if input=="english" && !isShowEnglish {
             return ""
-        }else if(input=="english" && isShowEnglish){
+        } else if input=="english" && isShowEnglish {
             return "◯"
-        }else{
-            ///This situation would never appear.
+        } else {
+            /// This situation would never appear.
             return "unknown"
         }
     }
