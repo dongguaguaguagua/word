@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "highlightedtexteditor",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kyle-n/HighlightedTextEditor",
+      "state" : {
+        "branch" : "main",
+        "revision" : "7069ede002afc6bde867aef7035f45ff72dc839c"
+      }
+    },
+    {
       "identity" : "sqlite.swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/stephencelis/SQLite.swift",

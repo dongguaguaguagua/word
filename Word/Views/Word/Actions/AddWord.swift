@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import HighlightedTextEditor
 
 struct AddWord: View {
     @EnvironmentObject var ModelData: ModelDataClass
@@ -45,7 +46,7 @@ struct NewWordForm: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                 Divider()
-                TextEditor(text: $wordDefinition)
+                HighlightedTextEditor(text: $wordDefinition,highlightRules: .markdown)
                     .padding()
                 Divider()
                 /// Select tags

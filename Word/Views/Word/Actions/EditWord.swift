@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import HighlightedTextEditor
 
 struct EditWord: View {
     @EnvironmentObject var ModelData: ModelDataClass
@@ -48,7 +49,7 @@ struct EditWordForm: View {
                     .disableAutocorrection(ModelData.settings.disableAutoCorrection)
                     .padding()
                 Divider()
-                TextEditor(text: $wordDef)
+                HighlightedTextEditor(text: $wordDef,highlightRules: .markdown)
                     .padding()
             }
             .toolbar {

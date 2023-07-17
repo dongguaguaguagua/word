@@ -10,6 +10,7 @@
 		3274438F2A5E8ED300F44ACF /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 3274438E2A5E8ED300F44ACF /* SQLite */; };
 		327443922A5E8EDF00F44ACF /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 327443912A5E8EDF00F44ACF /* MarkdownUI */; };
 		328FF10F2A60063A001CA966 /* vip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328FF10E2A60063A001CA966 /* vip.swift */; };
+		9C2BAF4F2A64FC2B006B1ACA /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 9C2BAF4E2A64FC2B006B1ACA /* HighlightedTextEditor */; };
 		9C3086B52A5BC1E800502D6D /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3086B42A5BC1E700502D6D /* Search.swift */; };
 		9C3086BA2A5C031A00502D6D /* ProcessWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3086B92A5C031A00502D6D /* ProcessWords.swift */; };
 		9C3086BC2A5C082300502D6D /* DictStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3086BB2A5C082300502D6D /* DictStructure.swift */; };
@@ -124,6 +125,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3274438F2A5E8ED300F44ACF /* SQLite in Frameworks */,
+				9C2BAF4F2A64FC2B006B1ACA /* HighlightedTextEditor in Frameworks */,
 				327443922A5E8EDF00F44ACF /* MarkdownUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,6 +344,7 @@
 			packageProductDependencies = (
 				3274438E2A5E8ED300F44ACF /* SQLite */,
 				327443912A5E8EDF00F44ACF /* MarkdownUI */,
+				9C2BAF4E2A64FC2B006B1ACA /* HighlightedTextEditor */,
 			);
 			productName = Word;
 			productReference = 9C9213AE2A47153100DAA757 /* Word.app */;
@@ -419,6 +422,7 @@
 			packageReferences = (
 				3274438D2A5E8ED300F44ACF /* XCRemoteSwiftPackageReference "SQLite" */,
 				327443902A5E8EDF00F44ACF /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
+				9C2BAF4D2A64FC2B006B1ACA /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */,
 			);
 			productRefGroup = 9C9213AF2A47153100DAA757 /* Products */;
 			projectDirPath = "";
@@ -853,6 +857,14 @@
 				kind = branch;
 			};
 		};
+		9C2BAF4D2A64FC2B006B1ACA /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kyle-n/HighlightedTextEditor";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -865,6 +877,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 327443902A5E8EDF00F44ACF /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
 			productName = MarkdownUI;
+		};
+		9C2BAF4E2A64FC2B006B1ACA /* HighlightedTextEditor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9C2BAF4D2A64FC2B006B1ACA /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */;
+			productName = HighlightedTextEditor;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
