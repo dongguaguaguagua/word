@@ -8,7 +8,7 @@ import Combine
 import Foundation
 
 struct settings: Hashable, Codable {
-    var showDetailDefinition: Bool
+    var moreCompactLayout: Bool
     var clickBottomToShuffle: Bool
     var recentSearchWord: [String]
     var disableAutoCorrection: Bool

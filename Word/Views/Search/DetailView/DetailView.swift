@@ -11,7 +11,7 @@ struct DetailView: View {
     @EnvironmentObject var ModelData: ModelDataClass
     @State var word: DictStruct
     var body: some View {
-        var isInWordList:Bool=ModelData.word.map{$0.name}.contains(word.name)
+        let isInWordList:Bool=ModelData.word.map{$0.name}.contains(word.name)
         VStack(alignment: .leading) {
             HStack(alignment: .bottom) {
                 Text(word.name)
@@ -22,9 +22,19 @@ struct DetailView: View {
                     .font(.system(size: 15))
                     .padding(.leading, 10)
                     .padding(.bottom, 5)
+            }
+            Divider()
+            List {
+                ImportanceRank(DictWord: word)
+                ChineseTranslations(DictWord: word)
+                EnglishDefinition(DictWord: word)
+            }
+        }
+        .toolbar{
+            ToolbarItem(placement: .primaryAction){
                 Button{
                     if(isInWordList==false){
-                        ModelData.word.append(singleWord(name: word.name, definition: "", date: getCurrentTime(timeFormat: .YYYYMMDDHHMMSS), tag: []))
+                        ModelData.word.append(singleWord(name: word.name, definition: "", date: getCurrentTime(timeFormat: .YYYYMMDDHHMMSS), tag: [],importance: 0))
                         saveData(data: ModelData.word)
                     }else{
                         ModelData.word.removeAll(where: {$0.name==word.name})
@@ -33,13 +43,7 @@ struct DetailView: View {
                 }label: {
                     Label("Add to word list",systemImage: isInWordList ? "star.fill" : "star")
                         .labelStyle(.iconOnly)
-                }.padding(.bottom, 5)
-            }
-            Divider()
-            List {
-                Importance(DictWord: word)
-                ChineseTranslations(DictWord: word)
-                EnglishDefinition(DictWord: word)
+                }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)

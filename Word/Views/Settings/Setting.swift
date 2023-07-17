@@ -13,8 +13,8 @@ struct Setting: View {
         NavigationView {
             Form {
                 Section(header: Text("appearance")) {
-                    Toggle(isOn: $ModelData.settings.showDetailDefinition) {
-                        Text("more_compatitive_layout")
+                    Toggle(isOn: $ModelData.settings.moreCompactLayout) {
+                        Text("more_compact_layout")
                     }
                 }
                 Section(header: Text("gesture")) {
@@ -32,7 +32,7 @@ struct Setting: View {
                     Toggle(isOn: $ModelData.settings.enableFuzzySearch) {
                         Text("enable_fuzzy_search")
                     }
-                    Text("fuzziness:\(ModelData.settings.fuzziness)")
+                    Text("Fuzziness: \(String(format: "%0.1f",ModelData.settings.fuzziness))")
                     Slider(value: $ModelData.settings.fuzziness, in: 0 ... 1, step: 0.1)
                         .disabled(!ModelData.settings.enableFuzzySearch)
                 }

@@ -46,7 +46,7 @@ struct ListRowOneLine: View {
                 Spacer()
                 if(word.definition==""){
                     let DictWord=fetchDataFromWordName(word: word.name)
-                    Text(DictWord.definition)
+                    Text(DictWord.translation)
                         .font(.subheadline)
                         .foregroundColor((!isShowEnglish) || isShowEnglishSingle ? Color.gray : Color.clear)
                         .animation(.easeInOut(duration: 0.2), value: isShowEnglishSingle)
@@ -70,6 +70,7 @@ struct ListRowOneLine: View {
                 }
             }
         }
+
     }
 
     func showBtn(isChinese: Bool) -> Bool {

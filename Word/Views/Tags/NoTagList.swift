@@ -39,7 +39,7 @@ struct NoTagList: View {
                 ForEach(isRandom ? randomWords : sortWords(sortMode: sortMode, data: noTagWord)) {
                     word in
                     ZStack(alignment: .leading) {
-                        if ModelData.settings.showDetailDefinition {
+                        if !ModelData.settings.moreCompactLayout {
                             ListRow(isShowEnglish: $showEnglishOnly, isShowChinese: $showChineseOnly, word: word)
                                 /// `swipeActions` only available in `iOS 15.0, macOS 12.0` or later.
                                 /// To support `iOS 14.0` and ealier, use https://github.com/SwipeCellKit/SwipeCellKit

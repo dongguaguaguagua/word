@@ -13,4 +13,5 @@ struct singleWord: Hashable, Codable, Identifiable {
     var definition: String
     var date: String
     var tag: [String]
+    var importance: Int
 }

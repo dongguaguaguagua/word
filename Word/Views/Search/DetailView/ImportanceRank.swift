@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Importance: View {
+struct ImportanceRank: View {
     var DictWord:DictStruct
     var body: some View {
         Section(header: Text("Importance")) {

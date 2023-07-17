@@ -73,7 +73,7 @@ struct ListDetail: View {
                         }
                     }
                 }
-                Importance(DictWord: DictWord)
+                ImportanceRank(DictWord: DictWord)
                 ChineseTranslations(DictWord: DictWord)
                 EnglishDefinition(DictWord: DictWord)
             }

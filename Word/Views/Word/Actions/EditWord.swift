@@ -60,10 +60,13 @@ struct EditWordForm: View {
                 ToolbarItem(placement: .primaryAction) {
                     Button("done") {
                         /// A new word is created. After deleting the old word, insert the new word into `ModelData`
-                        ModelData.word.removeAll(where: { wordId == $0.id })
+//                        ModelData.word.removeAll(where: { wordId == $0.id })
                         let time = getCurrentTime(timeFormat: .YYYYMMDDHHMMSS)
-                        let newWord = singleWord(id: wordId, name: "\(wordName)", definition: "\(wordDef)", date: time, tag: [])
-                        ModelData.word.append(newWord)
+                        let index = ModelData.word.firstIndex(where: {$0.id==wordId}) ?? 0
+                        
+                        ModelData.word[index].name=wordName
+                        ModelData.word[index].definition=wordDef
+                        ModelData.word[index].date=time
                         self.showEditWordForm.toggle()
                         saveData(data: ModelData.word)
                     }
