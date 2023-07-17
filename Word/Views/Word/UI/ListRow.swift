@@ -36,10 +36,18 @@ struct ListRow: View {
 
     var wordDifinitionView: some View {
         VStack(alignment: .leading) {
-            Text(word.definition)
-                .font(.system(size: 15))
-                .padding([.top, .bottom, .leading, .trailing], 2)
-                .foregroundColor(Color.gray)
+            if(word.definition==""){
+                let DictWord=fetchDataFromWordName(word: word.name)
+                Text(DictWord.translation)
+                    .font(.system(size: 15))
+                    .padding([.top, .bottom, .leading, .trailing], 2)
+                    .foregroundColor(Color.gray)
+            }else{
+                Text(word.definition)
+                    .font(.system(size: 15))
+                    .padding([.top, .bottom, .leading, .trailing], 2)
+                    .foregroundColor(Color.gray)
+            }
         }
         .frame(width: 150, height: 70)
     }

@@ -46,8 +46,12 @@ struct NewWordForm: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                 Divider()
-                HighlightedTextEditor(text: $wordDefinition,highlightRules: .markdown)
-                    .padding()
+                if(ModelData.settings.enableMarkdown){
+                    HighlightedTextEditor(text: $wordDefinition,highlightRules: .markdown)
+                        .padding()
+                }else{
+                    TextEditor(text: $wordDefinition)
+                }
                 Divider()
                 /// Select tags
                 NavigationLink {

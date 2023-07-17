@@ -49,8 +49,12 @@ struct EditWordForm: View {
                     .disableAutocorrection(ModelData.settings.disableAutoCorrection)
                     .padding()
                 Divider()
-                HighlightedTextEditor(text: $wordDef,highlightRules: .markdown)
-                    .padding()
+                if(ModelData.settings.enableMarkdown){
+                    HighlightedTextEditor(text: $wordDef,highlightRules: .markdown)
+                        .padding()
+                }else{
+                    TextEditor(text: $wordDef)
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
@@ -58,7 +62,7 @@ struct EditWordForm: View {
                         /// A new word is created. After deleting the old word, insert the new word into `ModelData`
                         ModelData.word.removeAll(where: { wordId == $0.id })
                         let time = getCurrentTime(timeFormat: .YYYYMMDDHHMMSS)
-                        let newWord = singleWord(id: wordId, name: "\(wordName)", definition: "\(wordDef)", date: time, tag: [""])
+                        let newWord = singleWord(id: wordId, name: "\(wordName)", definition: "\(wordDef)", date: time, tag: [])
                         ModelData.word.append(newWord)
                         self.showEditWordForm.toggle()
                         saveData(data: ModelData.word)

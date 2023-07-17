@@ -19,39 +19,65 @@ import SwiftUI
 struct ListDetail: View {
     @EnvironmentObject var ModelData: ModelDataClass
     @Binding var selectWordsID: Set<UUID>
+    let columns = [GridItem(.flexible()), GridItem(.flexible())]
     /// receive a word
     var word: singleWord
-
+    
     var body: some View {
         VStack(alignment: .leading) {
-            HStack {
-                ForEach(word.tag, id: \.self) { tag in
-                    /// The tags. Currently, it is represented by `text` with round edge and colorful background.
-                    Text("\(tag)")
-                        .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
-                        .background(Color(hex: fromTagNameGetColor(data: ModelData.tag, Tag: tag)))
-                        .foregroundColor(Color.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 5))
+            let DictWord=fetchDataFromWordName(word: word.name)
+            VStack(alignment:.leading){
+                HStack {
+                    ForEach(word.tag, id: \.self) { tag in
+                        /// The tags. Currently, it is represented by `text` with round edge and colorful background.
+                        Text("\(tag)")
+                            .font(.system(size: 10, weight: .bold, design: .default))
+                            .padding(EdgeInsets(top: 5, leading: 7, bottom: 5, trailing: 7))
+                            .background(Color(hex: fromTagNameGetColor(data: ModelData.tag, Tag: tag)))
+                            .foregroundColor(Color.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 5))
+                    }
                 }
-            }
-            Text(word.name)
-                .font(.title)
-            /// Actually, the `create time` is not accurate yet. When you edit a word, this will also be refreshed.
-            /// So I consider creating another attribute `edit date`.(NOT IN PROGRESS)
-            Text("add_time:\(word.date)")
-                .foregroundColor(.gray)
-            ScrollView {
-                if ModelData.settings.enableMarkdown {
-                    Markdown(word.definition)
-                        .markdownTheme(.gitHub)
-                } else {
-                    Text(word.definition)
+                
+                HStack{
+                    Text(word.name)
+                        .font(.title)
+                    Text("| "+DictWord.phonetic+" |")
+                        .font(.system(size: 15))
+                        .padding(.leading, 10)
                 }
+                /// Actually, the `create time` is not accurate yet. When you edit a word, this will also be refreshed.
+                /// So I consider creating another attribute `edit date`.(NOT IN PROGRESS)
+                HStack{
+                    Label("Add time",systemImage: "clock")
+                        .labelStyle(.iconOnly)
+                        .foregroundColor(.gray)
+                    Text(word.date)
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                }
+            }.padding()
+
+            List{
+                if(word.definition != ""){
+                    Section(header:Text("My definition")){
+                        if ModelData.settings.enableMarkdown {
+                            Markdown(word.definition)
+                                .markdownTheme(.gitHub)
+                        } else {
+                            Text(word.definition)
+                        }
+                    }
+                }
+                Importance(DictWord: DictWord)
+                ChineseTranslations(DictWord: DictWord)
+                EnglishDefinition(DictWord: DictWord)
             }
+            .padding([.leading, .trailing, .top, .bottom], 0)
             .navigationBarTitle(word.name, displayMode: .inline)
         }
-        .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .background(Color(hex: "#f2f2f7"))
 
         .toolbar {
             /// edit button

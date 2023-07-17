@@ -148,7 +148,7 @@ func fetchDataFromWordName(word: String)->DictStruct {
 func fuzzySearch(str: String, fuzziness: Double)->[DictStruct] {
     var result: [DictStruct] = []
     do {
-        let db = try Connection("~/Downloads/ECDict/sqlite.db")
+        let db = try Connection("/Users/huzongyu/Downloads/ECDICT/sqlite.db")
         let CollinsDict = Table("Collins")
         
         let name = Expression<String?>("word")

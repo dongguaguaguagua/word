@@ -14,7 +14,7 @@ struct Setting: View {
             Form {
                 Section(header: Text("appearance")) {
                     Toggle(isOn: $ModelData.settings.showDetailDefinition) {
-                        Text("show_full_definition")
+                        Text("more_compatitive_layout")
                     }
                 }
                 Section(header: Text("gesture")) {

@@ -44,11 +44,20 @@ struct ListRowOneLine: View {
             Spacer()
             HStack {
                 Spacer()
-                Text(word.definition)
-                    .font(.subheadline)
-                    .foregroundColor((!isShowEnglish) || isShowEnglishSingle ? Color.gray : Color.clear)
-                    .animation(.easeInOut(duration: 0.2), value: isShowEnglishSingle)
-                    .lineLimit(1)
+                if(word.definition==""){
+                    let DictWord=fetchDataFromWordName(word: word.name)
+                    Text(DictWord.definition)
+                        .font(.subheadline)
+                        .foregroundColor((!isShowEnglish) || isShowEnglishSingle ? Color.gray : Color.clear)
+                        .animation(.easeInOut(duration: 0.2), value: isShowEnglishSingle)
+                        .lineLimit(1)
+                }else{
+                    Text(word.definition)
+                        .font(.subheadline)
+                        .foregroundColor((!isShowEnglish) || isShowEnglishSingle ? Color.gray : Color.clear)
+                        .animation(.easeInOut(duration: 0.2), value: isShowEnglishSingle)
+                        .lineLimit(1)
+                }
                 if showBtn(isChinese: false) {
                     Button(action: {
                         isShowEnglishSingle.toggle()
