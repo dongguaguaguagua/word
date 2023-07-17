@@ -75,7 +75,7 @@ struct Manage: View {
             .sheet(item: $editItem) { item in
                 /// turn hex string to `UIColor`
                 let hexColor: String=item.color
-                let tagColor: Color=.init(hex: hexColor)
+                let tagColor: Color = .init(hex: hexColor)
                 editTagSheet(orinigalName: item.name, tagName: item.name, tagColor: tagColor, isShowRenameTagSheet: $isShowRenameTagSheet)
             }
             .environment(\.editMode, $editMode)

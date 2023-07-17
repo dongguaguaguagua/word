@@ -195,7 +195,7 @@ struct WordList: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     ZStack {
                         Text(isEditMode.isEditing ? "done" : "edit")
-                            .foregroundColor(Color.blue)
+                            .foregroundColor(Color.red)
                         EditButton()
                             .accentColor(.clear)
                     }

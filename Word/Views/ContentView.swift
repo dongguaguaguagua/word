@@ -16,7 +16,12 @@ struct ContentView: View {
         case manage
         case setting
     }
-
+    init() {
+//        UITabBar.appearance().shadowImage = UIImage()
+//        UITabBar.appearance().backgroundImage = UIImage()
+//        UITabBar.appearance().isTranslucent = true
+        UITabBar.appearance().backgroundColor = .white
+    }
     var body: some View {
         TabView(selection: $selection) {
             SearchView()
@@ -40,7 +45,6 @@ struct ContentView: View {
                 }
                 .tag(Tab.setting)
         }
-//        .tabViewStyle(.page(indexDisplayMode: .always))
         .accentColor(Color.red) // tabview font color, default to blue
         .environmentObject(modelData)
     }

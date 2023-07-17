@@ -155,7 +155,7 @@ struct EachTagList: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 ZStack {
                     Text(isEditMode.isEditing ? "done" : "edit")
-                        .foregroundColor(Color.blue)
+                        .foregroundColor(Color.red)
                         .frame(width: 50, alignment: .trailing)
                         .padding(.trailing, 10)
                     EditButton()

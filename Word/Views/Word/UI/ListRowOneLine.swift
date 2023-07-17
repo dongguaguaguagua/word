@@ -37,15 +37,17 @@ struct ListRowOneLine: View {
             }
             Spacer()
             HStack {
+                Spacer()
+                Text(word.definition)
+                    .font(.subheadline)
+                    .foregroundColor((!isShowEnglish) || isShowEnglishSingle ? Color.gray : Color.clear)
+                    .animation(.easeInOut(duration: 0.2), value: isShowEnglishSingle)
+                    .lineLimit(1)
+//                Spacer()
                 Text("\(getText(input: "english"))")
                     .onTapGesture {
                         isShowEnglishSingle.toggle()
                     }
-                Text(word.definition)
-                    .font(.subheadline)
-                    .foregroundColor((!isShowEnglish)||isShowEnglishSingle ? Color.gray : Color.clear)
-                    .animation(.easeInOut(duration: 0.2), value: isShowEnglishSingle)
-                    .lineLimit(1)
             }
         }
     }
