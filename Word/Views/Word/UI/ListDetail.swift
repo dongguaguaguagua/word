@@ -13,8 +13,6 @@ import SwiftUI
 /// It also has edit button and tag-select button on the tool bar.
 ///
 /// Many works need to be done.
-/// - markdown support
-/// - each tag is a navigation link
 /// - two button, you can press them to show the next/previous word's detail
 struct ListDetail: View {
     @EnvironmentObject var ModelData: ModelDataClass
@@ -29,13 +27,19 @@ struct ListDetail: View {
             VStack(alignment:.leading){
                 HStack {
                     ForEach(word.tag, id: \.self) { tag in
-                        /// The tags. Currently, it is represented by `text` with round edge and colorful background.
-                        Text("\(tag)")
-                            .font(.system(size: 10, weight: .bold, design: .default))
-                            .padding(EdgeInsets(top: 5, leading: 7, bottom: 5, trailing: 7))
-                            .background(Color(hex: fromTagNameGetColor(data: ModelData.tag, Tag: tag)))
-                            .foregroundColor(Color.white)
-                            .clipShape(RoundedRectangle(cornerRadius: 5))
+                        ///Each tag is a navigation link
+                        NavigationLink{
+                            EachTagList(tag: tag)
+                        }
+                        label:{
+                            /// The tags. Currently, it is represented by `text` with round edge and colorful background.
+                            Text("\(tag)")
+                                .font(.system(size: 10, weight: .bold, design: .default))
+                                .padding(EdgeInsets(top: 5, leading: 7, bottom: 5, trailing: 7))
+                                .background(Color(hex: fromTagNameGetColor(data: ModelData.tag, Tag: tag)))
+                                .foregroundColor(Color.white)
+                                .clipShape(RoundedRectangle(cornerRadius: 5))
+                        }
                     }
                 }
                 
