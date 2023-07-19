@@ -11,37 +11,52 @@ struct DetailView: View {
     @EnvironmentObject var ModelData: ModelDataClass
     @State var word: DictStruct
     var body: some View {
-        let isInWordList:Bool=ModelData.word.map{$0.name}.contains(word.name)
-        VStack(alignment: .leading) {
-            HStack(alignment: .bottom) {
-                Text(word.name)
-                    .font(.title)
-                    .bold()
-                    .padding(.leading, 20)
-                Text("| "+word.phonetic+" |")
-                    .font(.system(size: 15))
-                    .padding(.leading, 10)
-                    .padding(.bottom, 5)
+        let isInWordList: Bool = ModelData.word.map { $0.name }.contains(word.name)
+        ZStack {
+            VStack(alignment: .leading) {
+                HStack(alignment: .bottom) {
+                    Text(word.name)
+                        .font(.title)
+                        .bold()
+                        .padding(.leading, 20)
+                    if word.phonetic != "" {
+                        Text("| "+word.phonetic+" |")
+                            .font(.system(size: 15))
+                            .padding(.leading, 10)
+                            .padding(.bottom, 5)
+                    }
+                    Spacer()
+                }
+                Divider()
+                List {
+                    ImportanceRank(DictWord: word)
+                    ChineseTranslations(DictWord: word)
+                    EnglishDefinition(DictWord: word)
+                }
             }
-            Divider()
-            List {
-                ImportanceRank(DictWord: word)
-                ChineseTranslations(DictWord: word)
-                EnglishDefinition(DictWord: word)
+            VStack() {
+                HStack() {
+                    Spacer()
+                    if isInWordList {
+                        RecordedSealView(dateText: getCurrentTime(timeFormat: .YYYYMMDDHHMMSS))
+                            .padding(.trailing, 20)
+                    }
+                }
+                Spacer()
             }
         }
-        .toolbar{
-            ToolbarItem(placement: .primaryAction){
-                Button{
-                    if(isInWordList==false){
-                        ModelData.word.append(singleWord(name: word.name, definition: "", date: getCurrentTime(timeFormat: .YYYYMMDDHHMMSS), tag: [],importance: 0))
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    if isInWordList==false {
+                        ModelData.word.append(singleWord(name: word.name, definition: "", date: getCurrentTime(timeFormat: .YYYYMMDDHHMMSS), tag: [], importance: 0))
                         saveData(data: ModelData.word)
-                    }else{
-                        ModelData.word.removeAll(where: {$0.name==word.name})
+                    } else {
+                        ModelData.word.removeAll(where: { $0.name==word.name })
                         saveData(data: ModelData.word)
                     }
-                }label: {
-                    Label("Add to word list",systemImage: isInWordList ? "star.fill" : "star")
+                } label: {
+                    Label("Add to word list", systemImage: isInWordList ? "star.fill" : "star")
                         .labelStyle(.iconOnly)
                 }
             }

@@ -40,18 +40,23 @@ struct ListRowOneLine: View {
                     /// ease in and out animation
                     .animation(.easeInOut(duration: 0.2), value: isShowChineseSingle)
                     .lineLimit(1)
+//                    .onTapGesture {
+//                        let index=ModelData.word.firstIndex(where: { $0.id==word.id }) ?? 0
+//                        ModelData.word[index].importance += 1
+//                        saveData(data: ModelData.word)
+//                    }
             }
             Spacer()
             HStack {
                 Spacer()
-                if(word.definition==""){
+                if word.definition == "" {
                     let DictWord=fetchDataFromWordName(word: word.name)
                     Text(DictWord.translation)
                         .font(.subheadline)
                         .foregroundColor((!isShowEnglish) || isShowEnglishSingle ? Color.gray : Color.clear)
                         .animation(.easeInOut(duration: 0.2), value: isShowEnglishSingle)
                         .lineLimit(1)
-                }else{
+                } else {
                     Text(word.definition)
                         .font(.subheadline)
                         .foregroundColor((!isShowEnglish) || isShowEnglishSingle ? Color.gray : Color.clear)
@@ -70,7 +75,10 @@ struct ListRowOneLine: View {
                 }
             }
         }
-
+//        .background(
+//            LinearGradient(gradient: Gradient(colors: [.red, .white]), startPoint: .leading, endPoint: .trailing)
+//                .frame(width: 50)
+//        )
     }
 
     func showBtn(isChinese: Bool) -> Bool {

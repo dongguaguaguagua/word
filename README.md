@@ -18,18 +18,18 @@ Features:
 
 * Github flavored Markdown support
 
+* Word searching (include fuzzy search)
+
+* Word importance
+
 ---
 
 Todo:
 
 * Type mode for words
 
-* word searching
-
 * recite words based on the Ebbinghaus forgetting curve *(NOT IN PROGRESS)*
 
 * word statistics based on recitation *(NOT IN PROGRESS)*
 
 * import/export word data
-
-* 

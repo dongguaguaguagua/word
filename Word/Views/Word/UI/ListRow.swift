@@ -36,13 +36,13 @@ struct ListRow: View {
 
     var wordDifinitionView: some View {
         VStack(alignment: .leading) {
-            if(word.definition==""){
-                let DictWord=fetchDataFromWordName(word: word.name)
+            if word.definition == "" {
+                let DictWord = fetchDataFromWordName(word: word.name)
                 Text(DictWord.translation)
                     .font(.system(size: 15))
                     .padding([.top, .bottom, .leading, .trailing], 2)
                     .foregroundColor(Color.gray)
-            }else{
+            } else {
                 Text(word.definition)
                     .font(.system(size: 15))
                     .padding([.top, .bottom, .leading, .trailing], 2)

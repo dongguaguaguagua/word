@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SwipeActions
 
 /// The page of `word` tab.
 struct WordList: View {
@@ -39,12 +40,11 @@ struct WordList: View {
             /// Plan to use `lazyStack` instead
             VStack {
                 List(selection: $selectWordsID) {
-                    ForEach(isRandom ? randomWords : sortWords(sortMode: sortMode, data: filteredWords(data: ModelData.word, tag: filterTag))) {
-                        word in
-                        let index=ModelData.word.firstIndex(where: {$0.id==word.id}) ?? 0
-                        HStack{
-                            if(isEditMode != .active){
-                                ImporanceButton(index: index)
+                    ForEach(isRandom ? randomWords : sortWords(sortMode: sortMode, data: filteredWords(data: ModelData.word, tag: filterTag))) { word in
+//                        let index=ModelData.word.firstIndex(where: { $0.id == word.id }) ?? 0
+                        HStack {
+                            if isEditMode != .active {
+                                moreImportanceButton(word: word)
                             }
                             /// ```swift
                             /// ZStack(){
@@ -58,8 +58,8 @@ struct WordList: View {
                             ZStack(alignment: .leading) {
                                 if !ModelData.settings.moreCompactLayout {
                                     ListRow(isShowEnglish: $showEnglishOnly, isShowChinese: $showChineseOnly, word: word)
-                                    /// `swipeActions` only available in `iOS 15.0, macOS 12.0` or later.
-                                    /// To support `iOS 14.0` and ealier, use https://github.com/SwipeCellKit/SwipeCellKit
+                                        /// `swipeActions` only available in `iOS 15.0, macOS 12.0` or later.
+                                        /// To support `iOS 14.0` and ealier, use https://github.com/SwipeCellKit/SwipeCellKit
                                         .swipeActions(edge: .trailing) {
                                             Button(role: .destructive) {
                                                 ModelData.word.removeAll(where: { word.id == $0.id })
@@ -69,14 +69,7 @@ struct WordList: View {
                                             }
                                         }
                                         .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                                            Button() {
-                                                if(word.importance > 0){
-                                                    ModelData.word[index].importance -= 1
-                                                    saveData(data: ModelData.word)
-                                                }
-                                            } label: {
-                                                Label("less importance", systemImage: "arrow.uturn.backward.circle")
-                                            }
+                                            lessImportanceButton(word: word)
                                         }
                                 } else {
                                     ListRowOneLine(isShowEnglish: $showEnglishOnly, isShowChinese: $showChineseOnly, word: word)
@@ -88,8 +81,11 @@ struct WordList: View {
                                                 Label("Delete", systemImage: "trash")
                                             }
                                         }
+                                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                                            lessImportanceButton(word: word)
+                                        }
                                 }
-                                
+
                                 NavigationLink(destination: ListDetail(selectWordsID: $selectWordsID, word: word)) {
                                     EmptyView()
                                 }.opacity(0.0)
