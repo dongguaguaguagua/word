@@ -36,8 +36,10 @@ struct lessImportanceButton: View {
         Button {
             isShowSlide = true
         } label: {
-            Label("less importance", systemImage: "arrow.uturn.backward.circle")
+            Label("adjust importance", systemImage: "slider.vertical.3")
+                .labelStyle(.iconOnly)
         }
+        .tint(.blue)
         .partialSheet(isPresented: $isShowSlide) {
             VStack {
                 Text("change_importance")

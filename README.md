@@ -33,3 +33,13 @@ Todo:
 * word statistics based on recitation *(NOT IN PROGRESS)*
 
 * import/export word data
+
+---
+
+![](https://github.com/dongguaguaguagua/word/raw/main/img/001.png)
+![](https://github.com/dongguaguaguagua/word/raw/main/img/002.png)
+![](https://github.com/dongguaguaguagua/word/raw/main/img/003.png)
+![](https://github.com/dongguaguaguagua/word/raw/main/img/004.png)
+![](https://github.com/dongguaguaguagua/word/raw/main/img/005.png)
+![](https://github.com/dongguaguaguagua/word/raw/main/img/006.png)
+![](https://github.com/dongguaguaguagua/word/raw/main/img/007.png)

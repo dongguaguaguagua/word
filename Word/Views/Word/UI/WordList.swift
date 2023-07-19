@@ -56,10 +56,8 @@ struct WordList: View {
                             /// ```
                             /// Use this way to hide arrows in every navigation link.
                             ZStack(alignment: .leading) {
-                                if !ModelData.settings.moreCompactLayout {
-                                    ListRow(isShowEnglish: $showEnglishOnly, isShowChinese: $showChineseOnly, word: word)
-                                        /// `swipeActions` only available in `iOS 15.0, macOS 12.0` or later.
-                                        /// To support `iOS 14.0` and ealier, use https://github.com/SwipeCellKit/SwipeCellKit
+                                if ModelData.settings.moreCompactLayout {
+                                    ListRowOneLine(isShowEnglish: $showEnglishOnly, isShowChinese: $showChineseOnly, word: word)
                                         .swipeActions(edge: .trailing) {
                                             Button(role: .destructive) {
                                                 ModelData.word.removeAll(where: { word.id == $0.id })
@@ -72,7 +70,9 @@ struct WordList: View {
                                             lessImportanceButton(word: word)
                                         }
                                 } else {
-                                    ListRowOneLine(isShowEnglish: $showEnglishOnly, isShowChinese: $showChineseOnly, word: word)
+                                    ListRow(isShowEnglish: $showEnglishOnly, isShowChinese: $showChineseOnly, word: word)
+                                        /// `swipeActions` only available in `iOS 15.0, macOS 12.0` or later.
+                                        /// To support `iOS 14.0` and ealier, use https://github.com/SwipeCellKit/SwipeCellKit
                                         .swipeActions(edge: .trailing) {
                                             Button(role: .destructive) {
                                                 ModelData.word.removeAll(where: { word.id == $0.id })
@@ -89,7 +89,7 @@ struct WordList: View {
                                 NavigationLink(destination: ListDetail(selectWordsID: $selectWordsID, word: word)) {
                                     EmptyView()
                                 }.opacity(0.0)
-                            }.padding([.leading, .trailing], 10)
+                            }.padding([.leading, .trailing, .top, .bottom], 10)
                         }
                         .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     }
