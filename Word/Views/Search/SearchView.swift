@@ -11,6 +11,7 @@ struct SearchView: View {
     @EnvironmentObject var ModelData: ModelDataClass
     @State var searchWord: String = ""
     @State var searchResult: [DictStruct] = []
+    @State var showAddWordSheet = false
 //    @State var isActive:Bool=true
     var body: some View {
         NavigationView {
@@ -87,6 +88,22 @@ struct SearchView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            .toolbar {
+                ToolbarItemGroup(placement: .bottomBar) {
+                    HStack {
+                        // TODO: set default Tags
+//                        Spacer()
+                        Button {
+                            self.showAddWordSheet = true
+                        } label: {
+                            Label("Add", systemImage: "plus")
+                        }
+                        .sheet(isPresented: $showAddWordSheet) {
+                            NewWordForm(showNewWordForm: $showAddWordSheet)
+                        }
+                    }
+                }
+            }
         }
         .navigationBarTitle("Search")
     }

@@ -29,12 +29,10 @@ struct newTagSheet: View {
     @Binding var showAddTagSheet: Bool
     @State private var tagColor=Color(.sRGB, red: 0, green: 0, blue: 0)
     @State private var showAlert: Bool=false
+    @State private var showNameAlert: Bool=false
     var body: some View {
         NavigationView {
             VStack {
-                Text("add_tag")
-                    .font(.title2)
-                Divider()
                 TextField("tag_name", text: $tagName)
                     .disableAutocorrection(ModelData.settings.disableAutoCorrection)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -47,7 +45,7 @@ struct newTagSheet: View {
                     .foregroundColor(Color.gray)
                 Divider()
             }.toolbar {
-                ToolbarItem(placement: .primaryAction) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Button("done") {
                         if (ModelData.tag.map { $0.name }.contains(tagName)) {
                             showAlert=true
@@ -60,15 +58,23 @@ struct newTagSheet: View {
                             self.showAddTagSheet=false
                             saveTags(data: ModelData.tag)
                         }
+                        if tagName == "" {
+                            showNameAlert=true
+                        }
                     }
                 }
-                ToolbarItem(placement: .navigation) {
+                ToolbarItem(placement: .navigationBarLeading) {
                     Button("cancel") {
                         self.showAddTagSheet=false
                     }
                 }
+                ToolbarItem(placement: .principal) {
+                    Text("add_tag")
+                        .font(.headline)
+                }
             }
             .alert("tag_exist_alert", isPresented: $showAlert) {}
+            .alert("tag_name_empty", isPresented: $showNameAlert) {}
         }
     }
 }

@@ -5,8 +5,8 @@
 //  Created by 胡宗禹 on 6/24/23.
 //
 
-import SwiftUI
 import HighlightedTextEditor
+import SwiftUI
 
 struct AddWord: View {
     @EnvironmentObject var ModelData: ModelDataClass
@@ -35,82 +35,80 @@ struct NewWordForm: View {
     @Binding var showNewWordForm: Bool
     @State var selectedTags: [String] = []
     @State var selectedTagsText: String = "select_tags"
-    var body: some View {
-        NavigationView {
-            VStack {
-                Text("add_word")
-                    .font(.title2)
-                Divider()
-                TextField("word_placeholder", text: $wordName)
-                    .disableAutocorrection(ModelData.settings.disableAutoCorrection)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                Divider()
-                if(ModelData.settings.enableMarkdown){
-                    HighlightedTextEditor(text: $wordDefinition,highlightRules: .markdown)
-                        .padding()
-                }else{
-                    TextEditor(text: $wordDefinition)
-                }
-                Divider()
-                /// Select tags
-                NavigationLink {
-                    List {
-                        ForEach(ModelData.tag, id: \.self) {
-                            tag in
-                            /// Tag color in small circles
-                            HStack {
-                                Circle()
-                                    .fixedSize()
-                                    .foregroundColor(Color(hex: tag.color))
-                                Toggle(tag.name, isOn: bindingForTag(tag: tag.name))
-                                    .toggleStyle(.button)
-                            }
-                            /// drag action
-                            .onDrag {
-                                let provider = NSItemProvider(object: NSString(string: tag.name))
-                                return provider
-                            }
-                        }
-                        .onMove { fromSet, to in
-                            ModelData.tag.move(fromOffsets: fromSet, toOffset: to)
-                            saveTags(data: ModelData.tag)
-                        }
-                    }.toolbar {
-                        ToolbarItem(placement: .primaryAction) {
-                            AddTag(newTag: "")
-                        }
+
+    var SelectTagView: some View {
+        /// Select tags
+        NavigationLink {
+            List {
+                ForEach(ModelData.tag, id: \.self) {
+                    tag in
+                    /// Tag color in small circles
+                    HStack {
+                        Circle()
+                            .fixedSize()
+                            .foregroundColor(Color(hex: tag.color))
+                        Toggle(tag.name, isOn: bindingForTag(tag: tag.name))
+                            .toggleStyle(.button)
+                    }
+                    /// drag action
+                    .onDrag {
+                        let provider = NSItemProvider(object: NSString(string: tag.name))
+                        return provider
                     }
                 }
-                /// It shows which tag user select. If there are no tags, it shows "选择标签".
-                label: {
-                    Text("\(selectedTagsText)")
-                    ForEach(selectedTags, id: \.self) {
-                        selectedTag in
-                        Text("\(selectedTag)")
-                            .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
-                            .background(Color(hex: fromTagNameGetColor(data: ModelData.tag, Tag: selectedTag)))
-                            .foregroundColor(Color.white)
-                            .clipShape(RoundedRectangle(cornerRadius: 5))
-                    }
+                .onMove { fromSet, to in
+                    ModelData.tag.move(fromOffsets: fromSet, toOffset: to)
+                    saveTags(data: ModelData.tag)
                 }
-                .padding()
-                Divider()
             }.toolbar {
                 ToolbarItem(placement: .primaryAction) {
+                    AddTag(newTag: "")
+                }
+            }
+        }
+        /// It shows which tag user select. If there are no tags, it shows "选择标签".
+        label: {
+            if selectedTags == [] {
+                Label("Select", systemImage: "tag")
+            }
+//            Text("\(selectedTagsText)")
+            ForEach(selectedTags, id: \.self) {
+                selectedTag in
+                Text("\(selectedTag)")
+                    .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
+                    .background(Color(hex: fromTagNameGetColor(data: ModelData.tag, Tag: selectedTag)))
+                    .foregroundColor(Color.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 5))
+            }
+        }
+        .padding()
+    }
+
+    var body: some View {
+        NavigationView {
+            EditWordView(wordName: $wordName, wordDefinition: $wordDefinition)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Button("done") {
                         let time = getCurrentTime(timeFormat: .YYYYMMDDHHMMSS)
-                        let newWord = singleWord(name: "\(wordName)", definition: "\(wordDefinition)", date: time, tag: selectedTags,importance: 0)
+                        let newWord = singleWord(name: "\(wordName)", definition: "\(wordDefinition)", date: time, tag: selectedTags, importance: 0)
                         ModelData.word.append(newWord)
                         self.showNewWordForm.toggle()
                         /// 将单词写入本地文件
                         saveData(data: ModelData.word)
                     }
                 }
-                ToolbarItem(placement: .navigation) {
+                ToolbarItem(placement: .navigationBarLeading) {
                     Button("cancel") {
                         self.showNewWordForm.toggle()
                     }
+                }
+                ToolbarItem(placement: .principal) {
+                    Text("add_word")
+                        .font(.headline)
+                }
+                ToolbarItem(placement: .bottomBar) {
+                    SelectTagView
                 }
             }
         }
@@ -126,11 +124,6 @@ struct NewWordForm: View {
                     selectedTags.append(tag)
                 } else {
                     selectedTags.removeAll { $0 == tag }
-                }
-                if selectedTags == [] {
-                    selectedTagsText = "select_tags"
-                } else {
-                    selectedTagsText = ""
                 }
             }
         )

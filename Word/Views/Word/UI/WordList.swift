@@ -138,36 +138,41 @@ struct WordList: View {
                         /// The animation
                         .transition(.asymmetric(insertion: .backslide, removal: .slide))
                     } else {
-                        HStack {
-                            Spacer()
-                            NavigationLink {
-                                SelectTagsForMutiWords(WordsID: selectWordsID)
-                            }
-                            label: {
-                                Text("select_tags")
-                            }
-                            /// This will be disabled when there is not words selected.
-                            .disabled(selectWordsID.count == 0)
-                            Spacer()
-                            Button("delete") {
-                                for id in selectWordsID {
-                                    ModelData.word.removeAll(where: { $0.id == id })
+                        ZStack {
+                            HStack {
+                                NavigationLink {
+                                    SelectTagsForMutiWords(WordsID: selectWordsID)
                                 }
-                                saveData(data: ModelData.word)
-                            }
-                            /// This will be disabled when there is not words selected.
-                            .disabled(selectWordsID.count == 0)
-                            Spacer()
-                            Button(LocalizedStringKey(SelectAllButtonText)) {
-                                if SelectAllButtonText == "select_all" {
-                                    selectWordsID=Set(filteredWords(data: ModelData.word, tag: filterTag).map { $0.id })
-                                    SelectAllButtonText="cancel"
-                                } else {
-                                    selectWordsID=[]
-                                    SelectAllButtonText="select_all"
+                                label: {
+                                    Text("select_tags")
                                 }
+                                .padding(.leading, 10)
+                                /// This will be disabled when there is not words selected.
+                                .disabled(selectWordsID.count == 0)
+                                Spacer()
+                                Button("delete") {
+                                    for id in selectWordsID {
+                                        ModelData.word.removeAll(where: { $0.id == id })
+                                    }
+                                    saveData(data: ModelData.word)
+                                }
+                                .padding(.trailing, 10)
+                                /// This will be disabled when there is not words selected.
+                                .disabled(selectWordsID.count == 0)
                             }
-                            Spacer()
+                            HStack {
+                                Spacer()
+                                Button(LocalizedStringKey(SelectAllButtonText)) {
+                                    if SelectAllButtonText == "select_all" {
+                                        selectWordsID=Set(filteredWords(data: ModelData.word, tag: filterTag).map { $0.id })
+                                        SelectAllButtonText="cancel"
+                                    } else {
+                                        selectWordsID=[]
+                                        SelectAllButtonText="select_all"
+                                    }
+                                }
+                                Spacer()
+                            }
                         }
                         /// If you don't set `offset`, the whole bar will shift about 7 pixels up.
                         /// But it may not look very well on iPad. I will test it later.

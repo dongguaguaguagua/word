@@ -1,4 +1,6 @@
-# Word
+<center><h1>Word</h1></center>
+
+![](https://github.com/dongguaguaguagua/word/raw/main/img/img.png)
 
 A new word book focus on **elegance** and **simplicity**
 
@@ -35,11 +37,3 @@ Todo:
 * import/export word data
 
 ---
-
-![](https://github.com/dongguaguaguagua/word/raw/main/img/001.png)
-![](https://github.com/dongguaguaguagua/word/raw/main/img/002.png)
-![](https://github.com/dongguaguaguagua/word/raw/main/img/003.png)
-![](https://github.com/dongguaguaguagua/word/raw/main/img/004.png)
-![](https://github.com/dongguaguaguagua/word/raw/main/img/005.png)
-![](https://github.com/dongguaguaguagua/word/raw/main/img/006.png)
-![](https://github.com/dongguaguaguagua/word/raw/main/img/007.png)
