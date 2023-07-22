@@ -35,6 +35,7 @@ struct SearchView: View {
                     )
                     .padding(.horizontal, 10)
                     .autocorrectionDisabled(ModelData.settings.disableAutoCorrection)
+                    .textInputAutocapitalization(.never)
                 if searchWord=="" {
                     List {
                         Section("history_records") {

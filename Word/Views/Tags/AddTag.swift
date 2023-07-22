@@ -29,7 +29,6 @@ struct newTagSheet: View {
     @Binding var showAddTagSheet: Bool
     @State private var tagColor=Color(.sRGB, red: 0, green: 0, blue: 0)
     @State private var showAlert: Bool=false
-    @State private var showNameAlert: Bool=false
     var body: some View {
         NavigationView {
             VStack {
@@ -47,7 +46,9 @@ struct newTagSheet: View {
             }.toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("done") {
-                        if (ModelData.tag.map { $0.name }.contains(tagName)) {
+                        if tagName == "" {
+                            self.showAddTagSheet=false
+                        } else if (ModelData.tag.map { $0.name }.contains(tagName)) {
                             showAlert=true
                         } else {
                             if tagColor.description.count >= 21 {
@@ -57,9 +58,6 @@ struct newTagSheet: View {
                             }
                             self.showAddTagSheet=false
                             saveTags(data: ModelData.tag)
-                        }
-                        if tagName == "" {
-                            showNameAlert=true
                         }
                     }
                 }
@@ -74,7 +72,6 @@ struct newTagSheet: View {
                 }
             }
             .alert("tag_exist_alert", isPresented: $showAlert) {}
-            .alert("tag_name_empty", isPresented: $showNameAlert) {}
         }
     }
 }

@@ -8,20 +8,23 @@
 import SwiftUI
 
 struct ChineseTranslations: View {
-    var DictWord:DictStruct
+    var DictWord: DictStruct
     var body: some View {
-        Section(header: Text("Chinese Translations")) {
-            let meaningList: [String] = DictWord.translation.components(separatedBy: "\n")
-            ForEach(0..<meaningList.count, id: \.self) { index in
-                let meaning = meaningList[index]
-                let parts = meaning.components(separatedBy: " ")
+        let chineseDefExists: Bool = DictWord.translation != ""
+        if chineseDefExists {
+            Section(header: Text("Chinese Translations")) {
+                let meaningList: [String] = DictWord.translation.components(separatedBy: "\n")
+                ForEach(0 ..< meaningList.count, id: \.self) { index in
+                    let meaning: String = meaningList[index]
+                    let parts: [String] = meaning.components(separatedBy: " ")
 
-                HStack {
-                    Text(parts[0]) // 词性
-                        .foregroundColor(Color(red: 192/255, green: 77/255, blue: 71/255)) // 应用对应的颜色
-                        .italic()
-                    Text(parts.dropFirst().joined(separator: " "))
-                        .foregroundColor(Color.black)
+                    HStack {
+                        Text(parts[0]) // 词性
+                            .foregroundColor(Color(red: 192/255, green: 77/255, blue: 71/255)) // 应用对应的颜色
+                            .italic()
+                        Text(parts.dropFirst().joined(separator: " "))
+                            .foregroundColor(Color.black)
+                    }
                 }
             }
         }

@@ -5,11 +5,10 @@
   Created by 胡宗禹 on 7/8/23.
   
 */
-"Hello, world!"="你好世界！";
 "word_tab"="单词";
 "manage_tab"="管理";
 "setting_tab"="设置";
-"Add time:"="添加时间：";
+"add_time:%@"="添加时间:%@";
 "word_book_title"="生词本";
 "done"="完成";
 "edit"="编辑";
@@ -51,3 +50,22 @@
 "enable_markdown"="启用 Markdown";
 "enable_fuzzy_search"="启用模糊搜索";
 "change_importance"="更改单词重要性";
+"zk"="中考";
+"gk"="高考";
+"cet4"="四级";
+"cet6"="六级";
+"ky"="考研";
+"toefl"="托福";
+"ielts"="雅思";
+"gre"="GRE";
+"collins"="柯林斯";
+"frequency"="词频";
+"plural"="复数";
+"past_participle"="过去分词";
+"past_tense"="过去式";
+"infinitive"="不定式";
+"3rd_person_singular_present"="三单";
+"base_form_exchanges"="变化";
+"comparative"="比较级";
+"superlative"="最高级";
+"base_form"="原形";

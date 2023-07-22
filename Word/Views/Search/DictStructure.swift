@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DictStruct: Hashable, Codable {
+struct DictStruct: Hashable, Codable,Identifiable {
     var id: Int
     var name: String
     var phonetic: String

@@ -18,10 +18,11 @@ import SwiftUI
 struct ListDetail: View {
     @EnvironmentObject var ModelData: ModelDataClass
     @Binding var selectWordsID: Set<UUID>
+    @State var isShowWordSheet:Bool=false
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
     /// receive a word
     var word: singleWord
-
+    
     var body: some View {
         VStack(alignment: .leading) {
             let DictWord = fetchDataFromWordName(word: word.name)
@@ -86,6 +87,7 @@ struct ListDetail: View {
                 ImportanceRank(DictWord: DictWord)
                 ChineseTranslations(DictWord: DictWord)
                 EnglishDefinition(DictWord: DictWord)
+                WordExchanges(isShowWordSheet: false, DictWord: DictWord)
             }
             .padding([.leading, .trailing, .top, .bottom], 0)
             .navigationBarTitle(word.name, displayMode: .inline)

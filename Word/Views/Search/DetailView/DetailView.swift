@@ -32,6 +32,7 @@ struct DetailView: View {
                     ImportanceRank(DictWord: word)
                     ChineseTranslations(DictWord: word)
                     EnglishDefinition(DictWord: word)
+                    WordExchanges(isShowWordSheet: false, DictWord: word)
                 }
             }
             VStack() {
@@ -67,22 +68,6 @@ struct DetailView: View {
         .onAppear {
             if !ModelData.settings.recentSearchWord.contains(word.name) {
                 ModelData.settings.recentSearchWord.append(word.name)
-            }
-        }
-    }
-}
-
-struct StarRatingView: View {
-    var rating: Int
-
-    var body: some View {
-        HStack {
-            Text("Collins ")
-                .foregroundColor(Color.blue)
-            Spacer()
-            ForEach(1 ... 5, id: \.self) { index in
-                Image(systemName: index <= rating ? "star.fill" : "star")
-                    .foregroundColor(.yellow)
             }
         }
     }

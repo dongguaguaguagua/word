@@ -87,30 +87,35 @@ struct NewWordForm: View {
     var body: some View {
         NavigationView {
             EditWordView(wordName: $wordName, wordDefinition: $wordDefinition)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("done") {
-                        let time = getCurrentTime(timeFormat: .YYYYMMDDHHMMSS)
-                        let newWord = singleWord(name: "\(wordName)", definition: "\(wordDefinition)", date: time, tag: selectedTags, importance: 0)
-                        ModelData.word.append(newWord)
-                        self.showNewWordForm.toggle()
-                        /// 将单词写入本地文件
-                        saveData(data: ModelData.word)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("done") {
+                            if wordName == "" {
+                                // Do nothing, just like the "cancel" btn
+                                self.showNewWordForm.toggle()
+                            } else {
+                                let time = getCurrentTime(timeFormat: .YYYYMMDDHHMMSS)
+                                let newWord = singleWord(name: "\(wordName)", definition: "\(wordDefinition)", date: time, tag: selectedTags, importance: 0)
+                                ModelData.word.append(newWord)
+                                self.showNewWordForm.toggle()
+                                /// 将单词写入本地文件
+                                saveData(data: ModelData.word)
+                            }
+                        }
+                    }
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("cancel") {
+                            self.showNewWordForm.toggle()
+                        }
+                    }
+                    ToolbarItem(placement: .principal) {
+                        Text("add_word")
+                            .font(.headline)
+                    }
+                    ToolbarItem(placement: .bottomBar) {
+                        SelectTagView
                     }
                 }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("cancel") {
-                        self.showNewWordForm.toggle()
-                    }
-                }
-                ToolbarItem(placement: .principal) {
-                    Text("add_word")
-                        .font(.headline)
-                }
-                ToolbarItem(placement: .bottomBar) {
-                    SelectTagView
-                }
-            }
         }
     }
 

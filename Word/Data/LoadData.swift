@@ -30,10 +30,10 @@ func loadWords<T: Decodable>() ->T {
         [
             {
                 \"id\": \"\(UUID())\",
-                \"name\": \"massacre\",
-                \"definition\":\"n. 大屠杀，惨败 vt. 大屠杀，彻底击败，把…搞砸\",
+                \"name\": \"Guide 01\",
+                \"definition\":\"# This page will show you how to use this app.\n \n ![](https://github.com/dongguaguaguagua/word/raw/main/img/003.png)\n \n Click the adjust button to change the word’s importance (default to 0)\n \n Importance has 10 levels.\n",
                 \"date\":\"\(getCurrentTime(timeFormat: .YYYYMMDDHHMMSS))\",
-                \"tag\":["作文"],
+                \"tag\":["Guide For Starters"],
                 \"importance\":0
             }
         ]
