@@ -6,6 +6,39 @@
 //
 
 import SwiftUI
+import WrappingHStack
+
+struct WordView: View {
+    @State var DictWord: DictStruct
+    @State var clickedWord: DictStruct? = nil
+    var body: some View {
+        VStack(alignment: .leading) {
+            HStack(alignment: .bottom) {
+                Text(DictWord.name)
+                    .font(.title)
+                    .bold()
+                    .padding([.leading, .top], 20)
+                if DictWord.phonetic != "" {
+                    Text("| "+DictWord.phonetic+" |")
+                        .font(.system(size: 15))
+                        .padding(.leading, 10)
+                        .padding(.bottom, 5)
+                }
+                Spacer()
+            }
+            Divider()
+            List {
+                ImportanceRank(DictWord: DictWord)
+                ChineseTranslations(DictWord: DictWord)
+                EnglishDefinition(DictWord: DictWord, clickedWord: $clickedWord)
+                WordExchanges(DictWord: DictWord, clickedWord: $clickedWord)
+            }
+            .sheet(item: $clickedWord) { word in
+                WordView(DictWord: word)
+            }
+        }
+    }
+}
 
 struct DetailView: View {
     @EnvironmentObject var ModelData: ModelDataClass
@@ -13,30 +46,9 @@ struct DetailView: View {
     var body: some View {
         let isInWordList: Bool = ModelData.word.map { $0.name }.contains(word.name)
         ZStack {
-            VStack(alignment: .leading) {
-                HStack(alignment: .bottom) {
-                    Text(word.name)
-                        .font(.title)
-                        .bold()
-                        .padding(.leading, 20)
-                    if word.phonetic != "" {
-                        Text("| "+word.phonetic+" |")
-                            .font(.system(size: 15))
-                            .padding(.leading, 10)
-                            .padding(.bottom, 5)
-                    }
-                    Spacer()
-                }
-                Divider()
-                List {
-                    ImportanceRank(DictWord: word)
-                    ChineseTranslations(DictWord: word)
-                    EnglishDefinition(DictWord: word)
-                    WordExchanges(isShowWordSheet: false, DictWord: word)
-                }
-            }
-            VStack() {
-                HStack() {
+            WordView(DictWord: word)
+            VStack {
+                HStack {
                     Spacer()
                     if isInWordList {
                         RecordedSealView(dateText: getCurrentTime(timeFormat: .YYYYMMDDHHMMSS))

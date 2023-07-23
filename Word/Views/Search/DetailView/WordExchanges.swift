@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct WordExchanges: View {
-    @State var isShowWordSheet: Bool = false
-    @State var clickedWord:DictStruct?=nil
     var DictWord: DictStruct
+    @Binding var clickedWord: DictStruct?
     var body: some View {
         let exchangeExists: Bool = DictWord.exchange != ""
         let trans: [String: String] = [
@@ -57,33 +56,9 @@ struct WordExchanges: View {
                                         .lineLimit(1)
                                         .foregroundColor(.gray)
                                 }.onTapGesture {
-                                    clickedWord=word
+                                    clickedWord = word
                                 }
                             }
-                        }
-                    }
-                }
-                .sheet(item: $clickedWord) {word in
-                    VStack(alignment: .leading) {
-                        HStack(alignment: .bottom) {
-                            Text(word.name)
-                                .bold()
-                                .font(.title)
-                                .padding([.leading, .top], 20)
-                            if word.phonetic != "" {
-                                Text("| "+word.phonetic+" |")
-                                    .font(.system(size: 15))
-                                    .padding(.leading, 10)
-                                    .padding(.bottom, 5)
-                            }
-                            Spacer()
-                        }
-                        Divider()
-                        List {
-                            ImportanceRank(DictWord: word)
-                            ChineseTranslations(DictWord: word)
-                            EnglishDefinition(DictWord: word)
-                            WordExchanges(isShowWordSheet: false, DictWord: word)
                         }
                     }
                 }

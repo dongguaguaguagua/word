@@ -19,11 +19,17 @@ struct ChineseTranslations: View {
                     let parts: [String] = meaning.components(separatedBy: " ")
 
                     HStack {
-                        Text(parts[0]) // 词性
-                            .foregroundColor(Color(red: 192/255, green: 77/255, blue: 71/255)) // 应用对应的颜色
-                            .italic()
-                        Text(parts.dropFirst().joined(separator: " "))
-                            .foregroundColor(Color.black)
+                        if parts[0].contains("[") || parts[0].contains(".") {
+                            Text(parts[0]) // 词性
+                                .foregroundColor(Color(red: 192/255, green: 77/255, blue: 71/255)) // 应用对应的颜色
+                                .italic()
+
+                            Text(parts.dropFirst().joined(separator: " "))
+                                .foregroundColor(Color.black)
+                        } else {
+                            Text(parts.joined(separator: " "))
+                                .foregroundColor(Color.black)
+                        }
                     }
                 }
             }

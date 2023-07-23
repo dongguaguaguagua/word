@@ -7,6 +7,7 @@
 
 import MarkdownUI
 import SwiftUI
+import WrappingHStack
 
 /// This is the detail view of each word.
 /// It will appear when user click the navigation link.
@@ -18,17 +19,18 @@ import SwiftUI
 struct ListDetail: View {
     @EnvironmentObject var ModelData: ModelDataClass
     @Binding var selectWordsID: Set<UUID>
-    @State var isShowWordSheet:Bool=false
+    @State var isShowWordSheet: Bool = false
+    @State var clickedWord: DictStruct? = nil
+
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
     /// receive a word
     var word: singleWord
-    
     var body: some View {
         VStack(alignment: .leading) {
             let DictWord = fetchDataFromWordName(word: word.name)
             ZStack {
                 VStack(alignment: .leading) {
-                    HStack {
+                    WrappingHStack(alignment: .leading) {
                         ForEach(word.tag, id: \.self) { tag in
                             /// Each tag is a navigation link
                             NavigationLink {
@@ -86,11 +88,14 @@ struct ListDetail: View {
                 }
                 ImportanceRank(DictWord: DictWord)
                 ChineseTranslations(DictWord: DictWord)
-                EnglishDefinition(DictWord: DictWord)
-                WordExchanges(isShowWordSheet: false, DictWord: DictWord)
+                EnglishDefinition(DictWord: DictWord, clickedWord: $clickedWord)
+                WordExchanges(DictWord: DictWord, clickedWord: $clickedWord)
             }
             .padding([.leading, .trailing, .top, .bottom], 0)
             .navigationBarTitle(word.name, displayMode: .inline)
+            .sheet(item: $clickedWord) { word in
+                WordView(DictWord: word)
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(Color(hex: "#f2f2f7"))
