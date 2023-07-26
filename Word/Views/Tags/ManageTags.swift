@@ -55,7 +55,7 @@ struct Manage: View {
                         }
                         /// swipe action
                         .swipeActions(edge: .trailing) {
-                            deleteButton(tag: tag.name)
+                            deleteTagButton(tag: tag.name)
                             Button {
                                 self.isShowRenameTagSheet=true
                                 editItem=tag
@@ -145,7 +145,7 @@ struct editTagSheet: View {
     }
 }
 
-struct deleteButton: View {
+struct deleteTagButton: View {
     @EnvironmentObject var ModelData: ModelDataClass
 
     var tag: String
@@ -156,7 +156,8 @@ struct deleteButton: View {
                 ModelData.word[i].tag.removeAll(where: { $0==tag })
             }
             ModelData.tag.removeAll(where: { $0.name==tag })
-            saveData(data: ModelData.word)
+            deleteTagInSql(delTag: tag)
+            
             saveTags(data: ModelData.tag)
         } label: {
             Label("Delete", systemImage: "trash")

@@ -99,7 +99,7 @@ struct NewWordForm: View {
                                 ModelData.word.append(newWord)
                                 self.showNewWordForm.toggle()
                                 /// 将单词写入本地文件
-                                saveData(data: ModelData.word)
+                                insertWordsInSql(word: newWord)
                             }
                         }
                     }

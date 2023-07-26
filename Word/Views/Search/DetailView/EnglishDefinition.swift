@@ -10,8 +10,9 @@ import WrappingHStack
 
 func getSeperateIndex(parts: [String]) -> Int {
     var result = 0
+    let speechs: [String] = ["", "n", "v", "r", "s"]
     for part in parts {
-        if part.contains(".") || part == "" {
+        if part.contains(".") || speechs.contains(part) {
             result += 1
         } else {
             break
@@ -22,13 +23,12 @@ func getSeperateIndex(parts: [String]) -> Int {
 
 struct EnglishDefinition: View {
     var DictWord: DictStruct
-//    @State var isShowWordSheet: Bool = false
     @Binding var clickedWord: DictStruct?
     var body: some View {
         let englishDefExists: Bool = DictWord.definition != ""
         if englishDefExists {
-            Section(header: Text("English Definitions")) {
-                let strTmp = DictWord.definition
+            Section(header: Text("english_definitions")) {
+                let strTmp: String = DictWord.definition
                     .replacingOccurrences(of: "\n   ", with: " ")
                     .replacingOccurrences(of: "&", with: "")
                 let meaningList: [String] = strTmp.components(separatedBy: "\n")
@@ -39,7 +39,7 @@ struct EnglishDefinition: View {
                         VStack {
                             ForEach(parts.indices, id: \.self) { index in
                                 if index < sep {
-                                    let text = parts[index]
+                                    let text: String = parts[index]
                                         .trimmingCharacters(in: .whitespacesAndNewlines)
                                     if text != "" {
                                         Text(parts[index]) // 词性
@@ -53,13 +53,16 @@ struct EnglishDefinition: View {
                         WrappingHStack(alignment: .leading) {
                             ForEach(parts.indices, id: \.self) { index in
                                 if index >= sep {
-                                    let text = parts[index]
+                                    let text: String = parts[index]
                                         .trimmingCharacters(in: .whitespacesAndNewlines)
                                     if text != "" {
-                                        let word = fetchDataFromWordName(word: text)
-                                        Text(text).onTapGesture {
+                                        let word: DictStruct = fetchDataFromWordName(word: text)
+                                        Button {
                                             clickedWord = word
+                                        } label: {
+                                            Text(text)
                                         }
+                                        .buttonStyle(ClickToChangeBackground())
                                     }
                                 }
                             }
@@ -68,5 +71,16 @@ struct EnglishDefinition: View {
                 }
             }
         }
+    }
+}
+
+struct ClickToChangeBackground: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            // 设置前景色
+            .foregroundColor(configuration.isPressed ? Color.white : Color.black)
+//            .padding()
+            .background(configuration.isPressed ? Color.blue : Color.clear)
+            .cornerRadius(2)
     }
 }

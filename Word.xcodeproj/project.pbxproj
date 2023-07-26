@@ -15,7 +15,12 @@
 		32147CE02A679A5A00C2B036 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 32147CDF2A679A5A00C2B036 /* BottomSheet */; };
 		32147CE32A679D9000C2B036 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 32147CE22A679D9000C2B036 /* PartialSheet */; };
 		321AFD252A6B5E8800B51193 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 321AFD242A6B5E8800B51193 /* WrappingHStack */; };
+		324B2D6D2A6F77F100CD15DC /* ReciteWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324B2D6C2A6F77F100CD15DC /* ReciteWordsView.swift */; };
+		324B2D6F2A6FA93600CD15DC /* bingBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324B2D6E2A6FA93600CD15DC /* bingBackground.swift */; };
+		324B2D712A6FC2C400CD15DC /* deleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324B2D702A6FC2C400CD15DC /* deleteButton.swift */; };
+		324B2D732A6FDDE300CD15DC /* ReviewWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324B2D722A6FDDE300CD15DC /* ReviewWordsView.swift */; };
 		328FF10F2A60063A001CA966 /* vip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328FF10E2A60063A001CA966 /* vip.swift */; };
+		329113572A6E39770055F37F /* connectToDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329113562A6E39770055F37F /* connectToDB.swift */; };
 		32B9F3942A6A286900D6A8CA /* WordExchanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B9F3932A6A286900D6A8CA /* WordExchanges.swift */; };
 		9C2BAF512A6517B8006B1ACA /* ImportanceRank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2BAF502A6517B8006B1ACA /* ImportanceRank.swift */; };
 		9C2BAF532A651820006B1ACA /* ChineseTranslations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2BAF522A651820006B1ACA /* ChineseTranslations.swift */; };
@@ -83,7 +88,12 @@
 
 /* Begin PBXFileReference section */
 		32147CBF2A664E0700C2B036 /* RecordedSeal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordedSeal.swift; sourceTree = "<group>"; };
+		324B2D6C2A6F77F100CD15DC /* ReciteWordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReciteWordsView.swift; sourceTree = "<group>"; };
+		324B2D6E2A6FA93600CD15DC /* bingBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bingBackground.swift; sourceTree = "<group>"; };
+		324B2D702A6FC2C400CD15DC /* deleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deleteButton.swift; sourceTree = "<group>"; };
+		324B2D722A6FDDE300CD15DC /* ReviewWordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewWordsView.swift; sourceTree = "<group>"; };
 		328FF10E2A60063A001CA966 /* vip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vip.swift; sourceTree = "<group>"; };
+		329113562A6E39770055F37F /* connectToDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = connectToDB.swift; sourceTree = "<group>"; };
 		32B9F3932A6A286900D6A8CA /* WordExchanges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordExchanges.swift; sourceTree = "<group>"; };
 		9C2BAF502A6517B8006B1ACA /* ImportanceRank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportanceRank.swift; sourceTree = "<group>"; };
 		9C2BAF522A651820006B1ACA /* ChineseTranslations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChineseTranslations.swift; sourceTree = "<group>"; };
@@ -167,11 +177,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		324B2D6B2A6F77DD00CD15DC /* Recite */ = {
+			isa = PBXGroup;
+			children = (
+				324B2D6C2A6F77F100CD15DC /* ReciteWordsView.swift */,
+				324B2D6E2A6FA93600CD15DC /* bingBackground.swift */,
+				324B2D722A6FDDE300CD15DC /* ReviewWordsView.swift */,
+			);
+			path = Recite;
+			sourceTree = "<group>";
+		};
 		9C2BAF562A651A8D006B1ACA /* DetailView */ = {
 			isa = PBXGroup;
 			children = (
-				9C2BAF542A65192E006B1ACA /* EnglishDefinition.swift */,
 				9C6FC3B52A5CF98C0064EE86 /* DetailView.swift */,
+				9C2BAF542A65192E006B1ACA /* EnglishDefinition.swift */,
 				9C2BAF522A651820006B1ACA /* ChineseTranslations.swift */,
 				9C2BAF502A6517B8006B1ACA /* ImportanceRank.swift */,
 				32B9F3932A6A286900D6A8CA /* WordExchanges.swift */,
@@ -198,6 +218,7 @@
 				9C3086B42A5BC1E700502D6D /* Search.swift */,
 				9C3086BB2A5C082300502D6D /* DictStructure.swift */,
 				9CFF6C312A5E8D7F0018D5B2 /* SearchView.swift */,
+				329113562A6E39770055F37F /* connectToDB.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -274,6 +295,7 @@
 		9C9213EF2A472BBB00DAA757 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				324B2D6B2A6F77DD00CD15DC /* Recite */,
 				9CED471F2A499F7D00285043 /* Word */,
 				9C881B9F2A57C2180088A9C4 /* Settings */,
 				9C53F7682A4BBD8300E49CAD /* Tags */,
@@ -319,6 +341,7 @@
 				9C9213F02A472BF900DAA757 /* AddWord.swift */,
 				9CED471D2A49597800285043 /* EditWord.swift */,
 				9C53F76F2A4BFFC000E49CAD /* SelectTags.swift */,
+				324B2D702A6FC2C400CD15DC /* deleteButton.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -519,6 +542,7 @@
 				9C9213E92A47188900DAA757 /* ManageTags.swift in Sources */,
 				9C5974C02A517F26004D33C3 /* SelectTagsForMutiWords.swift in Sources */,
 				9C2BAF532A651820006B1ACA /* ChineseTranslations.swift in Sources */,
+				324B2D6F2A6FA93600CD15DC /* bingBackground.swift in Sources */,
 				9C9213DE2A4715B900DAA757 /* ListRow.swift in Sources */,
 				32147CC02A664E0700C2B036 /* RecordedSeal.swift in Sources */,
 				9C53F7702A4BFFC000E49CAD /* SelectTags.swift in Sources */,
@@ -527,6 +551,7 @@
 				9C881BA52A57D1C20088A9C4 /* ListRowOneLine.swift in Sources */,
 				9CC0DB1A2A543FA80055BF3B /* TagStructure.swift in Sources */,
 				9CFF6C2E2A5D57EB0018D5B2 /* SwiftyStringScore.swift in Sources */,
+				324B2D732A6FDDE300CD15DC /* ReviewWordsView.swift in Sources */,
 				9C2BAF512A6517B8006B1ACA /* ImportanceRank.swift in Sources */,
 				9C9213E52A4715FD00DAA757 /* WordStructure.swift in Sources */,
 				9C9213B42A47153100DAA757 /* ContentView.swift in Sources */,
@@ -542,12 +567,15 @@
 				9C53F7672A4BBB2700E49CAD /* SortModePicker.swift in Sources */,
 				9CED47272A4A732C00285043 /* SortAndFilterTools.swift in Sources */,
 				9CC0DB202A56C3620055BF3B /* Setting.swift in Sources */,
+				324B2D6D2A6F77F100CD15DC /* ReciteWordsView.swift in Sources */,
 				9C9213F12A472BF900DAA757 /* AddWord.swift in Sources */,
+				329113572A6E39770055F37F /* connectToDB.swift in Sources */,
 				9CED47212A49A0C000285043 /* EachTagList.swift in Sources */,
 				9CED471E2A49597800285043 /* EditWord.swift in Sources */,
 				9CFF6C322A5E8D7F0018D5B2 /* SearchView.swift in Sources */,
 				9C9213DC2A4715A200DAA757 /* WordList.swift in Sources */,
 				9C5974BC2A5041DE004D33C3 /* ColorExtension.swift in Sources */,
+				324B2D712A6FC2C400CD15DC /* deleteButton.swift in Sources */,
 				9C2BAF582A655650006B1ACA /* ImportanceButton.swift in Sources */,
 				328FF10F2A60063A001CA966 /* vip.swift in Sources */,
 				9C3086BA2A5C031A00502D6D /* ProcessWords.swift in Sources */,

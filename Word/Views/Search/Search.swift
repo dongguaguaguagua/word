@@ -4,7 +4,7 @@ import SQLite
 func fetchData(word: String)->[DictStruct] {
     var result: [DictStruct] = []
     do {
-        let db = try Connection("Users/huzongyao/Downloads/ECDICT/sqlite.db")
+        let db = try Connection("/Users/huzongyao/Downloads/ECDICT/sqlite.db")
         let CollinsDict = Table("Collins")
         let dict = Table("stardict")
         
@@ -60,26 +60,6 @@ func fetchData(word: String)->[DictStruct] {
                                      frq: word[frq] ?? -1,
                                      exchange: word[exchange] ?? ""))
         }
-//        for word in try db.prepare(res3) {
-//            if(result.count == 40){
-//                break
-//            }
-//            if(result.map{Int64($0.id)}.contains(word[id]))
-//            {
-//                continue
-//            }
-//            result.append(DictStruct(id: Int(word[id]),
-//                                     name: word[name] ?? "",
-//                                     phonetic: word[phonetic] ?? "",
-//                                     definition: word[definition] ?? "",
-//                                     translation: word[translation] ?? "",
-//                                     collins: word[collins] ?? -1,
-//                                     oxford: word[oxford] ?? -1,
-//                                     tag: word[tag] ?? "",
-//                                     bnc: word[bnc] ?? -1,
-//                                     frq: word[frq] ?? -1,
-//                                     exchange: word[exchange] ?? ""))
-//        }
     } catch {
         print(error)
     }
@@ -87,6 +67,8 @@ func fetchData(word: String)->[DictStruct] {
 }
 
 func fetchDataFromWordName(word: String)->DictStruct {
+//    let word=regexWord(str: word)
+    let extracted = word.filter { $0.isLetter } // 提取字符串中的所有字母
     var result = DictStruct(id: 0, name: "", phonetic: "", definition: "", translation: "", collins: -1, oxford: -1, tag: "", bnc: -1, frq: -1, exchange: "")
     do {
         let db = try Connection("/Users/huzongyao/Downloads/ECDICT/sqlite.db")
@@ -106,12 +88,12 @@ func fetchDataFromWordName(word: String)->DictStruct {
         let exchange = Expression<String?>("exchange")
         
         /// collins 1-5
-        let res1 = CollinsDict.filter(name==word)
-        let res2 = dict.filter(name==word)
+        let res1 = CollinsDict.filter(name==extracted)
+        let res2 = dict.filter(name==extracted)
         
         for res in try db.prepare(res1) {
             result = DictStruct(id: Int(res[id]),
-                                name: word,
+                                name: extracted,
                                 phonetic: res[phonetic] ?? "",
                                 definition: res[definition] ?? "",
                                 translation: res[translation] ?? "",
@@ -124,7 +106,7 @@ func fetchDataFromWordName(word: String)->DictStruct {
         }
         for res in try db.prepare(res2) {
             result = DictStruct(id: Int(res[id]),
-                                name: word,
+                                name: extracted,
                                 phonetic: res[phonetic] ?? "",
                                 definition: res[definition] ?? "",
                                 translation: res[translation] ?? "",

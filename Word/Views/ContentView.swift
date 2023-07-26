@@ -13,15 +13,23 @@ struct ContentView: View {
     enum Tab {
         case search
         case word
+        case recite
         case manage
         case setting
     }
+
     init() {
-//        UITabBar.appearance().shadowImage = UIImage()
-//        UITabBar.appearance().backgroundImage = UIImage()
-//        UITabBar.appearance().isTranslucent = true
-        UITabBar.appearance().backgroundColor = .white
+        // configure blur background
+        let appearance = UITabBarAppearance()
+        appearance.backgroundEffect = UIBlurEffect(style: .systemThinMaterial)
+        appearance.backgroundColor = UIColor(Color.white.opacity(0.2))
+
+        // Use this appearance when scrolling behind the TabView:
+        UITabBar.appearance().standardAppearance = appearance
+        // Use this appearance when scrolled all the way up:
+        UITabBar.appearance().scrollEdgeAppearance = appearance
     }
+
     var body: some View {
         TabView(selection: $selection) {
             SearchView()
@@ -34,6 +42,11 @@ struct ContentView: View {
                     Label("word_tab", systemImage: "list.bullet")
                 }
                 .tag(Tab.word)
+            ReciteWordsView()
+                .tabItem {
+                    Label("recite_tab", systemImage: "chart.bar.xaxis")
+                }
+                .tag(Tab.recite)
             Manage()
                 .tabItem {
                     Label("manage_tab", systemImage: "command.square")
@@ -47,6 +60,32 @@ struct ContentView: View {
         }
         .accentColor(Color.red) // tabview font color, default to blue
         .environmentObject(modelData)
+//        .onAppear {
+//            guard let url = URL(string: "https://bing.biturl.top/?resolution=1920&format=json&index=0&mkt=en-US") else {
+//                return
+//            }
+//            //    print(url)
+//            URLSession.shared.dataTask(with: url) { data, _, _ in
+//                if let data = data {
+//                    if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+//                       let imageURLString = json["url"] as? String,
+//                       let msg = json["copyright"] as? String,
+//                       let imageURL = URL(string: imageURLString)
+//                    {
+//                        DispatchQueue.main.async {
+//                            modelData.bingBackground.imageMsg = msg.components(separatedBy: "(©")[0]
+//                        }
+//                        if let imageData = try? Data(contentsOf: imageURL),
+//                           let image = UIImage(data: imageData)
+//                        {
+//                            DispatchQueue.main.async {
+//                                modelData.bingBackground.backgroundImage = image
+//                            }
+//                        }
+//                    }
+//                }
+//            }.resume()
+//        }
     }
 }
 

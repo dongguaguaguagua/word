@@ -22,7 +22,7 @@ struct ImportanceRank: View {
         let color4 = Color(red: 78/255, green: 159/255, blue: 215/255)
         let color5 = Color(red: 238/255, green: 113/255, blue: 69/255)
         if bncRankExists || collinsExists || frequencyExists || oxfordExists || wordTags != "" {
-            Section(header: Text("Importance")) {
+            Section(header: Text("importance")) {
                 HStack {
                     if collinsExists {
                         Text("collins")

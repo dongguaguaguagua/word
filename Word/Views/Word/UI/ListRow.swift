@@ -69,12 +69,12 @@ struct ListRow: View {
                 if showMaskSingleWord {
                     clickAndShowButton
                         .onTapGesture {
-                            showMaskSingleWord = !showMaskSingleWord
+                            showMaskSingleWord.toggle()
                         }
                 } else {
                     wordNameView
                         .onTapGesture {
-                            showMaskSingleWord = !showMaskSingleWord
+                            showMaskSingleWord.toggle()
                         }
                 }
             } else {
@@ -85,12 +85,12 @@ struct ListRow: View {
                 if showMaskSingleWord {
                     clickAndShowButton
                         .onTapGesture {
-                            showMaskSingleWord = !showMaskSingleWord
+                            showMaskSingleWord.toggle()
                         }
                 } else {
                     wordDifinitionView
                         .onTapGesture {
-                            showMaskSingleWord = !showMaskSingleWord
+                            showMaskSingleWord.toggle()
                         }
                 }
             } else {

@@ -67,12 +67,7 @@ struct BottomViews: View {
                     /// This will be disabled when there is not words selected.
                     .disabled(selectWordsID.count == 0)
                     Spacer()
-                    Button("delete") {
-                        for id in selectWordsID {
-                            ModelData.word.removeAll(where: { $0.id == id })
-                        }
-                        saveData(data: ModelData.word)
-                    }
+                    DeleteForMutiWords(WordsID: selectWordsID)
                     /// This will be disabled when there is not words selected.
                     .disabled(selectWordsID.count == 0)
                     Spacer()

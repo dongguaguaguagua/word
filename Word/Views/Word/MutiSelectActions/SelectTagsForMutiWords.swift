@@ -66,7 +66,7 @@ struct SelectTagsForMutiWords: View {
                 ModelData.word[index].tag = selectedTags.map { $0 }
             }
         }
-        saveData(data: ModelData.word)
+        addTagInSql(wordId: WordsID, selectedTag: selectedTags)
     }
 }
 

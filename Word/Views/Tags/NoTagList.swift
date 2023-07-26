@@ -44,22 +44,12 @@ struct NoTagList: View {
                                 /// `swipeActions` only available in `iOS 15.0, macOS 12.0` or later.
                                 /// To support `iOS 14.0` and ealier, use https://github.com/SwipeCellKit/SwipeCellKit
                                 .swipeActions(edge: .trailing) {
-                                    Button(role: .destructive) {
-                                        ModelData.word.removeAll(where: { word.id==$0.id })
-                                        saveData(data: ModelData.word)
-                                    } label: {
-                                        Label("Delete", systemImage: "trash")
-                                    }
+                                    deleteWordButton(id: word.id)
                                 }
                         } else {
                             ListRowOneLine(isShowEnglish: $showEnglishOnly, isShowChinese: $showChineseOnly, word: word)
                                 .swipeActions(edge: .trailing) {
-                                    Button(role: .destructive) {
-                                        ModelData.word.removeAll(where: { word.id==$0.id })
-                                        saveData(data: ModelData.word)
-                                    } label: {
-                                        Label("Delete", systemImage: "trash")
-                                    }
+                                    deleteWordButton(id: word.id)
                                 }
                         }
 
@@ -118,7 +108,7 @@ struct NoTagList: View {
                             for id in selectWordsID {
                                 ModelData.word.removeAll(where: { $0.id==id })
                             }
-                            saveData(data: ModelData.word)
+                            removeWordsInSql(uuid: selectWordsID)
                         }
                         /// This will be disabled when there is not words selected.
                         .disabled(selectWordsID.count==0)

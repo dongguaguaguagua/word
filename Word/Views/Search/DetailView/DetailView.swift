@@ -62,11 +62,13 @@ struct DetailView: View {
             ToolbarItem(placement: .primaryAction) {
                 Button {
                     if isInWordList==false {
-                        ModelData.word.append(singleWord(name: word.name, definition: "", date: getCurrentTime(timeFormat: .YYYYMMDDHHMMSS), tag: [], importance: 0))
-                        saveData(data: ModelData.word)
+                        let word=singleWord(name: word.name, definition: "", date: getCurrentTime(timeFormat: .YYYYMMDDHHMMSS), tag: [], importance: 0)
+                        ModelData.word.append(word)
+                        insertWordsInSql(word: word)
                     } else {
                         ModelData.word.removeAll(where: { $0.name==word.name })
-                        saveData(data: ModelData.word)
+                        let removeWordId=ModelData.word.filter({$0.name==word.name})
+                        removeWordsInSql(uuid: Set(removeWordId.map{$0.id}))
                     }
                 } label: {
                     Label("Add to word list", systemImage: isInWordList ? "star.fill" : "star")

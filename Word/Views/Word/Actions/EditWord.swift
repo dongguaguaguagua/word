@@ -74,7 +74,6 @@ struct EditWordForm: View {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button("done") {
                             /// A new word is created. After deleting the old word, insert the new word into `ModelData`
-//                        ModelData.word.removeAll(where: { wordId == $0.id })
                             let time = getCurrentTime(timeFormat: .YYYYMMDDHHMMSS)
                             let index = ModelData.word.firstIndex(where: { $0.id == wordId }) ?? 0
 
@@ -82,7 +81,7 @@ struct EditWordForm: View {
                             ModelData.word[index].definition = wordDef
                             ModelData.word[index].date = time
                             self.showEditWordForm.toggle()
-                            saveData(data: ModelData.word)
+                            updateWordsInSql(wordId: wordId, wordName: wordName, wordDef: wordDef, time: time)
                         }
                     }
                     ToolbarItem(placement: .navigationBarLeading) {

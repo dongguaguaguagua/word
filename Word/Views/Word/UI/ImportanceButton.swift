@@ -13,16 +13,18 @@ struct moreImportanceButton: View {
     let word: singleWord
     var body: some View {
         let index = ModelData.word.firstIndex(where: { $0.id==word.id }) ?? 0
-        let extent: Double = (10.0 - ModelData.word[index].importance) / 10.0
-        Rectangle()
-            .onTapGesture {
-                if ModelData.word[index].importance < 10 {
-                    ModelData.word[index].importance += 1.0
+        if(ModelData.word.count != 0){
+            let extent: Double = (10.0 - ModelData.word[index].importance) / 10.0
+            Rectangle()
+                .onTapGesture {
+                    if ModelData.word[index].importance < 10 {
+                        ModelData.word[index].importance += 1.0
+                    }
                 }
-            }
-            .frame(width: 20)
-            .fixedSize(horizontal: true, vertical: false)
-            .foregroundColor(Color(red: 1, green: extent, blue: extent))
+                .frame(width: 20)
+                .fixedSize(horizontal: true, vertical: false)
+                .foregroundColor(Color(red: 1, green: extent, blue: extent))
+        }
     }
 }
 

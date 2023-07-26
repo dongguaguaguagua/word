@@ -24,7 +24,7 @@ struct WordExchanges: View {
             "1": "base_form_exchanges",
         ]
         if exchangeExists {
-            Section(header: Text("Word Exchanges")) {
+            Section(header: Text("word_exchanges")) {
                 let changesList: [String] = DictWord.exchange.components(separatedBy: "/")
                 ForEach(0 ..< changesList.count, id: \.self) { index in
                     let change: String = changesList[index]

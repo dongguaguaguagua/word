@@ -25,6 +25,8 @@
 "word_placeholder"="单词/词组";
 "edit_word"="编辑单词";
 "appearance"="外观";
+"gesture"="手势";
+"auxiliary"="辅助功能";
 "more_compact_layout"="更紧密的布局";
 "edit_tag"="编辑标签";
 "tag_name"="标签名称";
@@ -70,3 +72,9 @@
 "superlative"="最高级";
 "base_form"="原形";
 "Oxford_3000"="牛津核心3000";
+"recite_tab"="背单词";
+"english_definitions"="英解";
+"chinese_translations"="汉解";
+"word_exchanges"="单词变形";
+"importance"="重要性";
+"search"="搜索...";

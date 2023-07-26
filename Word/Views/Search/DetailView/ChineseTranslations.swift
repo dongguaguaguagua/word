@@ -12,7 +12,7 @@ struct ChineseTranslations: View {
     var body: some View {
         let chineseDefExists: Bool = DictWord.translation != ""
         if chineseDefExists {
-            Section(header: Text("Chinese Translations")) {
+            Section(header: Text("chinese_translations")) {
                 let meaningList: [String] = DictWord.translation.components(separatedBy: "\n")
                 ForEach(0 ..< meaningList.count, id: \.self) { index in
                     let meaning: String = meaningList[index]

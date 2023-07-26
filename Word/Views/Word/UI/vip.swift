@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct Test: View {
+struct VipTest: View {
     var body: some View {
         NavigationView {
             ZStack {
@@ -180,8 +180,8 @@ struct Test: View {
     }
 }
 
-struct Test_Previews: PreviewProvider {
+struct VipTest_Previews: PreviewProvider {
     static var previews: some View {
-        Test()
+        VipTest()
     }
 }
